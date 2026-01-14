@@ -793,6 +793,11 @@
     letter-spacing: 2px;
 }
 
+.space-theme-page .event-detail-title {
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
 .event-detail-meta {
     display: flex;
     flex-wrap: wrap;
