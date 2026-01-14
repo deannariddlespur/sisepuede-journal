@@ -335,9 +335,13 @@ def path_event_create(request):
             try:
                 # Parse date (format: YYYY-MM-DD)
                 date_obj = datetime.strptime(date_str, '%Y-%m-%d').date()
-                # Set default time to noon
-                default_datetime = timezone.make_aware(datetime.combine(date_obj, datetime.min.time().replace(hour=12)))
-                form.fields['event_date'].initial = default_datetime
+                # Set default time to noon (12:00 PM)
+                default_time = datetime.min.time().replace(hour=12, minute=0)
+                default_datetime = datetime.combine(date_obj, default_time)
+                # Make timezone-aware
+                default_datetime = timezone.make_aware(default_datetime)
+                # Format for datetime-local input (YYYY-MM-DDTHH:MM)
+                form.fields['event_date'].initial = default_datetime.strftime('%Y-%m-%dT%H:%M')
             except (ValueError, TypeError):
                 pass  # Invalid date format, ignore
     return render(request, 'entries/path_event_form.html', {'form': form, 'title': 'Define a New Path'})
