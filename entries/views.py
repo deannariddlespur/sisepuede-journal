@@ -4,11 +4,14 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
+from django.conf import settings
 from .models import JournalEntry, Comment, PathEvent, DiaryPage
 from .forms import JournalEntryForm, CommentForm, PathEventForm, DiaryPageForm
 from django.utils import timezone
 from datetime import datetime, timedelta
 import calendar
+
+DEBUG = settings.DEBUG
 
 def is_admin(user):
     return user.is_authenticated and user.is_staff
@@ -125,9 +128,13 @@ def login_view(request):
         
         if user is not None and user.is_active:
             login(request, user)
+            # Redirect staff to home, regular users to home
             return redirect('home')
         else:
             error_message = 'Invalid email/username or password. Please try again.'
+            # Debug info (remove in production)
+            if DEBUG:
+                print(f"Login attempt failed for: {username_or_email}")
     
     from django.contrib.auth.forms import AuthenticationForm
     form = AuthenticationForm()
