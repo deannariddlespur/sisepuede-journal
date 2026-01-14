@@ -153,15 +153,19 @@
 }
 
 .day-event-dot {
-    width: 8px;
-    height: 8px;
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
-    display: block;
+    display: inline-block;
     transition: transform 0.3s;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin: 2px;
 }
 
 .day-event-dot:hover {
     transform: scale(1.5);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
 }
 
 /* Events Grid */

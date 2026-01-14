@@ -200,12 +200,12 @@ def path_events_calendar(request):
         year = now.year
         month = now.month
     
-    # Get events for this month
-    month_start = datetime(year, month, 1, tzinfo=dt_timezone.utc)
+    # Get events for this month - use timezone-aware datetime
+    month_start = timezone.make_aware(datetime(year, month, 1))
     if month == 12:
-        month_end = datetime(year + 1, 1, 1, tzinfo=dt_timezone.utc)
+        month_end = timezone.make_aware(datetime(year + 1, 1, 1))
     else:
-        month_end = datetime(year, month + 1, 1, tzinfo=dt_timezone.utc)
+        month_end = timezone.make_aware(datetime(year, month + 1, 1))
     
     month_events = PathEvent.objects.filter(
         is_published=True,
@@ -217,10 +217,16 @@ def path_events_calendar(request):
     cal = calendar.monthcalendar(year, month)
     events_by_date = {}
     for event in month_events:
-        day = event.event_date.day
-        if day not in events_by_date:
-            events_by_date[day] = []
-        events_by_date[day].append(event)
+        # Get the day from the event date (in the same timezone)
+        event_day_local = event.event_date.astimezone(timezone.get_current_timezone()).day
+        # Also check if it's the same month/year to avoid cross-month issues
+        event_month = event.event_date.astimezone(timezone.get_current_timezone()).month
+        event_year = event.event_date.astimezone(timezone.get_current_timezone()).year
+        
+        if event_month == month and event_year == year:
+            if event_day_local not in events_by_date:
+                events_by_date[event_day_local] = []
+            events_by_date[event_day_local].append(event)
     
     # Navigation
     prev_month = month - 1
