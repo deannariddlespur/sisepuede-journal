@@ -72,6 +72,60 @@
                 });
             }
         });
+
+        // Tooltip positioning for event dots
+        document.addEventListener('DOMContentLoaded', function() {
+            const eventDots = document.querySelectorAll('.day-event-dot');
+            
+            eventDots.forEach(dot => {
+                dot.addEventListener('mouseenter', function() {
+                    const tooltip = this.querySelector('.event-tooltip');
+                    if (tooltip) {
+                        const rect = this.getBoundingClientRect();
+                        const tooltipRect = tooltip.getBoundingClientRect();
+                        const viewportWidth = window.innerWidth;
+                        const viewportHeight = window.innerHeight;
+                        
+                        // Check if tooltip goes off screen
+                        let leftOffset = 0;
+                        let topOffset = 0;
+                        
+                        // Adjust horizontal position if too far right
+                        if (rect.left + tooltipRect.width / 2 > viewportWidth - 20) {
+                            leftOffset = viewportWidth - rect.left - tooltipRect.width - 20;
+                        }
+                        // Adjust horizontal position if too far left
+                        else if (rect.left - tooltipRect.width / 2 < 20) {
+                            leftOffset = 20 - rect.left + tooltipRect.width / 2;
+                        }
+                        
+                        // Adjust vertical position if too high
+                        if (rect.top - tooltipRect.height < 20) {
+                            topOffset = tooltipRect.height + 20;
+                            tooltip.style.bottom = 'auto';
+                            tooltip.style.top = '100%';
+                            tooltip.style.transform = 'translateX(-50%) translateY(5px)';
+                            // Update arrow position
+                            tooltip.querySelector('::after')?.remove();
+                            const arrow = document.createElement('div');
+                            arrow.style.cssText = `
+                                position: absolute;
+                                bottom: 100%;
+                                left: 50%;
+                                transform: translateX(-50%);
+                                border: 6px solid transparent;
+                                border-bottom-color: rgba(10, 14, 39, 0.95);
+                            `;
+                        }
+                        
+                        if (leftOffset !== 0) {
+                            tooltip.style.left = leftOffset + 'px';
+                            tooltip.style.transform = 'translateX(0) translateY(-5px)';
+                        }
+                    }
+                });
+            });
+        });
     </script>
 
     <!-- Background Music Player -->
