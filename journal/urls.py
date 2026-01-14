@@ -35,6 +35,11 @@ urlpatterns = [
     path('define-your-path/new/', views.path_event_create, name='path_event_create'),
     path('define-your-path/<int:pk>/edit/', views.path_event_edit, name='path_event_edit'),
     path('define-your-path/<int:pk>/delete/', views.path_event_delete, name='path_event_delete'),
+    path('deannas-diary/', views.diary_list, name='diary_list'),
+    path('deannas-diary/<int:pk>/', views.diary_page_detail, name='diary_page_detail'),
+    path('deannas-diary/new/', views.diary_page_create, name='diary_page_create'),
+    path('deannas-diary/<int:pk>/edit/', views.diary_page_edit, name='diary_page_edit'),
+    path('deannas-diary/<int:pk>/delete/', views.diary_page_delete, name='diary_page_delete'),
 ]
 
 # Serve static and media files

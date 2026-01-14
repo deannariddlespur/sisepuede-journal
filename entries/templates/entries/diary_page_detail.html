@@ -1,0 +1,44 @@
+{% extends 'entries/base.html' %}
+
+{% block title %}{{ page.title }} - DeAnna's Diary{% endblock %}
+
+{% block content %}
+<div class="diary-page-detail">
+    <div class="diary-detail-header">
+        <a href="{% url 'diary_list' %}" class="back-link">← Back to Diary</a>
+        {% if user.is_staff %}
+        <div class="diary-admin-actions">
+            <a href="{% url 'diary_page_edit' page.pk %}" class="btn btn-primary">Edit</a>
+            <a href="{% url 'diary_page_delete' page.pk %}" class="btn btn-danger">Delete</a>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="diary-detail-card">
+        {% if page.image %}
+        <div class="diary-detail-image">
+            <img src="{{ page.image.url }}" alt="{{ page.title }}">
+        </div>
+        {% endif %}
+        
+        <div class="diary-detail-content">
+            <div class="diary-status-badge diary-status-{{ page.status }}">
+                {{ page.get_status_display }}
+            </div>
+            <h1 class="diary-detail-title">{{ page.title }}</h1>
+            
+            <div class="diary-detail-text">
+                {{ page.content|linebreaks }}
+            </div>
+
+            <div class="diary-detail-footer">
+                <p class="diary-created">Written on {{ page.created_at|date:"F d, Y" }}</p>
+                {% if page.updated_at != page.created_at %}
+                <p class="diary-updated">Last updated {{ page.updated_at|date:"F d, Y" }}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

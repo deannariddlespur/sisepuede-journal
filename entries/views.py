@@ -4,8 +4,8 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
-from .models import JournalEntry, Comment, PathEvent
-from .forms import JournalEntryForm, CommentForm, PathEventForm
+from .models import JournalEntry, Comment, PathEvent, DiaryPage
+from .forms import JournalEntryForm, CommentForm, PathEventForm, DiaryPageForm
 from django.utils import timezone
 from datetime import datetime, timedelta
 import calendar
@@ -288,3 +288,74 @@ def path_event_delete(request, pk):
         messages.success(request, 'Path event deleted successfully!')
         return redirect('path_events_calendar')
     return render(request, 'entries/path_event_confirm_delete.html', {'event': event})
+
+# DeAnna's Diary Views
+def is_deanna(user):
+    """Check if user is DeAnna (staff)"""
+    return user.is_authenticated and user.is_staff
+
+def diary_list(request):
+    """List all diary pages - only DeAnna can see drafts, public pages visible to all"""
+    if not request.user.is_authenticated:
+        # Show only public pages to non-authenticated users
+        pages = DiaryPage.objects.filter(status='public').order_by('-created_at')
+    elif request.user.is_staff:
+        # DeAnna/staff can see all pages
+        pages = DiaryPage.objects.all().order_by('-created_at')
+    else:
+        # Regular users see only public pages
+        pages = DiaryPage.objects.filter(status='public').order_by('-created_at')
+    
+    return render(request, 'entries/diary_list.html', {'pages': pages})
+
+def diary_page_detail(request, pk):
+    """View individual diary page"""
+    page = get_object_or_404(DiaryPage, pk=pk)
+    
+    # Check permissions
+    if page.status == 'draft' and not request.user.is_staff:
+        return HttpResponseForbidden("This page is private.")
+    
+    if page.status == 'public' or request.user.is_staff:
+        return render(request, 'entries/diary_page_detail.html', {'page': page})
+    
+    return HttpResponseForbidden("You don't have permission to view this page.")
+
+@user_passes_test(is_deanna)
+def diary_page_create(request):
+    """Create a new diary page - DeAnna only"""
+    if request.method == 'POST':
+        form = DiaryPageForm(request.POST, request.FILES)
+        if form.is_valid():
+            page = form.save(commit=False)
+            page.author = request.user
+            page.save()
+            messages.success(request, 'Diary page created successfully!')
+            return redirect('diary_page_detail', pk=page.pk)
+    else:
+        form = DiaryPageForm()
+    return render(request, 'entries/diary_page_form.html', {'form': form, 'title': 'New Diary Page'})
+
+@user_passes_test(is_deanna)
+def diary_page_edit(request, pk):
+    """Edit a diary page - DeAnna only"""
+    page = get_object_or_404(DiaryPage, pk=pk)
+    if request.method == 'POST':
+        form = DiaryPageForm(request.POST, request.FILES, instance=page)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Diary page updated successfully!')
+            return redirect('diary_page_detail', pk=page.pk)
+    else:
+        form = DiaryPageForm(instance=page)
+    return render(request, 'entries/diary_page_form.html', {'form': form, 'title': 'Edit Diary Page', 'page': page})
+
+@user_passes_test(is_deanna)
+def diary_page_delete(request, pk):
+    """Delete a diary page - DeAnna only"""
+    page = get_object_or_404(DiaryPage, pk=pk)
+    if request.method == 'POST':
+        page.delete()
+        messages.success(request, 'Diary page deleted successfully!')
+        return redirect('diary_list')
+    return render(request, 'entries/diary_page_confirm_delete.html', {'page': page})

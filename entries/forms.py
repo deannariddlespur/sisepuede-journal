@@ -1,5 +1,5 @@
 from django import forms
-from .models import JournalEntry, Comment, PathEvent
+from .models import JournalEntry, Comment, PathEvent, DiaryPage
 
 class JournalEntryForm(forms.ModelForm):
     class Meta:
@@ -65,6 +65,27 @@ class PathEventForm(forms.ModelForm):
             }),
             'is_published': forms.CheckboxInput(attrs={
                 'class': 'form-check-input',
+            }),
+        }
+
+class DiaryPageForm(forms.ModelForm):
+    class Meta:
+        model = DiaryPage
+        fields = ['title', 'content', 'image', 'status']
+        widgets = {
+            'title': forms.TextInput(attrs={
+                'class': 'form-control',
+            }),
+            'content': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 20,
+            }),
+            'image': forms.FileInput(attrs={
+                'class': 'form-control',
+                'accept': 'image/*',
+            }),
+            'status': forms.Select(attrs={
+                'class': 'form-control',
             }),
         }
 

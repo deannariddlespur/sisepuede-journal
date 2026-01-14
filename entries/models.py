@@ -73,3 +73,30 @@ class PathEvent(models.Model):
     def get_absolute_url(self):
         from django.urls import reverse
         return reverse('path_event_detail', kwargs={'pk': self.pk})
+
+class DiaryPage(models.Model):
+    """DeAnna's Diary - Private diary pages with draft/public status"""
+    STATUS_CHOICES = [
+        ('draft', 'Draft'),
+        ('public', 'Public'),
+    ]
+    
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+    image = models.ImageField(upload_to=get_upload_path, blank=True, null=True)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='diary_pages')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = 'Diary Page'
+        verbose_name_plural = 'Diary Pages'
+    
+    def __str__(self):
+        return f'{self.title} ({self.get_status_display()})'
+    
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('diary_page_detail', kwargs={'pk': self.pk})

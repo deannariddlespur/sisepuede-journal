@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import JournalEntry, Comment, PathEvent
+from .models import JournalEntry, Comment, PathEvent, DiaryPage
 
 @admin.register(JournalEntry)
 class JournalEntryAdmin(admin.ModelAdmin):
@@ -19,3 +19,10 @@ class PathEventAdmin(admin.ModelAdmin):
     list_filter = ['event_type', 'is_published', 'event_date']
     search_fields = ['title', 'description', 'location']
     date_hierarchy = 'event_date'
+
+@admin.register(DiaryPage)
+class DiaryPageAdmin(admin.ModelAdmin):
+    list_display = ['title', 'author', 'status', 'created_at']
+    list_filter = ['status', 'created_at']
+    search_fields = ['title', 'content']
+    date_hierarchy = 'created_at'

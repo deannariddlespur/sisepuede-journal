@@ -42,9 +42,25 @@ elif os.environ.get('RAILWAY_PUBLIC_DOMAIN'):
     if railway_domain:
         csrf_origins = [f'https://{railway_domain}']
 
-# If still empty, try to get from request (fallback)
-if not csrf_origins:
-    # Allow all HTTPS origins in development, but this should be set in production
+# Add common Railway domains - check environment
+if os.environ.get('RAILWAY_ENVIRONMENT'):
+    # We're on Railway, add the public domain
+    public_domain = os.environ.get('RAILWAY_PUBLIC_DOMAIN')
+    if public_domain:
+        domain_url = f'https://{public_domain}'
+        if domain_url not in csrf_origins:
+            csrf_origins.append(domain_url)
+    
+    # Also check for custom domain
+    custom_domain = os.environ.get('RAILWAY_CUSTOM_DOMAIN')
+    if custom_domain:
+        domain_url = f'https://{custom_domain}'
+        if domain_url not in csrf_origins:
+            csrf_origins.append(domain_url)
+
+# Fallback: add common Railway domain if we detect it
+if not csrf_origins and not DEBUG:
+    # Try to detect Railway domain from request headers (will be set dynamically)
     pass
 
 CSRF_TRUSTED_ORIGINS = csrf_origins
