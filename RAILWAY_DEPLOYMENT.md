@@ -58,6 +58,18 @@ Make sure these are set in Railway:
 - `DEBUG` - Set to `False` for production
 - `ALLOWED_HOSTS` - Your Railway domain (e.g., `your-app-name.up.railway.app`)
 
+### Optional Superuser Variables (if you want to customize)
+
+The superuser is automatically created on deployment via the `release` command in Procfile.
+You can customize it with these environment variables (defaults shown):
+
+- `SUPERUSER_USERNAME` - Default: `deanna`
+- `SUPERUSER_EMAIL` - Default: `deanna.riddlespur@gmail.com`
+- `SUPERUSER_PASSWORD` - Default: `Sunshine101!`
+
+**Important:** If you don't set `SUPERUSER_PASSWORD`, it will use the default. 
+Set a strong password in Railway's environment variables for security!
+
 ## Troubleshooting
 
 If you can't login:
