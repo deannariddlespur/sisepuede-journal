@@ -449,16 +449,21 @@
 }
 
 .event-card {
-    background: white;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .event-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 
+        0 6px 30px rgba(0, 0, 0, 0.4),
+        0 0 30px rgba(255, 179, 217, 0.3);
+    border-color: rgba(255, 179, 217, 0.5);
 }
 
 .event-card.past {
@@ -529,9 +534,10 @@
 }
 
 .event-content h3 a {
-    color: #333;
+    color: rgba(255, 255, 255, 0.95);
     text-decoration: none;
     transition: color 0.3s;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
 .event-content h3 a:hover {
