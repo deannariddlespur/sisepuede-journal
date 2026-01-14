@@ -678,9 +678,24 @@ main {
     border: 1px solid rgba(179, 255, 224, 0.3);
 }
 
+.space-theme-page .header-section {
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+        0 4px 30px rgba(0, 0, 0, 0.3),
+        0 0 40px rgba(255, 179, 217, 0.1);
+}
+
 .header-section h2 {
     color: #333;
     margin: 0;
+}
+
+.space-theme-page .header-section h2 {
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
 }
 
 /* Entries Grid */
@@ -699,10 +714,26 @@ main {
     border: 1px solid rgba(179, 255, 224, 0.3);
 }
 
+.space-theme-page .entry-card {
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+        0 4px 30px rgba(0, 0, 0, 0.3),
+        0 0 40px rgba(255, 179, 217, 0.1);
+}
+
 .entry-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 4px 20px rgba(255, 179, 217, 0.3);
     border-color: rgba(179, 255, 224, 0.6);
+}
+
+.space-theme-page .entry-card:hover {
+    box-shadow: 
+        0 6px 40px rgba(0, 0, 0, 0.4),
+        0 0 50px rgba(255, 179, 217, 0.2);
+    border-color: rgba(255, 179, 217, 0.5);
 }
 
 .entry-header {
@@ -723,8 +754,18 @@ main {
     transition: color 0.3s;
 }
 
+.space-theme-page .entry-header h3 a {
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
 .entry-header h3 a:hover {
     color: #ff69b4;
+}
+
+.space-theme-page .entry-header h3 a:hover {
+    color: #ffb3d9;
+    text-shadow: 0 0 15px rgba(255, 179, 217, 0.5);
 }
 
 /* Pencil Icon Button with Dropdown - Shared Styles */
@@ -997,11 +1038,21 @@ input[type="file"]:hover {
     margin-bottom: 1rem;
 }
 
+.space-theme-page .entry-content h1 {
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
 .entry-body {
     margin-top: 2rem;
     line-height: 1.8;
     color: #444;
     white-space: pre-wrap;
+}
+
+.space-theme-page .entry-body {
+    color: rgba(255, 255, 255, 0.85);
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
 }
 
 /* Form */
