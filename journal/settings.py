@@ -60,15 +60,35 @@ for domain in railway_domains:
     if domain not in csrf_origins:
         csrf_origins.append(domain)
 
-# If still empty in production, add wildcard for Railway (less secure but works)
-if not csrf_origins and not DEBUG:
-    csrf_origins = ['https://*.up.railway.app', 'https://*.railway.app']
+# If still empty, try to detect from request (fallback)
+# Note: Django doesn't support wildcards in CSRF_TRUSTED_ORIGINS
+# So we need explicit domains
 
 CSRF_TRUSTED_ORIGINS = csrf_origins
 
-# Additional CSRF settings for admin
-CSRF_COOKIE_SECURE = os.environ.get('CSRF_COOKIE_SECURE', 'False') == 'True'
+# Debug: Print CSRF origins in development
+if DEBUG:
+    print(f"CSRF_TRUSTED_ORIGINS: {CSRF_TRUSTED_ORIGINS}")
+
+# Additional CSRF settings for production
+# Detect if we're on Railway (production)
+RAILWAY_ENVIRONMENT = os.environ.get('RAILWAY_ENVIRONMENT')
+RAILWAY_PUBLIC_DOMAIN = os.environ.get('RAILWAY_PUBLIC_DOMAIN')
+
+# Set CSRF cookie settings based on environment
+# On Railway, always use secure cookies
+is_production = RAILWAY_ENVIRONMENT or RAILWAY_PUBLIC_DOMAIN or (not DEBUG and os.environ.get('SECRET_KEY') != 'django-insecure-gbx9h8xbzwm#6sv^k$$^h(bad-f=hbjikuws=5pgkqv)^#2b#@')
+
+if is_production:
+    CSRF_COOKIE_SECURE = True
+    SESSION_COOKIE_SECURE = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+else:
+    CSRF_COOKIE_SECURE = False
+    SESSION_COOKIE_SECURE = False
+
 CSRF_COOKIE_HTTPONLY = True
+CSRF_COOKIE_SAMESITE = 'Lax'
 
 
 # Application definition
