@@ -30,38 +30,39 @@ ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',') if os.environ.get
 
 # CSRF settings for Railway - auto-detect from ALLOWED_HOSTS
 csrf_origins = []
+
+# First, check explicit CSRF_TRUSTED_ORIGINS env var
 if os.environ.get('CSRF_TRUSTED_ORIGINS'):
     csrf_origins = [origin.strip() for origin in os.environ.get('CSRF_TRUSTED_ORIGINS', '').split(',') if origin.strip()]
-elif os.environ.get('ALLOWED_HOSTS'):
-    # Auto-generate CSRF origins from ALLOWED_HOSTS
+
+# Add Railway public domain if available
+railway_domain = os.environ.get('RAILWAY_PUBLIC_DOMAIN')
+if railway_domain:
+    domain_url = f'https://{railway_domain}'
+    if domain_url not in csrf_origins:
+        csrf_origins.append(domain_url)
+
+# Add from ALLOWED_HOSTS if set
+if os.environ.get('ALLOWED_HOSTS'):
     hosts = os.environ.get('ALLOWED_HOSTS', '').split(',')
-    csrf_origins = [f'https://{host.strip()}' for host in hosts if host.strip() and host.strip() != '*']
-elif os.environ.get('RAILWAY_PUBLIC_DOMAIN'):
-    # Railway provides this automatically
-    railway_domain = os.environ.get('RAILWAY_PUBLIC_DOMAIN')
-    if railway_domain:
-        csrf_origins = [f'https://{railway_domain}']
+    for host in hosts:
+        host = host.strip()
+        if host and host != '*':
+            domain_url = f'https://{host}'
+            if domain_url not in csrf_origins:
+                csrf_origins.append(domain_url)
 
-# Add common Railway domains - check environment
-if os.environ.get('RAILWAY_ENVIRONMENT'):
-    # We're on Railway, add the public domain
-    public_domain = os.environ.get('RAILWAY_PUBLIC_DOMAIN')
-    if public_domain:
-        domain_url = f'https://{public_domain}'
-        if domain_url not in csrf_origins:
-            csrf_origins.append(domain_url)
-    
-    # Also check for custom domain
-    custom_domain = os.environ.get('RAILWAY_CUSTOM_DOMAIN')
-    if custom_domain:
-        domain_url = f'https://{custom_domain}'
-        if domain_url not in csrf_origins:
-            csrf_origins.append(domain_url)
+# Add common Railway domains explicitly
+railway_domains = [
+    'https://sisepuede-journal-production.up.railway.app',
+]
+for domain in railway_domains:
+    if domain not in csrf_origins:
+        csrf_origins.append(domain)
 
-# Fallback: add common Railway domain if we detect it
+# If still empty in production, add wildcard for Railway (less secure but works)
 if not csrf_origins and not DEBUG:
-    # Try to detect Railway domain from request headers (will be set dynamically)
-    pass
+    csrf_origins = ['https://*.up.railway.app', 'https://*.railway.app']
 
 CSRF_TRUSTED_ORIGINS = csrf_origins
 
