@@ -48,23 +48,103 @@
     animation: fade-in 1.5s ease-in 0.3s both;
 }
 
-/* Calendar Container */
+/* Calendar Container - Milky Way Theme */
 .calendar-container {
-    background: white;
+    position: relative;
+    background: 
+        radial-gradient(ellipse at 20% 50%, rgba(255, 179, 217, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(179, 255, 224, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 20%, rgba(217, 179, 255, 0.1) 0%, transparent 50%),
+        linear-gradient(135deg, #0a0e27 0%, #1a1f3a 25%, #2a1f3a 50%, #1a1f3a 75%, #0a0e27 100%);
     border-radius: 20px;
     padding: 2rem;
     margin-bottom: 3rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 
+        0 4px 30px rgba(255, 179, 217, 0.2),
+        0 0 60px rgba(179, 255, 224, 0.1),
+        inset 0 0 100px rgba(0, 0, 0, 0.3);
     width: 100%;
     max-width: 100%;
     overflow-x: auto;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Milky Way stars overlay */
+.calendar-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(2px 2px at 20px 30px, rgba(255, 255, 255, 0.8), transparent),
+        radial-gradient(2px 2px at 60px 70px, rgba(255, 255, 255, 0.6), transparent),
+        radial-gradient(1px 1px at 50px 50px, rgba(255, 255, 255, 0.9), transparent),
+        radial-gradient(1px 1px at 80px 80px, rgba(255, 255, 255, 0.7), transparent),
+        radial-gradient(2px 2px at 100px 40px, rgba(255, 255, 255, 0.5), transparent),
+        radial-gradient(1px 1px at 120px 90px, rgba(255, 255, 255, 0.8), transparent),
+        radial-gradient(2px 2px at 150px 20px, rgba(255, 255, 255, 0.6), transparent),
+        radial-gradient(1px 1px at 180px 60px, rgba(255, 255, 255, 0.7), transparent),
+        radial-gradient(2px 2px at 200px 100px, rgba(255, 255, 255, 0.5), transparent),
+        radial-gradient(1px 1px at 220px 30px, rgba(255, 255, 255, 0.9), transparent),
+        radial-gradient(2px 2px at 250px 80px, rgba(255, 255, 255, 0.6), transparent),
+        radial-gradient(1px 1px at 280px 50px, rgba(255, 255, 255, 0.7), transparent),
+        radial-gradient(2px 2px at 300px 10px, rgba(255, 255, 255, 0.8), transparent),
+        radial-gradient(1px 1px at 320px 70px, rgba(255, 255, 255, 0.5), transparent),
+        radial-gradient(2px 2px at 350px 40px, rgba(255, 255, 255, 0.6), transparent),
+        radial-gradient(1px 1px at 380px 90px, rgba(255, 255, 255, 0.7), transparent),
+        radial-gradient(2px 2px at 400px 20px, rgba(255, 255, 255, 0.8), transparent),
+        radial-gradient(1px 1px at 420px 60px, rgba(255, 255, 255, 0.5), transparent),
+        radial-gradient(2px 2px at 450px 100px, rgba(255, 255, 255, 0.6), transparent);
+    background-size: 500px 500px;
+    background-repeat: repeat;
+    opacity: 0.6;
+    animation: twinkle-stars 4s ease-in-out infinite;
+    pointer-events: none;
+    border-radius: 20px;
+}
+
+/* Milky Way nebula clouds */
+.calendar-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(ellipse 800px 400px at 30% 40%, rgba(255, 179, 217, 0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 600px 300px at 70% 60%, rgba(179, 255, 224, 0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 500px 250px at 50% 20%, rgba(217, 179, 255, 0.05) 0%, transparent 70%);
+    pointer-events: none;
+    border-radius: 20px;
+    animation: nebula-drift 20s ease-in-out infinite;
+}
+
+@keyframes twinkle-stars {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+}
+
+@keyframes nebula-drift {
+    0%, 100% { 
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+    50% { 
+        transform: translate(10px, -5px) scale(1.05);
+        opacity: 0.8;
+    }
 }
 
 /* Search Section */
 .calendar-search-section {
+    position: relative;
+    z-index: 2;
     margin-bottom: 2rem;
     padding-bottom: 1.5rem;
-    border-bottom: 2px solid #f0f0f0;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.15);
 }
 
 .calendar-search-form {
@@ -82,22 +162,34 @@
     flex: 1;
     min-width: 250px;
     padding: 0.75rem 1rem;
-    border: 2px solid #e0e0e0;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 8px;
     font-size: 1rem;
-    transition: border-color 0.3s;
+    color: white;
+    transition: all 0.3s;
+}
+
+.search-input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
 }
 
 .search-input:focus {
     outline: none;
     border-color: #ffb3d9;
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 20px rgba(255, 179, 217, 0.3);
 }
 
 .search-date-input {
     padding: 0.75rem 1rem;
-    border: 2px solid #e0e0e0;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 8px;
     font-size: 1rem;
+    color: white;
     transition: border-color 0.3s;
 }
 
@@ -169,13 +261,16 @@
 
 /* Calendar Grid */
 .calendar-grid {
+    position: relative;
+    z-index: 2;
     display: flex;
     flex-direction: column;
     gap: 0;
-    background: #e0e0e0;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
     border-radius: 8px;
     overflow: hidden;
-    border: 1px solid #e0e0e0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .calendar-header {
@@ -192,7 +287,13 @@
     font-weight: 600;
     font-size: 0.9rem;
     letter-spacing: 1px;
-    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
 .calendar-day-header:last-child {
@@ -206,13 +307,14 @@
 }
 
 .calendar-day {
-    background: white;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(5px);
     min-height: 100px;
     padding: 0.5rem;
     position: relative;
-    transition: background 0.3s;
-    border-right: 1px solid #e0e0e0;
-    border-bottom: 1px solid #e0e0e0;
+    transition: all 0.3s;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
@@ -224,27 +326,37 @@
 }
 
 .calendar-day:hover {
-    background: #f8f8f8;
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: inset 0 0 20px rgba(255, 179, 217, 0.2);
 }
 
 .calendar-day.empty {
-    background: #f5f5f5;
+    background: rgba(0, 0, 0, 0.1);
+    opacity: 0.5;
 }
 
 .calendar-day.today {
-    background: linear-gradient(135deg, #ffb3d9 0%, #b3ffe0 100%);
+    background: linear-gradient(135deg, rgba(255, 179, 217, 0.3) 0%, rgba(179, 255, 224, 0.3) 100%);
+    backdrop-filter: blur(10px);
     font-weight: bold;
+    box-shadow: 
+        inset 0 0 30px rgba(255, 179, 217, 0.4),
+        0 0 20px rgba(255, 179, 217, 0.3);
+    border: 1px solid rgba(255, 179, 217, 0.5);
 }
 
 .day-number {
     font-size: 1rem;
     font-weight: 600;
-    color: #333;
+    color: rgba(255, 255, 255, 0.9);
     margin-bottom: 0.5rem;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
 .calendar-day.today .day-number {
-    color: #0a0e27;
+    color: white;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+    font-weight: 700;
 }
 
 .day-events {
@@ -316,11 +428,12 @@
 
 .upcoming-events-section .section-title,
 .past-events-section .section-title {
-    color: #0a0e27;
+    color: rgba(255, 255, 255, 0.95);
     font-size: 2.5rem;
     font-weight: 300;
     letter-spacing: 2px;
     margin-bottom: 2rem;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
     text-align: center;
     padding-bottom: 1rem;
     border-bottom: 2px solid #ffb3d9;
