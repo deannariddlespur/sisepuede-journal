@@ -187,8 +187,38 @@ def admin_login_view(request):
 def path_events_calendar(request):
     """Calendar view showing all upcoming path events"""
     now = timezone.now()
-    upcoming_events = PathEvent.objects.filter(is_published=True, event_date__gte=now).order_by('event_date')
-    past_events = PathEvent.objects.filter(is_published=True, event_date__lt=now).order_by('-event_date')[:5]
+    
+    # Handle search query
+    search_query = request.GET.get('search', '').strip()
+    search_date = request.GET.get('search_date', '').strip()
+    
+    # Base queryset
+    base_events = PathEvent.objects.filter(is_published=True)
+    
+    # Apply search filters
+    if search_query:
+        base_events = base_events.filter(
+            models.Q(title__icontains=search_query) |
+            models.Q(description__icontains=search_query) |
+            models.Q(location__icontains=search_query) |
+            models.Q(event_type__icontains=search_query)
+        )
+    
+    if search_date:
+        try:
+            # Try to parse date (format: YYYY-MM-DD)
+            search_date_obj = datetime.strptime(search_date, '%Y-%m-%d').date()
+            search_datetime_start = timezone.make_aware(datetime.combine(search_date_obj, datetime.min.time()))
+            search_datetime_end = timezone.make_aware(datetime.combine(search_date_obj, datetime.max.time()))
+            base_events = base_events.filter(
+                event_date__gte=search_datetime_start,
+                event_date__lte=search_datetime_end
+            )
+        except (ValueError, TypeError):
+            pass  # Invalid date format, ignore
+    
+    upcoming_events = base_events.filter(event_date__gte=now).order_by('event_date')
+    past_events = base_events.filter(event_date__lt=now).order_by('-event_date')[:5]
     
     # Get current month/year for calendar
     year = request.GET.get('year', now.year)

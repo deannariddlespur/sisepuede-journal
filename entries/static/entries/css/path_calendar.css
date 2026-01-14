@@ -60,6 +60,86 @@
     overflow-x: auto;
 }
 
+/* Search Section */
+.calendar-search-section {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.calendar-search-form {
+    width: 100%;
+}
+
+.search-inputs {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.search-input {
+    flex: 1;
+    min-width: 250px;
+    padding: 0.75rem 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #ffb3d9;
+}
+
+.search-date-input {
+    padding: 0.75rem 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.search-date-input:focus {
+    outline: none;
+    border-color: #ffb3d9;
+}
+
+.search-btn {
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, #ffb3d9 0%, #b3ffe0 100%);
+    color: #0a0e27;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.search-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(255, 179, 217, 0.4);
+}
+
+.clear-search-btn {
+    padding: 0.75rem 1.5rem;
+    background: #f0f0f0;
+    color: #666;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.3s;
+    display: inline-block;
+}
+
+.clear-search-btn:hover {
+    background: #e0e0e0;
+}
+
 .calendar-nav {
     display: flex;
     justify-content: space-between;

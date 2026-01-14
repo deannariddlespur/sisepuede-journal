@@ -24,11 +24,27 @@
     </div>
 
     <div class="calendar-container">
+        <!-- Search Section -->
+        <div class="calendar-search-section">
+            <form method="get" class="calendar-search-form">
+                <div class="search-inputs">
+                    <input type="text" name="search" placeholder="Search events by title, description, location..." value="{{ search_query }}" class="search-input">
+                    <input type="date" name="search_date" placeholder="Filter by date" value="{{ search_date }}" class="search-date-input">
+                    <input type="hidden" name="year" value="{{ year }}">
+                    <input type="hidden" name="month" value="{{ month }}">
+                    <button type="submit" class="search-btn">🔍 Search</button>
+                    {% if search_query or search_date %}
+                    <a href="?year={{ year }}&month={{ month }}" class="clear-search-btn">Clear</a>
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+        
         <!-- Calendar Navigation -->
         <div class="calendar-nav">
-            <a href="?year={{ prev_year }}&month={{ prev_month }}" class="calendar-nav-btn">← Previous</a>
+            <a href="?year={{ prev_year }}&month={{ prev_month }}{% if search_query %}&search={{ search_query }}{% endif %}{% if search_date %}&search_date={{ search_date }}{% endif %}" class="calendar-nav-btn">← Previous</a>
             <h2 class="calendar-month-title">{{ month_name }} {{ year }}</h2>
-            <a href="?year={{ next_year }}&month={{ next_month }}" class="calendar-nav-btn">Next →</a>
+            <a href="?year={{ next_year }}&month={{ next_month }}{% if search_query %}&search={{ search_query }}{% endif %}{% if search_date %}&search_date={{ search_date }}{% endif %}" class="calendar-nav-btn">Next →</a>
         </div>
 
         <!-- Calendar Grid -->
