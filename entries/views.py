@@ -329,6 +329,17 @@ def path_event_create(request):
             return redirect('path_event_detail', pk=event.pk)
     else:
         form = PathEventForm()
+        # Pre-fill date if provided in query string
+        date_str = request.GET.get('date', '').strip()
+        if date_str:
+            try:
+                # Parse date (format: YYYY-MM-DD)
+                date_obj = datetime.strptime(date_str, '%Y-%m-%d').date()
+                # Set default time to noon
+                default_datetime = timezone.make_aware(datetime.combine(date_obj, datetime.min.time().replace(hour=12)))
+                form.fields['event_date'].initial = default_datetime
+            except (ValueError, TypeError):
+                pass  # Invalid date format, ignore
     return render(request, 'entries/path_event_form.html', {'form': form, 'title': 'Define a New Path'})
 
 @user_passes_test(is_admin)
