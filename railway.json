@@ -6,7 +6,8 @@
   "deploy": {
     "startCommand": "gunicorn journal.wsgi:application --bind 0.0.0.0:$PORT",
     "restartPolicyType": "ON_FAILURE",
-    "restartPolicyMaxRetries": 10
+    "restartPolicyMaxRetries": 10,
+    "runCommand": "python manage.py migrate --noinput && python manage.py collectstatic --noinput && python manage.py create_superuser"
   }
 }
 
