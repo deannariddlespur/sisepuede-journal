@@ -471,14 +471,16 @@
 /* Events Grid */
 .upcoming-events-section,
 .past-events-section {
-    margin-bottom: 3rem;
-    padding: 2rem;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 20px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    margin-top: 2rem;
     position: relative;
     z-index: 2;
+    margin-bottom: 3rem;
+    margin-top: 2rem;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
 }
 
 .upcoming-events-section .section-title,
@@ -491,7 +493,7 @@
     text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
     text-align: center;
     padding-bottom: 1rem;
-    border-bottom: 2px solid #ffb3d9;
+    border-bottom: 2px solid rgba(255, 179, 217, 0.5);
     position: relative;
     z-index: 2;
 }
