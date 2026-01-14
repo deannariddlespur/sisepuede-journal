@@ -3,7 +3,9 @@
 {% block title %}Delete Event{% endblock %}
 
 {% block content %}
-<div class="delete-confirm-container">
+<div class="space-theme-page">
+    <div class="space-content-container">
+        <div class="delete-confirm-container">
     <div class="delete-confirm-card">
         <h1>Delete Path Event</h1>
         <p>Are you sure you want to delete <strong>"{{ event.title }}"</strong>?</p>
@@ -16,6 +18,8 @@
                 <a href="{% url 'path_event_detail' event.pk %}" class="btn btn-secondary">Cancel</a>
             </div>
         </form>
+    </div>
+        </div>
     </div>
 </div>
 {% endblock %}
