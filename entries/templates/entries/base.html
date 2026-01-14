@@ -35,6 +35,58 @@
     <footer>
         <p>&copy; 2026 Me Defino - I Define Myself</p>
     </footer>
+
+    <!-- Background Music Player -->
+    <div class="music-player" id="musicPlayer">
+        <button class="music-toggle" id="musicToggle" aria-label="Toggle music">
+            <span class="music-icon">🎵</span>
+        </button>
+        <audio id="backgroundMusic" loop>
+            <!-- You can add your music file here or link to Apple Music -->
+            <!-- <source src="/static/entries/audio/define-myself.mp3" type="audio/mpeg"> -->
+        </audio>
+        <div class="music-info">
+            <a href="https://music.apple.com/mx/album/define-myself/1854798584?i=1854798585" target="_blank" class="music-link">
+                "Define Myself" by Marcus Maison & Mandi Fisher
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const musicToggle = document.getElementById('musicToggle');
+        const backgroundMusic = document.getElementById('backgroundMusic');
+        let musicPlaying = false;
+
+        // Check if user previously enabled music
+        const musicEnabled = localStorage.getItem('musicEnabled') === 'true';
+        
+        musicToggle.addEventListener('click', function() {
+            if (musicPlaying) {
+                backgroundMusic.pause();
+                musicToggle.classList.remove('playing');
+                musicPlaying = false;
+                localStorage.setItem('musicEnabled', 'false');
+            } else {
+                // Try to play - will only work if audio source is set
+                backgroundMusic.play().then(() => {
+                    musicToggle.classList.add('playing');
+                    musicPlaying = true;
+                    localStorage.setItem('musicEnabled', 'true');
+                }).catch(() => {
+                    // Audio source not set or autoplay blocked
+                    console.log('Music file not available or autoplay blocked');
+                });
+            }
+        });
+
+        // Restore music state if previously enabled
+        if (musicEnabled && backgroundMusic.src) {
+            backgroundMusic.play().then(() => {
+                musicToggle.classList.add('playing');
+                musicPlaying = true;
+            }).catch(() => {});
+        }
+    </script>
 </body>
 </html>
 
