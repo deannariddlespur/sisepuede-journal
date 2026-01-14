@@ -86,12 +86,13 @@
 
 /* Calendar Grid */
 .calendar-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 1px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
     background: #e0e0e0;
     border-radius: 8px;
     overflow: hidden;
+    border: 1px solid #e0e0e0;
 }
 
 .calendar-header {
@@ -99,6 +100,7 @@
     grid-template-columns: repeat(7, 1fr);
     background: #0a0e27;
     color: white;
+    width: 100%;
 }
 
 .calendar-day-header {
@@ -107,11 +109,17 @@
     font-weight: 600;
     font-size: 0.9rem;
     letter-spacing: 1px;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.calendar-day-header:last-child {
+    border-right: none;
 }
 
 .calendar-week {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
+    width: 100%;
 }
 
 .calendar-day {
@@ -120,6 +128,14 @@
     padding: 0.5rem;
     position: relative;
     transition: background 0.3s;
+    border-right: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    flex-direction: column;
+}
+
+.calendar-week .calendar-day:last-child {
+    border-right: none;
 }
 
 .calendar-day:hover {
