@@ -237,8 +237,8 @@ def path_events_calendar(request):
     else:
         month_end = timezone.make_aware(datetime(year, month + 1, 1))
     
-    month_events = PathEvent.objects.filter(
-        is_published=True,
+    # Apply search filters to month events too
+    month_events = base_events.filter(
         event_date__gte=month_start,
         event_date__lt=month_end
     )
