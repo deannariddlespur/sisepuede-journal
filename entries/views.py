@@ -193,8 +193,11 @@ def path_events_calendar(request):
     search_query = request.GET.get('search', '').strip()
     search_date = request.GET.get('search_date', '').strip()
     
-    # Base queryset
-    base_events = PathEvent.objects.filter(is_published=True)
+    # Base queryset - show all events for staff, only published for others
+    if request.user.is_staff:
+        base_events = PathEvent.objects.all()
+    else:
+        base_events = PathEvent.objects.filter(is_published=True)
     
     # Apply search filters
     if search_query:
