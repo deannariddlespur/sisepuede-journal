@@ -5,7 +5,27 @@ from django.urls import reverse
 import os
 
 def get_upload_path(instance, filename):
-    return os.path.join('journal_entries', str(instance.author.id), filename)
+    """Generate upload path for images - handles different model types"""
+    # Get user ID from either 'author' or 'created_by' field
+    user_id = None
+    if hasattr(instance, 'author'):
+        user_id = instance.author.id
+    elif hasattr(instance, 'created_by'):
+        user_id = instance.created_by.id
+    
+    # Determine folder based on model type
+    if isinstance(instance, PathEvent):
+        folder = 'path_events'
+    elif isinstance(instance, DiaryPage):
+        folder = 'diary_pages'
+    else:
+        folder = 'journal_entries'
+    
+    if user_id:
+        return os.path.join(folder, str(user_id), filename)
+    else:
+        # Fallback if no user found
+        return os.path.join(folder, 'unknown', filename)
 
 class JournalEntry(models.Model):
     title = models.CharField(max_length=200)
