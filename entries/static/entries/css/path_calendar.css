@@ -55,6 +55,9 @@
     padding: 2rem;
     margin-bottom: 3rem;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
 }
 
 .calendar-nav {
