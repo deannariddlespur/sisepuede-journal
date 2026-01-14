@@ -1,7 +1,9 @@
 {% extends 'entries/base.html' %}
 
 {% block content %}
-<div class="entry-detail">
+<div class="space-theme-page">
+    <div class="space-content-container">
+        <div class="entry-detail">
     <div class="entry-header-actions">
         <a href="{% url 'home' %}" class="btn btn-secondary">← Back to Entries</a>
         {% if user.is_staff %}
@@ -68,6 +70,7 @@
             {% empty %}
             <p style="color: #666; font-style: italic;">No comments yet. Be the first to comment!</p>
             {% endfor %}
+        </div>
         </div>
     </div>
 </div>

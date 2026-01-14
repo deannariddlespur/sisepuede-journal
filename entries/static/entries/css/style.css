@@ -424,6 +424,133 @@ main {
     z-index: 1;
 }
 
+/* Space Theme - Milky Way Background for Pages */
+.space-theme-page {
+    position: relative;
+    min-height: 100vh;
+    background: 
+        radial-gradient(ellipse at 20% 50%, rgba(255, 179, 217, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(179, 255, 224, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 20%, rgba(217, 179, 255, 0.1) 0%, transparent 50%),
+        linear-gradient(135deg, #0a0e27 0%, #1a1f3a 25%, #2a1f3a 50%, #1a1f3a 75%, #0a0e27 100%);
+    padding: 2rem 0;
+    overflow-x: hidden;
+}
+
+.space-theme-page::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(2px 2px at 20px 30px, rgba(255, 255, 255, 0.8), transparent),
+        radial-gradient(2px 2px at 60px 70px, rgba(255, 255, 255, 0.6), transparent),
+        radial-gradient(1px 1px at 50px 50px, rgba(255, 255, 255, 0.9), transparent),
+        radial-gradient(1px 1px at 80px 80px, rgba(255, 255, 255, 0.7), transparent),
+        radial-gradient(2px 2px at 100px 40px, rgba(255, 255, 255, 0.5), transparent),
+        radial-gradient(1px 1px at 120px 90px, rgba(255, 255, 255, 0.8), transparent),
+        radial-gradient(2px 2px at 150px 20px, rgba(255, 255, 255, 0.6), transparent),
+        radial-gradient(1px 1px at 180px 60px, rgba(255, 255, 255, 0.7), transparent),
+        radial-gradient(2px 2px at 200px 100px, rgba(255, 255, 255, 0.5), transparent),
+        radial-gradient(1px 1px at 220px 30px, rgba(255, 255, 255, 0.9), transparent),
+        radial-gradient(2px 2px at 250px 80px, rgba(255, 255, 255, 0.6), transparent),
+        radial-gradient(1px 1px at 280px 50px, rgba(255, 255, 255, 0.7), transparent),
+        radial-gradient(2px 2px at 300px 10px, rgba(255, 255, 255, 0.8), transparent),
+        radial-gradient(1px 1px at 320px 70px, rgba(255, 255, 255, 0.5), transparent),
+        radial-gradient(2px 2px at 350px 40px, rgba(255, 255, 255, 0.6), transparent),
+        radial-gradient(1px 1px at 380px 90px, rgba(255, 255, 255, 0.7), transparent),
+        radial-gradient(2px 2px at 400px 20px, rgba(255, 255, 255, 0.8), transparent),
+        radial-gradient(1px 1px at 420px 60px, rgba(255, 255, 255, 0.5), transparent),
+        radial-gradient(2px 2px at 450px 100px, rgba(255, 255, 255, 0.6), transparent);
+    background-size: 500px 500px;
+    background-repeat: repeat;
+    opacity: 0.6;
+    animation: twinkle-stars-space 4s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.space-theme-page::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(ellipse 800px 400px at 30% 40%, rgba(255, 179, 217, 0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 600px 300px at 70% 60%, rgba(179, 255, 224, 0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 500px 250px at 50% 20%, rgba(217, 179, 255, 0.05) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+    animation: nebula-drift-space 20s ease-in-out infinite;
+}
+
+@keyframes twinkle-stars-space {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+}
+
+@keyframes nebula-drift-space {
+    0%, 100% { 
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+    50% { 
+        transform: translate(10px, -5px) scale(1.05);
+        opacity: 0.8;
+    }
+}
+
+/* Space-themed content containers */
+.space-content-container {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Space-themed cards */
+.space-card {
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+        0 4px 30px rgba(0, 0, 0, 0.3),
+        0 0 40px rgba(255, 179, 217, 0.1);
+    transition: all 0.3s ease;
+}
+
+.space-card:hover {
+    box-shadow: 
+        0 6px 40px rgba(0, 0, 0, 0.4),
+        0 0 50px rgba(255, 179, 217, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Space-themed text */
+.space-text-light {
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.space-text-muted {
+    color: rgba(255, 255, 255, 0.7);
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+}
+
+.space-heading {
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    margin-bottom: 1.5rem;
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -685,6 +812,11 @@ main {
     color: #666;
     margin-bottom: 1rem;
     line-height: 1.6;
+}
+
+.space-theme-page .entry-preview {
+    color: rgba(255, 255, 255, 0.8);
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
 }
 
 .entry-meta {

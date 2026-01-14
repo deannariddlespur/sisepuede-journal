@@ -1,15 +1,17 @@
 {% extends 'entries/base.html' %}
 
 {% block content %}
-<div class="header-section">
-    <h2>Me Defino</h2>
-    {% if user.is_staff %}
-    <a href="{% url 'entry_create' %}" class="btn btn-primary">+ New Entry</a>
-    {% endif %}
-</div>
+<div class="space-theme-page">
+    <div class="space-content-container">
+        <div class="header-section space-card">
+            <h2 class="space-heading">Me Defino</h2>
+            {% if user.is_staff %}
+            <a href="{% url 'entry_create' %}" class="btn btn-primary">+ New Entry</a>
+            {% endif %}
+        </div>
 
-{% if entries %}
-    <div class="entries-grid">
+        {% if entries %}
+        <div class="entries-grid">
         {% for entry in entries %}
         <div class="entry-card">
             <div class="entry-header">
@@ -40,16 +42,18 @@
             </div>
         </div>
         {% endfor %}
-    </div>
-{% else %}
-    <div class="empty-state">
-        <p class="empty-icon">📝</p>
-        <h3>No entries yet</h3>
-        <p>Start your journaling journey by creating your first entry!</p>
-        {% if user.is_staff %}
-        <a href="{% url 'entry_create' %}" class="btn btn-primary">Create Your First Entry</a>
+        </div>
+        {% else %}
+        <div class="empty-state space-card">
+            <p class="empty-icon">📝</p>
+            <h3 class="space-heading">No entries yet</h3>
+            <p class="space-text-muted">Start your journaling journey by creating your first entry!</p>
+            {% if user.is_staff %}
+            <a href="{% url 'entry_create' %}" class="btn btn-primary">Create Your First Entry</a>
+            {% endif %}
+        </div>
         {% endif %}
     </div>
-{% endif %}
+</div>
 {% endblock %}
 
