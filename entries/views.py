@@ -27,8 +27,11 @@ def home(request):
         return render(request, 'entries/landing.html', {'entries': entries})
 
 def entry_detail(request, pk):
-    # Anyone can view published entries
-    entry = get_object_or_404(JournalEntry, pk=pk, is_published=True)
+    # Staff can see all entries, others only published
+    if request.user.is_staff:
+        entry = get_object_or_404(JournalEntry, pk=pk)
+    else:
+        entry = get_object_or_404(JournalEntry, pk=pk, is_published=True)
     comments = entry.comments.all()
     comment_form = None
     
