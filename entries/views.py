@@ -237,10 +237,23 @@ def path_events_calendar(request):
     
     month_name = calendar.month_name[month]
     
+    # Create a calendar grid with events for easier template rendering
+    calendar_with_events = []
+    for week in cal:
+        week_data = []
+        for day in week:
+            day_data = {
+                'day': day,
+                'events': events_by_date.get(day, []) if day != 0 else []
+            }
+            week_data.append(day_data)
+        calendar_with_events.append(week_data)
+    
     return render(request, 'entries/path_events_calendar.html', {
         'upcoming_events': upcoming_events,
         'past_events': past_events,
         'calendar': cal,
+        'calendar_with_events': calendar_with_events,
         'events_by_date': events_by_date,
         'year': year,
         'month': month,
