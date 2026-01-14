@@ -73,7 +73,7 @@
             }
         });
 
-        // Tooltip positioning for event dots
+        // Tooltip smart positioning for event dots
         document.addEventListener('DOMContentLoaded', function() {
             const eventDots = document.querySelectorAll('.day-event-dot');
             
@@ -81,47 +81,43 @@
                 dot.addEventListener('mouseenter', function() {
                     const tooltip = this.querySelector('.event-tooltip');
                     if (tooltip) {
-                        const rect = this.getBoundingClientRect();
-                        const tooltipRect = tooltip.getBoundingClientRect();
-                        const viewportWidth = window.innerWidth;
-                        const viewportHeight = window.innerHeight;
+                        // Reset positioning
+                        tooltip.style.left = '';
+                        tooltip.style.right = '';
+                        tooltip.style.bottom = '';
+                        tooltip.style.top = '';
+                        tooltip.style.transform = '';
                         
-                        // Check if tooltip goes off screen
-                        let leftOffset = 0;
-                        let topOffset = 0;
-                        
-                        // Adjust horizontal position if too far right
-                        if (rect.left + tooltipRect.width / 2 > viewportWidth - 20) {
-                            leftOffset = viewportWidth - rect.left - tooltipRect.width - 20;
-                        }
-                        // Adjust horizontal position if too far left
-                        else if (rect.left - tooltipRect.width / 2 < 20) {
-                            leftOffset = 20 - rect.left + tooltipRect.width / 2;
-                        }
-                        
-                        // Adjust vertical position if too high
-                        if (rect.top - tooltipRect.height < 20) {
-                            topOffset = tooltipRect.height + 20;
-                            tooltip.style.bottom = 'auto';
-                            tooltip.style.top = '100%';
-                            tooltip.style.transform = 'translateX(-50%) translateY(5px)';
-                            // Update arrow position
-                            tooltip.querySelector('::after')?.remove();
-                            const arrow = document.createElement('div');
-                            arrow.style.cssText = `
-                                position: absolute;
-                                bottom: 100%;
-                                left: 50%;
-                                transform: translateX(-50%);
-                                border: 6px solid transparent;
-                                border-bottom-color: rgba(10, 14, 39, 0.95);
-                            `;
-                        }
-                        
-                        if (leftOffset !== 0) {
-                            tooltip.style.left = leftOffset + 'px';
-                            tooltip.style.transform = 'translateX(0) translateY(-5px)';
-                        }
+                        // Get positions after tooltip is visible
+                        setTimeout(() => {
+                            const rect = this.getBoundingClientRect();
+                            const tooltipRect = tooltip.getBoundingClientRect();
+                            const viewportWidth = window.innerWidth;
+                            
+                            // Adjust horizontal position if tooltip goes off screen
+                            const tooltipLeft = rect.left + (rect.width / 2) - (tooltipRect.width / 2);
+                            
+                            if (tooltipLeft < 10) {
+                                // Too far left - align to left edge
+                                tooltip.style.left = '10px';
+                                tooltip.style.transform = 'translateX(0) translateY(-5px)';
+                            } else if (tooltipLeft + tooltipRect.width > viewportWidth - 10) {
+                                // Too far right - align to right edge
+                                tooltip.style.right = '10px';
+                                tooltip.style.left = 'auto';
+                                tooltip.style.transform = 'translateX(0) translateY(-5px)';
+                            }
+                            
+                            // Adjust vertical position if tooltip goes above viewport
+                            if (rect.top - tooltipRect.height < 10) {
+                                tooltip.style.bottom = 'auto';
+                                tooltip.style.top = '100%';
+                                tooltip.style.marginTop = '8px';
+                                tooltip.style.marginBottom = '0';
+                                // Change arrow direction
+                                tooltip.style.setProperty('--arrow-direction', 'down');
+                            }
+                        }, 10);
                     }
                 });
             });
