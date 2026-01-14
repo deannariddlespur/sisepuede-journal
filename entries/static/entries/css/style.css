@@ -37,6 +37,38 @@ body::after {
     z-index: -1;
 }
 
+/* Day to Night Gradient Overlay - Moves with stars */
+.day-night-gradient {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    pointer-events: none;
+    z-index: 0;
+    will-change: transform;
+    background: linear-gradient(
+        90deg,
+        /* Day colors - warm oranges, yellows, light blues */
+        rgba(255, 200, 100, 0.4) 0%,
+        rgba(255, 180, 80, 0.3) 10%,
+        rgba(200, 220, 255, 0.2) 20%,
+        rgba(150, 200, 255, 0.15) 30%,
+        /* Transition to evening */
+        rgba(100, 150, 200, 0.1) 40%,
+        rgba(80, 120, 180, 0.15) 50%,
+        /* Night colors - deep blues, purples */
+        rgba(50, 80, 150, 0.25) 60%,
+        rgba(30, 50, 100, 0.35) 70%,
+        rgba(20, 30, 60, 0.45) 80%,
+        rgba(10, 20, 40, 0.55) 90%,
+        rgba(5, 10, 25, 0.65) 100%
+    );
+    background-size: 200% 100%;
+    animation: move-stars-right 300s linear infinite;
+    opacity: 0.8;
+}
+
 /* Animated Stars Background - Moving Starfield */
 .stars, .stars2, .stars3 {
     position: fixed;
@@ -111,10 +143,10 @@ body::after {
 
 @keyframes move-stars-right {
     from {
-        transform: translateX(0) translateY(0);
+        transform: translateX(-50%) translateY(-25%);
     }
     to {
-        transform: translateX(-50%) translateY(-25%);
+        transform: translateX(0) translateY(0);
     }
 }
 
