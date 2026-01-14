@@ -1,0 +1,18 @@
+{% extends 'entries/base.html' %}
+
+{% block content %}
+<div class="delete-confirm">
+    <h2>Delete Entry</h2>
+    <p>Are you sure you want to delete "<strong>{{ entry.title }}</strong>"?</p>
+    <p class="warning">This action cannot be undone.</p>
+    
+    <form method="post" class="delete-form">
+        {% csrf_token %}
+        <div class="form-actions">
+            <button type="submit" class="btn btn-danger">Yes, Delete</button>
+            <a href="{% url 'entry_detail' entry.pk %}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
