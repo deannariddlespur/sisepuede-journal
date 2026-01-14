@@ -22,12 +22,14 @@ from entries import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('admin-login/', views.admin_login_view, name='admin_login'),
     path('', views.home, name='home'),
     path('login/', views.login_view, name='login'),
     path('entry/<int:pk>/', views.entry_detail, name='entry_detail'),
     path('entry/new/', views.entry_create, name='entry_create'),
     path('entry/<int:pk>/edit/', views.entry_edit, name='entry_edit'),
     path('entry/<int:pk>/delete/', views.entry_delete, name='entry_delete'),
+    path('entry/<int:pk>/comment/', views.add_comment, name='add_comment'),
 ]
 
 # Serve static and media files

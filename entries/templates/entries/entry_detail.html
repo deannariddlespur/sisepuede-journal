@@ -4,10 +4,12 @@
 <div class="entry-detail">
     <div class="entry-header-actions">
         <a href="{% url 'home' %}" class="btn btn-secondary">← Back to Entries</a>
+        {% if user.is_staff %}
         <div class="entry-actions">
             <a href="{% url 'entry_edit' entry.pk %}" class="btn btn-secondary">Edit</a>
             <a href="{% url 'entry_delete' entry.pk %}" class="btn btn-danger">Delete</a>
         </div>
+        {% endif %}
     </div>
     
     <article class="entry-content">
@@ -27,6 +29,39 @@
             {{ entry.content|linebreaks }}
         </div>
     </article>
+
+    <!-- Comments Section -->
+    <div class="comments-section" style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid rgba(179, 255, 224, 0.3);">
+        <h2 style="color: #333; margin-bottom: 1.5rem;">Comments ({{ comments.count }})</h2>
+        
+        {% if user.is_authenticated %}
+        <div class="comment-form" style="background: rgba(255, 255, 255, 0.7); padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;">
+            <form method="post" action="{% url 'add_comment' entry.pk %}">
+                {% csrf_token %}
+                {{ comment_form.content }}
+                <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">Post Comment</button>
+            </form>
+        </div>
+        {% else %}
+        <p style="color: #666; margin-bottom: 2rem;">
+            <a href="{% url 'login' %}" style="color: #ff69b4;">Login</a> to post a comment.
+        </p>
+        {% endif %}
+
+        <div class="comments-list">
+            {% for comment in comments %}
+            <div class="comment" style="background: rgba(255, 255, 255, 0.7); padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border-left: 3px solid #b3ffe0;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <strong style="color: #ff69b4;">{{ comment.author.username }}</strong>
+                    <span style="color: #999; font-size: 0.875rem;">{{ comment.created_at|date:"F d, Y g:i A" }}</span>
+                </div>
+                <p style="color: #333; margin: 0;">{{ comment.content|linebreaks }}</p>
+            </div>
+            {% empty %}
+            <p style="color: #666; font-style: italic;">No comments yet. Be the first to comment!</p>
+            {% endfor %}
+        </div>
+    </div>
 </div>
 {% endblock %}
 

@@ -11,14 +11,19 @@
     <nav class="navbar">
         <div class="container">
             <h1 class="logo">SI SE PUEDE</h1>
-            {% if user.is_authenticated %}
             <div class="nav-links">
                 <a href="{% url 'home' %}" class="nav-link">Home</a>
-                <a href="{% url 'entry_create' %}" class="nav-link btn-primary">New Entry</a>
-                <span class="user-info">Welcome, {{ user.username }}</span>
-                <a href="/admin/logout/" class="nav-link">Logout</a>
+                {% if user.is_authenticated %}
+                    {% if user.is_staff %}
+                    <a href="{% url 'entry_create' %}" class="nav-link btn-primary">New Entry</a>
+                    <a href="/admin/" class="nav-link">Admin</a>
+                    {% endif %}
+                    <span class="user-info">Welcome, {{ user.username }}</span>
+                    <a href="/admin/logout/" class="nav-link">Logout</a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="nav-link">Login</a>
+                {% endif %}
             </div>
-            {% endif %}
         </div>
     </nav>
     
