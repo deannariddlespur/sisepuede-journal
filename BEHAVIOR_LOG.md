@@ -33,3 +33,26 @@
 
 **Status:** Fixed - Deployment should now work properly
 
+---
+
+## Date: January 14, 2025
+
+### Issue: Database Tables Not Created - "no such table: auth_user"
+
+**Problem:**
+- User getting OperationalError: no such table: auth_user
+- Migrations appear to not be running on Railway deployment
+- Database tables don't exist even though release command includes migrations
+
+**Root Cause:**
+- Release command in Procfile might be failing silently
+- SQLite database file might not be persisting on Railway (ephemeral storage)
+- Need to ensure migrations run successfully and database persists
+
+**Actions Taken:**
+1. Check Procfile release command ✓
+2. Need to verify migrations are actually running
+3. May need to switch to PostgreSQL for Railway (persistent database)
+
+**Status:** Investigating - Need to ensure migrations run and database persists
+
