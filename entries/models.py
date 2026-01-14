@@ -38,3 +38,38 @@ class Comment(models.Model):
     
     def __str__(self):
         return f'Comment by {self.author.username} on {self.entry.title}'
+
+class PathEvent(models.Model):
+    """Define Your Path - Events calendar for runs, hikes, and adventures"""
+    EVENT_TYPES = [
+        ('run', 'Run'),
+        ('hike', 'Hike'),
+        ('adventure', 'Adventure'),
+        ('community', 'Community Event'),
+        ('wellness', 'Wellness'),
+        ('other', 'Other'),
+    ]
+    
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    event_type = models.CharField(max_length=20, choices=EVENT_TYPES, default='adventure')
+    event_date = models.DateTimeField()
+    location = models.CharField(max_length=200, blank=True)
+    image = models.ImageField(upload_to=get_upload_path, blank=True, null=True)
+    max_participants = models.IntegerField(null=True, blank=True)
+    is_published = models.BooleanField(default=True)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_events')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        ordering = ['event_date']
+        verbose_name = 'Path Event'
+        verbose_name_plural = 'Path Events'
+    
+    def __str__(self):
+        return f'{self.title} - {self.event_date.strftime("%B %d, %Y")}'
+    
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('path_event_detail', kwargs={'pk': self.pk})

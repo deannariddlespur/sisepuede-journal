@@ -30,6 +30,11 @@ urlpatterns = [
     path('entry/<int:pk>/edit/', views.entry_edit, name='entry_edit'),
     path('entry/<int:pk>/delete/', views.entry_delete, name='entry_delete'),
     path('entry/<int:pk>/comment/', views.add_comment, name='add_comment'),
+    path('define-your-path/', views.path_events_calendar, name='path_events_calendar'),
+    path('define-your-path/event/<int:pk>/', views.path_event_detail, name='path_event_detail'),
+    path('define-your-path/new/', views.path_event_create, name='path_event_create'),
+    path('define-your-path/<int:pk>/edit/', views.path_event_edit, name='path_event_edit'),
+    path('define-your-path/<int:pk>/delete/', views.path_event_delete, name='path_event_delete'),
 ]
 
 # Serve static and media files

@@ -1,5 +1,5 @@
 from django import forms
-from .models import JournalEntry, Comment
+from .models import JournalEntry, Comment, PathEvent
 
 class JournalEntryForm(forms.ModelForm):
     class Meta:
@@ -31,6 +31,40 @@ class CommentForm(forms.ModelForm):
                 'class': 'form-control',
                 'rows': 4,
                 'placeholder': 'Write your comment...',
+            }),
+        }
+
+class PathEventForm(forms.ModelForm):
+    class Meta:
+        model = PathEvent
+        fields = ['title', 'description', 'event_type', 'event_date', 'location', 'image', 'max_participants', 'is_published']
+        widgets = {
+            'title': forms.TextInput(attrs={
+                'class': 'form-control',
+            }),
+            'description': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 8,
+            }),
+            'event_type': forms.Select(attrs={
+                'class': 'form-control',
+            }),
+            'event_date': forms.DateTimeInput(attrs={
+                'class': 'form-control',
+                'type': 'datetime-local',
+            }),
+            'location': forms.TextInput(attrs={
+                'class': 'form-control',
+            }),
+            'image': forms.FileInput(attrs={
+                'class': 'form-control',
+                'accept': 'image/*',
+            }),
+            'max_participants': forms.NumberInput(attrs={
+                'class': 'form-control',
+            }),
+            'is_published': forms.CheckboxInput(attrs={
+                'class': 'form-check-input',
             }),
         }
 

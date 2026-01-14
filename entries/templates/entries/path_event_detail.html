@@ -1,0 +1,63 @@
+{% extends 'entries/base.html' %}
+{% load static %}
+
+{% block title %}{{ event.title }} - Define Your Path{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'entries/css/path_calendar.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="path-event-detail">
+    <div class="event-detail-header">
+        <a href="{% url 'path_events_calendar' %}" class="back-link">← Back to Calendar</a>
+        {% if user.is_staff %}
+        <div class="event-admin-actions">
+            <a href="{% url 'path_event_edit' event.pk %}" class="btn btn-primary">Edit Event</a>
+            <a href="{% url 'path_event_delete' event.pk %}" class="btn btn-danger">Delete</a>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="event-detail-card">
+        {% if event.image %}
+        <div class="event-detail-image">
+            <img src="{{ event.image.url }}" alt="{{ event.title }}">
+        </div>
+        {% endif %}
+        
+        <div class="event-detail-content">
+            <div class="event-type-badge event-type-{{ event.event_type }}">{{ event.get_event_type_display }}</div>
+            <h1 class="event-detail-title">{{ event.title }}</h1>
+            
+            <div class="event-detail-meta">
+                <div class="event-meta-item">
+                    <span class="meta-icon">📅</span>
+                    <span class="meta-text">{{ event.event_date|date:"F d, Y g:i A" }}</span>
+                </div>
+                {% if event.location %}
+                <div class="event-meta-item">
+                    <span class="meta-icon">📍</span>
+                    <span class="meta-text">{{ event.location }}</span>
+                </div>
+                {% endif %}
+                {% if event.max_participants %}
+                <div class="event-meta-item">
+                    <span class="meta-icon">👥</span>
+                    <span class="meta-text">Max {{ event.max_participants }} participants</span>
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="event-detail-description">
+                {{ event.description|linebreaks }}
+            </div>
+
+            <div class="event-detail-footer">
+                <p class="event-created">Created by {{ event.created_by.username }} on {{ event.created_at|date:"F d, Y" }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

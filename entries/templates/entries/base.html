@@ -6,6 +6,7 @@
     <title>{% block title %}Me Defino - I Define Myself{% endblock %}</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'entries/css/style.css' %}">
+    {% block extra_css %}{% endblock %}
 </head>
 <body>
     <nav class="navbar">
@@ -13,9 +14,11 @@
             <h1 class="logo">Me Defino</h1>
             <div class="nav-links">
                 <a href="{% url 'home' %}" class="nav-link">Home</a>
+                <a href="{% url 'path_events_calendar' %}" class="nav-link">Define Your Path</a>
                 {% if user.is_authenticated %}
                     {% if user.is_staff %}
                     <a href="{% url 'entry_create' %}" class="nav-link btn-primary">New Entry</a>
+                    <a href="{% url 'path_event_create' %}" class="nav-link">New Event</a>
                     <a href="/admin/" class="nav-link">Admin</a>
                     {% endif %}
                     <span class="user-info">Welcome, {{ user.username }}</span>

@@ -4,8 +4,11 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
-from .models import JournalEntry, Comment
-from .forms import JournalEntryForm, CommentForm
+from .models import JournalEntry, Comment, PathEvent
+from .forms import JournalEntryForm, CommentForm, PathEventForm
+from django.utils import timezone
+from datetime import datetime, timedelta
+import calendar
 
 def is_admin(user):
     return user.is_authenticated and user.is_staff
@@ -172,3 +175,116 @@ def admin_login_view(request):
         form.add_error(None, error_message)
     
     return render(request, 'entries/admin_login.html', {'form': form})
+
+# Define Your Path - Events Calendar Views
+def path_events_calendar(request):
+    """Calendar view showing all upcoming path events"""
+    now = timezone.now()
+    upcoming_events = PathEvent.objects.filter(is_published=True, event_date__gte=now).order_by('event_date')
+    past_events = PathEvent.objects.filter(is_published=True, event_date__lt=now).order_by('-event_date')[:5]
+    
+    # Get current month/year for calendar
+    year = request.GET.get('year', now.year)
+    month = request.GET.get('month', now.month)
+    try:
+        year = int(year)
+        month = int(month)
+    except (ValueError, TypeError):
+        year = now.year
+        month = now.month
+    
+    # Get events for this month
+    month_start = datetime(year, month, 1, tzinfo=timezone.utc)
+    if month == 12:
+        month_end = datetime(year + 1, 1, 1, tzinfo=timezone.utc)
+    else:
+        month_end = datetime(year, month + 1, 1, tzinfo=timezone.utc)
+    
+    month_events = PathEvent.objects.filter(
+        is_published=True,
+        event_date__gte=month_start,
+        event_date__lt=month_end
+    )
+    
+    # Create calendar
+    cal = calendar.monthcalendar(year, month)
+    events_by_date = {}
+    for event in month_events:
+        day = event.event_date.day
+        if day not in events_by_date:
+            events_by_date[day] = []
+        events_by_date[day].append(event)
+    
+    # Navigation
+    prev_month = month - 1
+    prev_year = year
+    if prev_month == 0:
+        prev_month = 12
+        prev_year -= 1
+    
+    next_month = month + 1
+    next_year = year
+    if next_month == 13:
+        next_month = 1
+        next_year += 1
+    
+    month_name = calendar.month_name[month]
+    
+    return render(request, 'entries/path_events_calendar.html', {
+        'upcoming_events': upcoming_events,
+        'past_events': past_events,
+        'calendar': cal,
+        'events_by_date': events_by_date,
+        'year': year,
+        'month': month,
+        'month_name': month_name,
+        'prev_month': prev_month,
+        'prev_year': prev_year,
+        'next_month': next_month,
+        'next_year': next_year,
+        'now': now,
+    })
+
+def path_event_detail(request, pk):
+    """View individual path event"""
+    event = get_object_or_404(PathEvent, pk=pk, is_published=True)
+    return render(request, 'entries/path_event_detail.html', {'event': event})
+
+@user_passes_test(is_admin)
+def path_event_create(request):
+    """Create a new path event - admin only"""
+    if request.method == 'POST':
+        form = PathEventForm(request.POST, request.FILES)
+        if form.is_valid():
+            event = form.save(commit=False)
+            event.created_by = request.user
+            event.save()
+            messages.success(request, 'Path event created successfully!')
+            return redirect('path_event_detail', pk=event.pk)
+    else:
+        form = PathEventForm()
+    return render(request, 'entries/path_event_form.html', {'form': form, 'title': 'Define a New Path'})
+
+@user_passes_test(is_admin)
+def path_event_edit(request, pk):
+    """Edit a path event - admin only"""
+    event = get_object_or_404(PathEvent, pk=pk)
+    if request.method == 'POST':
+        form = PathEventForm(request.POST, request.FILES, instance=event)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Path event updated successfully!')
+            return redirect('path_event_detail', pk=event.pk)
+    else:
+        form = PathEventForm(instance=event)
+    return render(request, 'entries/path_event_form.html', {'form': form, 'title': 'Edit Path Event'})
+
+@user_passes_test(is_admin)
+def path_event_delete(request, pk):
+    """Delete a path event - admin only"""
+    event = get_object_or_404(PathEvent, pk=pk)
+    if request.method == 'POST':
+        event.delete()
+        messages.success(request, 'Path event deleted successfully!')
+        return redirect('path_events_calendar')
+    return render(request, 'entries/path_event_confirm_delete.html', {'event': event})

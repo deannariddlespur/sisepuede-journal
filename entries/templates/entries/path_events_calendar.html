@@ -1,0 +1,131 @@
+{% extends 'entries/base.html' %}
+{% load static %}
+
+{% block title %}Define Your Path - Events Calendar{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'entries/css/path_calendar.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="path-calendar-page">
+    <!-- Hero Section -->
+    <div class="path-hero">
+        <div class="stars"></div>
+        <div class="stars2"></div>
+        <div class="stars3"></div>
+        <div class="path-hero-content">
+            <h1 class="path-title">Define Your Path</h1>
+            <p class="path-subtitle">Chart your journey through adventures, runs, hikes, and community events</p>
+            {% if user.is_staff %}
+            <a href="{% url 'path_event_create' %}" class="btn btn-hero-primary">Create New Event</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="calendar-container">
+        <!-- Calendar Navigation -->
+        <div class="calendar-nav">
+            <a href="?year={{ prev_year }}&month={{ prev_month }}" class="calendar-nav-btn">← Previous</a>
+            <h2 class="calendar-month-title">{{ month_name }} {{ year }}</h2>
+            <a href="?year={{ next_year }}&month={{ next_month }}" class="calendar-nav-btn">Next →</a>
+        </div>
+
+        <!-- Calendar Grid -->
+        <div class="calendar-grid">
+            <div class="calendar-header">
+                <div class="calendar-day-header">Sun</div>
+                <div class="calendar-day-header">Mon</div>
+                <div class="calendar-day-header">Tue</div>
+                <div class="calendar-day-header">Wed</div>
+                <div class="calendar-day-header">Thu</div>
+                <div class="calendar-day-header">Fri</div>
+                <div class="calendar-day-header">Sat</div>
+            </div>
+            
+            {% for week in calendar %}
+            <div class="calendar-week">
+                {% for day in week %}
+                <div class="calendar-day {% if day == 0 %}empty{% endif %} {% if day == now.day and month == now.month and year == now.year %}today{% endif %}">
+                    {% if day != 0 %}
+                    <div class="day-number">{{ day }}</div>
+                    {% if day in events_by_date %}
+                    <div class="day-events">
+                        {% for event in events_by_date|get_item:day %}
+                        <a href="{% url 'path_event_detail' event.pk %}" class="day-event-dot" title="{{ event.title }}" style="background-color: {% if event.event_type == 'run' %}#ffb3d9{% elif event.event_type == 'hike' %}#b3ffe0{% elif event.event_type == 'adventure' %}#ffe0f5{% else %}#ff91c7{% endif %}"></a>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Upcoming Events List -->
+    {% if upcoming_events %}
+    <div class="upcoming-events-section">
+        <h2 class="section-title">Upcoming Paths</h2>
+        <div class="events-grid">
+            {% for event in upcoming_events %}
+            <div class="event-card">
+                {% if event.image %}
+                <div class="event-image">
+                    <img src="{{ event.image.url }}" alt="{{ event.title }}">
+                </div>
+                {% endif %}
+                <div class="event-content">
+                    <div class="event-type-badge event-type-{{ event.event_type }}">{{ event.get_event_type_display }}</div>
+                    <h3><a href="{% url 'path_event_detail' event.pk %}">{{ event.title }}</a></h3>
+                    <p class="event-date">📅 {{ event.event_date|date:"F d, Y g:i A" }}</p>
+                    {% if event.location %}
+                    <p class="event-location">📍 {{ event.location }}</p>
+                    {% endif %}
+                    <p class="event-description">{{ event.description|truncatewords:25 }}</p>
+                    {% if user.is_staff %}
+                    <div class="event-actions">
+                        <a href="{% url 'path_event_edit' event.pk %}" class="btn-small">Edit</a>
+                        <a href="{% url 'path_event_delete' event.pk %}" class="btn-small btn-danger">Delete</a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Past Events -->
+    {% if past_events %}
+    <div class="past-events-section">
+        <h2 class="section-title">Recent Paths</h2>
+        <div class="events-grid">
+            {% for event in past_events %}
+            <div class="event-card past">
+                {% if event.image %}
+                <div class="event-image">
+                    <img src="{{ event.image.url }}" alt="{{ event.title }}">
+                </div>
+                {% endif %}
+                <div class="event-content">
+                    <div class="event-type-badge event-type-{{ event.event_type }}">{{ event.get_event_type_display }}</div>
+                    <h3><a href="{% url 'path_event_detail' event.pk %}">{{ event.title }}</a></h3>
+                    <p class="event-date">📅 {{ event.event_date|date:"F d, Y g:i A" }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<script>
+// Custom template filter for getting dict items
+document.addEventListener('DOMContentLoaded', function() {
+    // This is handled server-side, but we can add client-side enhancements
+});
+</script>
+{% endblock %}
+
