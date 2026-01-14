@@ -946,14 +946,29 @@
     transition: color 0.3s;
 }
 
+.space-theme-page .diary-page-content h2 a {
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
 .diary-page-content h2 a:hover {
     color: #ff69b4;
+}
+
+.space-theme-page .diary-page-content h2 a:hover {
+    color: #ffb3d9;
+    text-shadow: 0 0 15px rgba(255, 179, 217, 0.5);
 }
 
 .diary-preview {
     color: #666;
     line-height: 1.6;
     margin: 1rem 0;
+}
+
+.space-theme-page .diary-preview {
+    color: rgba(255, 255, 255, 0.8);
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
 }
 
 .diary-meta {
@@ -997,6 +1012,15 @@
     border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.space-theme-page .diary-detail-card {
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+        0 4px 30px rgba(0, 0, 0, 0.3),
+        0 0 40px rgba(255, 179, 217, 0.1);
 }
 
 .diary-detail-image {

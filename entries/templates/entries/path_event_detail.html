@@ -8,7 +8,9 @@
 {% endblock %}
 
 {% block content %}
-<div class="path-event-detail">
+<div class="space-theme-page">
+    <div class="space-content-container">
+        <div class="path-event-detail">
     <div class="event-detail-header">
         <a href="{% url 'path_events_calendar' %}" class="back-link">← Back to Calendar</a>
         {% if user.is_staff %}
@@ -65,6 +67,7 @@
                 <p class="event-created">Created by {{ event.created_by.username }} on {{ event.created_at|date:"F d, Y" }}</p>
             </div>
         </div>
+    </div>
     </div>
 </div>
 {% endblock %}

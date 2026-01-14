@@ -3,7 +3,9 @@
 {% block title %}{{ page.title }} - DeAnna's Diary{% endblock %}
 
 {% block content %}
-<div class="diary-page-detail">
+<div class="space-theme-page">
+    <div class="space-content-container">
+        <div class="diary-page-detail">
     <div class="diary-detail-header">
         <a href="{% url 'diary_list' %}" class="back-link">← Back to Diary</a>
         {% if user.is_staff %}
@@ -46,6 +48,7 @@
                 {% endif %}
             </div>
         </div>
+    </div>
     </div>
 </div>
 {% endblock %}

@@ -1,7 +1,9 @@
 {% extends 'entries/base.html' %}
 
 {% block content %}
-<div class="form-container">
+<div class="space-theme-page">
+    <div class="space-content-container">
+        <div class="form-container">
     <div class="form-header">
         <h2>{{ title }}</h2>
         <a href="{% url 'home' %}" class="btn btn-secondary">Cancel</a>
@@ -44,6 +46,8 @@
             <a href="{% url 'home' %}" class="btn btn-secondary">Cancel</a>
         </div>
     </form>
+        </div>
+    </div>
 </div>
 {% endblock %}
 
