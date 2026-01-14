@@ -600,6 +600,82 @@ main {
     color: #ff69b4;
 }
 
+/* Pencil Icon Button with Dropdown - Shared Styles */
+.event-actions-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.pencil-icon-btn {
+    background: linear-gradient(135deg, #ffb3d9 0%, #b3ffe0 100%);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(255, 179, 217, 0.3);
+    color: #0a0e27;
+}
+
+.pencil-icon-btn:hover {
+    transform: scale(1.1) rotate(15deg);
+    box-shadow: 0 4px 12px rgba(255, 179, 217, 0.5);
+}
+
+.pencil-icon-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 45px;
+    right: 0;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    min-width: 150px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.dropdown-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-item {
+    display: block;
+    padding: 0.75rem 1rem;
+    color: #333;
+    text-decoration: none;
+    transition: background 0.2s;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.dropdown-item:hover {
+    background: linear-gradient(135deg, rgba(255, 179, 217, 0.1) 0%, rgba(179, 255, 224, 0.1) 100%);
+    color: #0a0e27;
+}
+
+.dropdown-item.delete-item:hover {
+    background: rgba(255, 99, 99, 0.1);
+    color: #d32f2f;
+}
+
 .entry-actions {
     display: flex;
     gap: 0.5rem;
