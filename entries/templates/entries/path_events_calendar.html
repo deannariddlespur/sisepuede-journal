@@ -49,13 +49,15 @@
                 <div class="calendar-day {% if day == 0 %}empty{% endif %} {% if day == now.day and month == now.month and year == now.year %}today{% endif %}">
                     {% if day != 0 %}
                     <div class="day-number">{{ day }}</div>
-                    {% if day in events_by_date %}
-                    <div class="day-events">
-                        {% for event in events_by_date|get_item:day %}
-                        <a href="{% url 'path_event_detail' event.pk %}" class="day-event-dot" title="{{ event.title }}" style="background-color: {% if event.event_type == 'run' %}#ffb3d9{% elif event.event_type == 'hike' %}#b3ffe0{% elif event.event_type == 'adventure' %}#ffe0f5{% else %}#ff91c7{% endif %}"></a>
-                        {% endfor %}
-                    </div>
-                    {% endif %}
+                    {% for event_day, event_list in events_by_date.items %}
+                        {% if event_day == day %}
+                        <div class="day-events">
+                            {% for event in event_list %}
+                            <a href="{% url 'path_event_detail' event.pk %}" class="day-event-dot" title="{{ event.title }}" style="background-color: {% if event.event_type == 'run' %}#ffb3d9{% elif event.event_type == 'hike' %}#b3ffe0{% elif event.event_type == 'adventure' %}#ffe0f5{% else %}#ff91c7{% endif %}"></a>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    {% endfor %}
                     {% endif %}
                 </div>
                 {% endfor %}
