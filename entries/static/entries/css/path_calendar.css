@@ -2,6 +2,9 @@
 
 .path-calendar-page {
     min-height: 100vh;
+    position: relative;
+    z-index: 1;
+    padding-bottom: 3rem;
 }
 
 .path-hero {
@@ -165,6 +168,27 @@
 .upcoming-events-section,
 .past-events-section {
     margin-bottom: 3rem;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    margin-top: 2rem;
+    position: relative;
+    z-index: 2;
+}
+
+.upcoming-events-section .section-title,
+.past-events-section .section-title {
+    color: #0a0e27;
+    font-size: 2.5rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+    margin-bottom: 2rem;
+    text-align: center;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #ffb3d9;
+    position: relative;
+    z-index: 2;
 }
 
 .events-grid {
