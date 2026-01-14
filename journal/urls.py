@@ -30,6 +30,12 @@ urlpatterns = [
     path('entry/<int:pk>/delete/', views.entry_delete, name='entry_delete'),
 ]
 
-# Serve media files in development
+# Serve static and media files
 if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+else:
+    # In production, static files should be served by web server (Nginx, etc.)
+    # But we'll serve them via Django for Railway
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
