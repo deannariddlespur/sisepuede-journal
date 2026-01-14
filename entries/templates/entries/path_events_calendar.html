@@ -62,11 +62,13 @@
             {% for week in calendar_with_events %}
             <div class="calendar-week">
                 {% for day_data in week %}
-                {% if day_data.day != 0 %}
+                {% if day_data.day == 0 %}
+                <div class="calendar-day empty"></div>
+                {% else %}
                 {% if user.is_staff %}
                 <a href="{% url 'path_event_create' %}?date={{ year }}-{{ month|stringformat:"02d" }}-{{ day_data.day|stringformat:"02d" }}" class="calendar-day-link">
                 {% endif %}
-                <div class="calendar-day {% if day_data.day == 0 %}empty{% endif %} {% if day_data.day == now.day and month == now.month and year == now.year %}today{% endif %} {% if user.is_staff %}clickable-day{% endif %}">
+                <div class="calendar-day {% if day_data.day == now.day and month == now.month and year == now.year %}today{% endif %} {% if user.is_staff %}clickable-day{% endif %}">
                     <div class="day-number">{{ day_data.day }}</div>
                     {% if day_data.events %}
                     <div class="day-events">
@@ -77,6 +79,7 @@
                            data-event-date="{{ event.event_date|date:'M d, Y g:i A' }}"
                            data-event-type="{{ event.get_event_type_display }}"
                            data-event-location="{% if event.location %}{{ event.location }}{% endif %}"
+                           onclick="event.stopPropagation();"
                            style="background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), {% if event.event_type == 'run' %}#ffb3d9{% elif event.event_type == 'hike' %}#b3ffe0{% elif event.event_type == 'adventure' %}#ffe0f5{% elif event.event_type == 'community' %}#ff91c7{% elif event.event_type == 'wellness' %}#d9b3ff{% else %}#e0b3ff{% endif %}); color: {% if event.event_type == 'run' %}#ffb3d9{% elif event.event_type == 'hike' %}#b3ffe0{% elif event.event_type == 'adventure' %}#ffe0f5{% elif event.event_type == 'community' %}#ff91c7{% elif event.event_type == 'wellness' %}#d9b3ff{% else %}#e0b3ff{% endif %};">
                             <span class="event-tooltip">
                                 <strong>{{ event.title }}</strong>
@@ -90,10 +93,10 @@
                         {% endfor %}
                     </div>
                     {% endif %}
-                    {% endif %}
                 </div>
                 {% if user.is_staff %}
                 </a>
+                {% endif %}
                 {% endif %}
                 {% endfor %}
             </div>
