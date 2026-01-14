@@ -75,20 +75,9 @@
                         {% for event in day_data.events %}
                         <a href="{% url 'path_event_detail' event.pk %}" 
                            class="day-event-dot event-type-{{ event.event_type }}" 
-                           data-event-title="{{ event.title }}"
-                           data-event-date="{{ event.event_date|date:'M d, Y g:i A' }}"
-                           data-event-type="{{ event.get_event_type_display }}"
-                           data-event-location="{% if event.location %}{{ event.location }}{% endif %}"
                            onclick="event.stopPropagation();"
+                           title="{{ event.title }}"
                            style="background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), {% if event.event_type == 'run' %}#ffb3d9{% elif event.event_type == 'hike' %}#b3ffe0{% elif event.event_type == 'adventure' %}#ffe0f5{% elif event.event_type == 'community' %}#ff91c7{% elif event.event_type == 'wellness' %}#d9b3ff{% else %}#e0b3ff{% endif %}); color: {% if event.event_type == 'run' %}#ffb3d9{% elif event.event_type == 'hike' %}#b3ffe0{% elif event.event_type == 'adventure' %}#ffe0f5{% elif event.event_type == 'community' %}#ff91c7{% elif event.event_type == 'wellness' %}#d9b3ff{% else %}#e0b3ff{% endif %};">
-                            <span class="event-tooltip">
-                                <strong>{{ event.title }}</strong>
-                                <span class="tooltip-type">{{ event.get_event_type_display }}</span>
-                                <span class="tooltip-date">📅 {{ event.event_date|date:"M d, Y g:i A" }}</span>
-                                {% if event.location %}
-                                <span class="tooltip-location">📍 {{ event.location }}</span>
-                                {% endif %}
-                            </span>
                         </a>
                         {% endfor %}
                     </div>
