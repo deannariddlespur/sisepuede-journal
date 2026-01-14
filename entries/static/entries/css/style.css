@@ -37,7 +37,7 @@ body::after {
     z-index: -1;
 }
 
-/* Animated Stars Background */
+/* Animated Stars Background - More Realistic */
 .stars, .stars2, .stars3 {
     position: fixed;
     top: 0;
@@ -48,21 +48,55 @@ body::after {
     z-index: 0;
 }
 
+/* Layer 1: Small distant stars - many tiny points */
 .stars {
-    background: transparent url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><circle cx="20" cy="20" r="1" fill="white" opacity="0.8"/><circle cx="50" cy="30" r="0.5" fill="white" opacity="0.6"/><circle cx="80" cy="10" r="1" fill="white" opacity="0.9"/><circle cx="30" cy="60" r="0.5" fill="white" opacity="0.7"/><circle cx="70" cy="70" r="1" fill="white" opacity="0.8"/><circle cx="10" cy="80" r="0.5" fill="white" opacity="0.6"/><circle cx="90" cy="50" r="1" fill="white" opacity="0.9"/></svg>') repeat;
+    background-image: 
+        radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,0.9), transparent),
+        radial-gradient(1px 1px at 50px 70px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 80px 10px, rgba(255,255,255,0.9), transparent),
+        radial-gradient(1px 1px at 30px 60px, rgba(255,255,255,0.7), transparent),
+        radial-gradient(2px 2px at 70px 90px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 10px 80px, rgba(255,255,255,0.6), transparent),
+        radial-gradient(2px 2px at 90px 50px, rgba(255,255,255,0.9), transparent),
+        radial-gradient(1px 1px at 40px 20px, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1px 1px at 60px 40px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(2px 2px at 15px 55px, rgba(255,255,255,0.9), transparent);
+    background-size: 200px 200px;
+    background-position: 0 0, 50px 50px, 100px 20px, 150px 80px, 30px 120px, 80px 100px, 120px 60px, 40px 140px, 160px 30px, 20px 160px;
     animation: move-stars 200s linear infinite;
+    opacity: 0.8;
 }
 
+/* Layer 2: Medium stars - brighter, more visible */
 .stars2 {
-    background: transparent url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="150" height="150"><circle cx="40" cy="40" r="0.5" fill="white" opacity="0.5"/><circle cx="100" cy="60" r="1" fill="white" opacity="0.7"/><circle cx="20" cy="120" r="0.5" fill="white" opacity="0.6"/><circle cx="130" cy="30" r="1" fill="white" opacity="0.8"/><circle cx="60" cy="100" r="0.5" fill="white" opacity="0.5"/></svg>') repeat;
+    background-image:
+        radial-gradient(2px 2px at 100px 120px, rgba(255,255,255,0.95), transparent),
+        radial-gradient(1.5px 1.5px at 150px 80px, rgba(255,255,255,0.85), transparent),
+        radial-gradient(2px 2px at 200px 150px, rgba(255,255,255,0.9), transparent),
+        radial-gradient(1px 1px at 50px 180px, rgba(255,255,255,0.7), transparent),
+        radial-gradient(2px 2px at 180px 50px, rgba(255,255,255,0.9), transparent),
+        radial-gradient(1.5px 1.5px at 120px 200px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(2px 2px at 250px 100px, rgba(255,255,255,0.95), transparent),
+        radial-gradient(1px 1px at 80px 220px, rgba(255,255,255,0.75), transparent);
+    background-size: 300px 300px;
+    background-position: 0 0, 100px 100px, 200px 50px, 50px 200px, 150px 150px, 250px 80px, 80px 250px, 180px 180px;
     animation: move-stars 150s linear infinite;
     opacity: 0.7;
 }
 
+/* Layer 3: Large bright stars - twinkling effect */
 .stars3 {
-    background: transparent url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><circle cx="80" cy="80" r="1" fill="white" opacity="0.4"/><circle cx="150" cy="120" r="0.5" fill="white" opacity="0.6"/><circle cx="50" cy="180" r="1" fill="white" opacity="0.5"/><circle cx="180" cy="60" r="0.5" fill="white" opacity="0.7"/></svg>') repeat;
-    animation: move-stars 100s linear infinite;
-    opacity: 0.5;
+    background-image:
+        radial-gradient(3px 3px at 200px 200px, rgba(255,255,255,1), transparent 70%),
+        radial-gradient(2px 2px at 400px 300px, rgba(255,255,255,0.9), transparent 70%),
+        radial-gradient(3px 3px at 600px 150px, rgba(255,255,255,1), transparent 70%),
+        radial-gradient(2px 2px at 300px 500px, rgba(255,255,255,0.85), transparent 70%),
+        radial-gradient(3px 3px at 500px 400px, rgba(255,255,255,0.95), transparent 70%),
+        radial-gradient(2px 2px at 700px 250px, rgba(255,255,255,0.9), transparent 70%);
+    background-size: 800px 800px;
+    background-position: 0 0, 200px 200px, 400px 100px, 100px 400px, 300px 300px, 500px 200px;
+    animation: move-stars 100s linear infinite, twinkle 3s ease-in-out infinite;
+    opacity: 0.6;
 }
 
 @keyframes move-stars {
@@ -71,6 +105,15 @@ body::after {
     }
     to {
         transform: translateY(-2000px);
+    }
+}
+
+@keyframes twinkle {
+    0%, 100% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 1;
     }
 }
 
