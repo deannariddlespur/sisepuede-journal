@@ -309,7 +309,11 @@ def path_events_calendar(request):
 
 def path_event_detail(request, pk):
     """View individual path event"""
-    event = get_object_or_404(PathEvent, pk=pk, is_published=True)
+    # Staff can see all events, others only published
+    if request.user.is_staff:
+        event = get_object_or_404(PathEvent, pk=pk)
+    else:
+        event = get_object_or_404(PathEvent, pk=pk, is_published=True)
     return render(request, 'entries/path_event_detail.html', {'event': event})
 
 @user_passes_test(is_admin)
