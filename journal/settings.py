@@ -28,8 +28,18 @@ DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',') if os.environ.get('ALLOWED_HOSTS') else ['*']
 
-# CSRF settings for Railway
-CSRF_TRUSTED_ORIGINS = os.environ.get('CSRF_TRUSTED_ORIGINS', '').split(',') if os.environ.get('CSRF_TRUSTED_ORIGINS') else []
+# CSRF settings for Railway - auto-detect from ALLOWED_HOSTS
+csrf_origins = []
+if os.environ.get('CSRF_TRUSTED_ORIGINS'):
+    csrf_origins = os.environ.get('CSRF_TRUSTED_ORIGINS', '').split(',')
+elif os.environ.get('ALLOWED_HOSTS'):
+    # Auto-generate CSRF origins from ALLOWED_HOSTS
+    hosts = os.environ.get('ALLOWED_HOSTS', '').split(',')
+    csrf_origins = [f'https://{host.strip()}' for host in hosts if host.strip()]
+elif os.environ.get('RAILWAY_PUBLIC_DOMAIN'):
+    # Railway provides this automatically
+    csrf_origins = [f'https://{os.environ.get("RAILWAY_PUBLIC_DOMAIN")}']
+CSRF_TRUSTED_ORIGINS = csrf_origins
 
 
 # Application definition
