@@ -1,8 +1,19 @@
 {% extends 'entries/base.html' %}
 
 {% block content %}
+<!-- Hero Section with Animated Stars -->
+<div class="hero-section">
+    <div class="stars"></div>
+    <div class="stars2"></div>
+    <div class="stars3"></div>
+    <div class="hero-content">
+        <h1 class="hero-title">SI SE PUEDE</h1>
+        <p class="hero-subtitle">Journal</p>
+    </div>
+    <div class="mountains"></div>
+</div>
+
 <div class="header-section">
-    <h2>SI SE PUEDE Journal</h2>
     {% if user.is_staff %}
     <a href="{% url 'entry_create' %}" class="btn btn-primary">+ New Entry</a>
     {% elif not user.is_authenticated %}

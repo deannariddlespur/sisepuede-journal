@@ -8,8 +8,122 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     line-height: 1.6;
     color: #333;
-    background: linear-gradient(135deg, #ffb3d9 0%, #b3ffe0 50%, #ffe0f5 100%);
+    background: #0a0e27;
     min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Animated Stars Background */
+.stars, .stars2, .stars3 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.stars {
+    background: transparent url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><circle cx="20" cy="20" r="1" fill="white" opacity="0.8"/><circle cx="50" cy="30" r="0.5" fill="white" opacity="0.6"/><circle cx="80" cy="10" r="1" fill="white" opacity="0.9"/><circle cx="30" cy="60" r="0.5" fill="white" opacity="0.7"/><circle cx="70" cy="70" r="1" fill="white" opacity="0.8"/><circle cx="10" cy="80" r="0.5" fill="white" opacity="0.6"/><circle cx="90" cy="50" r="1" fill="white" opacity="0.9"/></svg>') repeat;
+    animation: move-stars 200s linear infinite;
+}
+
+.stars2 {
+    background: transparent url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="150" height="150"><circle cx="40" cy="40" r="0.5" fill="white" opacity="0.5"/><circle cx="100" cy="60" r="1" fill="white" opacity="0.7"/><circle cx="20" cy="120" r="0.5" fill="white" opacity="0.6"/><circle cx="130" cy="30" r="1" fill="white" opacity="0.8"/><circle cx="60" cy="100" r="0.5" fill="white" opacity="0.5"/></svg>') repeat;
+    animation: move-stars 150s linear infinite;
+    opacity: 0.7;
+}
+
+.stars3 {
+    background: transparent url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><circle cx="80" cy="80" r="1" fill="white" opacity="0.4"/><circle cx="150" cy="120" r="0.5" fill="white" opacity="0.6"/><circle cx="50" cy="180" r="1" fill="white" opacity="0.5"/><circle cx="180" cy="60" r="0.5" fill="white" opacity="0.7"/></svg>') repeat;
+    animation: move-stars 100s linear infinite;
+    opacity: 0.5;
+}
+
+@keyframes move-stars {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-2000px);
+    }
+}
+
+/* Hero Section */
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 70vh;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to bottom, #0a0e27 0%, #1a1f3a 50%, #0a0e27 100%);
+    overflow: hidden;
+    margin-bottom: 3rem;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: white;
+}
+
+.hero-title {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 4.5rem;
+    font-weight: 300;
+    letter-spacing: 8px;
+    margin: 0;
+    text-transform: uppercase;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    animation: fade-in 2s ease-in;
+}
+
+.hero-subtitle {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    letter-spacing: 4px;
+    margin-top: 1rem;
+    opacity: 0.9;
+    animation: fade-in 2s ease-in 0.5s both;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mountains Silhouette */
+.mountains {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(to top, #0a0e27 0%, transparent 100%),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 200"><path d="M0,200 L200,120 L400,160 L600,100 L800,140 L1000,80 L1200,120 L1200,200 Z" fill="%230a0e27" opacity="0.8"/><path d="M0,200 L150,140 L350,180 L550,120 L750,160 L950,100 L1200,140 L1200,200 Z" fill="%231a1f3a" opacity="0.6"/></svg>') no-repeat bottom;
+    background-size: 100% 100%;
+    z-index: 1;
+}
+
+main {
+    position: relative;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.95);
+    margin-top: -2rem;
+    border-radius: 20px 20px 0 0;
+    padding: 2rem;
+    min-height: calc(100vh - 70vh);
 }
 
 .container {
@@ -20,14 +134,14 @@ body {
 
 /* Navbar */
 .navbar {
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(10, 14, 39, 0.95);
     backdrop-filter: blur(10px);
-    box-shadow: 0 2px 10px rgba(255, 179, 217, 0.2);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     padding: 1rem 0;
     position: sticky;
     top: 0;
     z-index: 1000;
-    border-bottom: 2px solid rgba(179, 255, 224, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .navbar .container {
@@ -39,8 +153,10 @@ body {
 .logo {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #ff69b4;
+    color: white;
     margin: 0;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    letter-spacing: 2px;
 }
 
 .nav-links {
@@ -51,17 +167,17 @@ body {
 
 .nav-link {
     text-decoration: none;
-    color: #333;
+    color: rgba(255, 255, 255, 0.9);
     font-weight: 500;
     transition: color 0.3s;
 }
 
 .nav-link:hover {
-    color: #ff69b4;
+    color: #b3ffe0;
 }
 
 .user-info {
-    color: #666;
+    color: rgba(255, 255, 255, 0.7);
     font-size: 0.9rem;
 }
 
