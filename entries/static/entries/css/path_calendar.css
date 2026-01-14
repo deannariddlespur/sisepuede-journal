@@ -546,13 +546,14 @@
 
 .event-date,
 .event-location {
-    color: #666;
+    color: rgba(255, 255, 255, 0.8);
     font-size: 0.9rem;
     margin: 0.5rem 0;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
 }
 
 .event-description {
-    color: #666;
+    color: rgba(255, 255, 255, 0.75);
     line-height: 1.6;
     margin-top: 1rem;
 }
