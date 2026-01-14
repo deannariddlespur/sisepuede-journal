@@ -186,7 +186,7 @@ def admin_login_view(request):
 # Define Your Path - Events Calendar Views
 def path_events_calendar(request):
     """Calendar view showing all upcoming path events"""
-    now = django_timezone.now()
+    now = timezone.now()
     upcoming_events = PathEvent.objects.filter(is_published=True, event_date__gte=now).order_by('event_date')
     past_events = PathEvent.objects.filter(is_published=True, event_date__lt=now).order_by('-event_date')[:5]
     
@@ -201,11 +201,11 @@ def path_events_calendar(request):
         month = now.month
     
     # Get events for this month
-    month_start = datetime(year, month, 1, tzinfo=timezone.utc)
+    month_start = datetime(year, month, 1, tzinfo=dt_timezone.utc)
     if month == 12:
-        month_end = datetime(year + 1, 1, 1, tzinfo=timezone.utc)
+        month_end = datetime(year + 1, 1, 1, tzinfo=dt_timezone.utc)
     else:
-        month_end = datetime(year, month + 1, 1, tzinfo=timezone.utc)
+        month_end = datetime(year, month + 1, 1, tzinfo=dt_timezone.utc)
     
     month_events = PathEvent.objects.filter(
         is_published=True,
