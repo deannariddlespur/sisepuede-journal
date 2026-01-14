@@ -355,9 +355,9 @@
 .calendar-day.clickable-day::before {
     content: '+';
     position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
-    font-size: 1.2rem;
+    top: 0.2rem;
+    right: 0.2rem;
+    font-size: 0.9rem;
     color: rgba(255, 255, 255, 0.4);
     opacity: 0;
     transition: all 0.3s;
