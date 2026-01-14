@@ -198,10 +198,10 @@ def path_events_calendar(request):
     # Apply search filters
     if search_query:
         base_events = base_events.filter(
-            models.Q(title__icontains=search_query) |
-            models.Q(description__icontains=search_query) |
-            models.Q(location__icontains=search_query) |
-            models.Q(event_type__icontains=search_query)
+            Q(title__icontains=search_query) |
+            Q(description__icontains=search_query) |
+            Q(location__icontains=search_query) |
+            Q(event_type__icontains=search_query)
         )
     
     if search_date:
