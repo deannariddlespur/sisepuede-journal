@@ -5,6 +5,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from django.conf import settings
+from django.db.models import Q
 from .models import JournalEntry, Comment, PathEvent, DiaryPage
 from .forms import JournalEntryForm, CommentForm, PathEventForm, DiaryPageForm
 from django.utils import timezone
