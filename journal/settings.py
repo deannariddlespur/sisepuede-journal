@@ -31,15 +31,27 @@ ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',') if os.environ.get
 # CSRF settings for Railway - auto-detect from ALLOWED_HOSTS
 csrf_origins = []
 if os.environ.get('CSRF_TRUSTED_ORIGINS'):
-    csrf_origins = os.environ.get('CSRF_TRUSTED_ORIGINS', '').split(',')
+    csrf_origins = [origin.strip() for origin in os.environ.get('CSRF_TRUSTED_ORIGINS', '').split(',') if origin.strip()]
 elif os.environ.get('ALLOWED_HOSTS'):
     # Auto-generate CSRF origins from ALLOWED_HOSTS
     hosts = os.environ.get('ALLOWED_HOSTS', '').split(',')
-    csrf_origins = [f'https://{host.strip()}' for host in hosts if host.strip()]
+    csrf_origins = [f'https://{host.strip()}' for host in hosts if host.strip() and host.strip() != '*']
 elif os.environ.get('RAILWAY_PUBLIC_DOMAIN'):
     # Railway provides this automatically
-    csrf_origins = [f'https://{os.environ.get("RAILWAY_PUBLIC_DOMAIN")}']
+    railway_domain = os.environ.get('RAILWAY_PUBLIC_DOMAIN')
+    if railway_domain:
+        csrf_origins = [f'https://{railway_domain}']
+
+# If still empty, try to get from request (fallback)
+if not csrf_origins:
+    # Allow all HTTPS origins in development, but this should be set in production
+    pass
+
 CSRF_TRUSTED_ORIGINS = csrf_origins
+
+# Additional CSRF settings for admin
+CSRF_COOKIE_SECURE = os.environ.get('CSRF_COOKIE_SECURE', 'False') == 'True'
+CSRF_COOKIE_HTTPONLY = True
 
 
 # Application definition
