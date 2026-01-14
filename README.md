@@ -1,4 +1,4 @@
-# SI SE PUEDE Journal
+# Me Defino - I Define Myself
 
 A beautiful Django journaling application with image upload support.
 

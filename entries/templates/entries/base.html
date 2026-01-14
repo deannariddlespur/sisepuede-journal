@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Si Se Puede Journal{% endblock %}</title>
+    <title>{% block title %}Me Defino - I Define Myself{% endblock %}</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'entries/css/style.css' %}">
 </head>
 <body>
     <nav class="navbar">
         <div class="container">
-            <h1 class="logo">SI SE PUEDE</h1>
+            <h1 class="logo">Me Defino</h1>
             <div class="nav-links">
                 <a href="{% url 'home' %}" class="nav-link">Home</a>
                 {% if user.is_authenticated %}
@@ -33,7 +33,7 @@
     </main>
     
     <footer>
-        <p>&copy; 2026 Si Se Puede Journal</p>
+        <p>&copy; 2026 Me Defino - I Define Myself</p>
     </footer>
 </body>
 </html>
