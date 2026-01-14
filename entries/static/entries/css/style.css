@@ -50,18 +50,21 @@ body {
     }
 }
 
-/* Hero Section */
-.hero-section {
+/* Landing Page */
+.landing-page {
+    min-height: 100vh;
+}
+
+.landing-hero {
     position: relative;
     width: 100%;
-    height: 70vh;
-    min-height: 500px;
+    height: 85vh;
+    min-height: 600px;
     display: flex;
     align-items: center;
     justify-content: center;
     background: linear-gradient(to bottom, #0a0e27 0%, #1a1f3a 50%, #0a0e27 100%);
     overflow: hidden;
-    margin-bottom: 3rem;
 }
 
 .hero-content {
@@ -69,33 +72,86 @@ body {
     z-index: 2;
     text-align: center;
     color: white;
+    max-width: 800px;
+    padding: 0 2rem;
 }
 
 .hero-title {
     font-family: 'Georgia', 'Times New Roman', serif;
-    font-size: 4.5rem;
+    font-size: 5rem;
     font-weight: 300;
-    letter-spacing: 8px;
+    letter-spacing: 10px;
     margin: 0;
     text-transform: uppercase;
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
-    animation: fade-in 2s ease-in;
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+    animation: fade-in 1.5s ease-in;
 }
 
 .hero-subtitle {
     font-family: 'Georgia', 'Times New Roman', serif;
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: 300;
-    letter-spacing: 4px;
-    margin-top: 1rem;
-    opacity: 0.9;
-    animation: fade-in 2s ease-in 0.5s both;
+    letter-spacing: 3px;
+    margin-top: 1.5rem;
+    opacity: 0.95;
+    animation: fade-in 1.5s ease-in 0.3s both;
+}
+
+.hero-description {
+    font-size: 1.2rem;
+    margin-top: 1.5rem;
+    opacity: 0.85;
+    line-height: 1.8;
+    animation: fade-in 1.5s ease-in 0.6s both;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-top: 3rem;
+    animation: fade-in 1.5s ease-in 0.9s both;
+}
+
+.btn-hero-primary {
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff91c7 100%);
+    color: #0a0e27;
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(255, 179, 217, 0.4);
+}
+
+.btn-hero-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 179, 217, 0.6);
+}
+
+.btn-hero-secondary {
+    background: transparent;
+    color: white;
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    text-decoration: none;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    transition: all 0.3s;
+}
+
+.btn-hero-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: white;
+    transform: translateY(-3px);
 }
 
 @keyframes fade-in {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(30px);
     }
     to {
         opacity: 1;
@@ -103,27 +159,159 @@ body {
     }
 }
 
-/* Mountains Silhouette */
 .mountains {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 200px;
+    height: 250px;
     background: linear-gradient(to top, #0a0e27 0%, transparent 100%),
-                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 200"><path d="M0,200 L200,120 L400,160 L600,100 L800,140 L1000,80 L1200,120 L1200,200 Z" fill="%230a0e27" opacity="0.8"/><path d="M0,200 L150,140 L350,180 L550,120 L750,160 L950,100 L1200,140 L1200,200 Z" fill="%231a1f3a" opacity="0.6"/></svg>') no-repeat bottom;
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 250"><path d="M0,250 L200,150 L400,200 L600,120 L800,180 L1000,100 L1200,150 L1200,250 Z" fill="%230a0e27" opacity="0.9"/><path d="M0,250 L150,180 L350,220 L550,150 L750,200 L950,130 L1200,180 L1200,250 Z" fill="%231a1f3a" opacity="0.7"/></svg>') no-repeat bottom;
     background-size: 100% 100%;
     z-index: 1;
+}
+
+/* Features Section */
+.features-section {
+    background: white;
+    padding: 5rem 0;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 3rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.feature-card {
+    text-align: center;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.feature-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+    color: #333;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.feature-card p {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Entries Preview Section */
+.entries-preview-section {
+    background: linear-gradient(135deg, #ffb3d9 0%, #b3ffe0 50%, #ffe0f5 100%);
+    padding: 5rem 0;
+}
+
+.entries-preview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.preview-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.preview-card:hover {
+    transform: translateY(-5px);
+}
+
+.preview-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.preview-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.preview-content {
+    padding: 1.5rem;
+}
+
+.preview-content h3 {
+    color: #333;
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+}
+
+.preview-content p {
+    color: #666;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.preview-link {
+    color: #ff69b4;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.preview-link:hover {
+    color: #ff91c7;
+}
+
+.cta-section {
+    text-align: center;
+    margin-top: 3rem;
+    padding: 2rem;
+}
+
+.cta-section p {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+.empty-preview {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.empty-preview p {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 2rem;
 }
 
 main {
     position: relative;
     z-index: 1;
-    background: rgba(255, 255, 255, 0.95);
-    margin-top: -2rem;
-    border-radius: 20px 20px 0 0;
-    padding: 2rem;
-    min-height: calc(100vh - 70vh);
 }
 
 .container {

@@ -1,0 +1,81 @@
+{% extends 'entries/base.html' %}
+
+{% block content %}
+<div class="landing-page">
+    <!-- Hero Section -->
+    <div class="landing-hero">
+        <div class="stars"></div>
+        <div class="stars2"></div>
+        <div class="stars3"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">SI SE PUEDE</h1>
+            <p class="hero-subtitle">Share your journey. Inspire others.</p>
+            <p class="hero-description">A beautiful space to document your thoughts, experiences, and stories.</p>
+            <div class="hero-buttons">
+                <a href="{% url 'login' %}" class="btn btn-hero-primary">Login</a>
+                <a href="{% url 'login' %}" class="btn btn-hero-secondary">Join</a>
+            </div>
+        </div>
+        <div class="mountains"></div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="features-section">
+        <div class="container">
+            <h2 class="section-title">Why SI SE PUEDE?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <h3>Write Your Story</h3>
+                    <p>Share your thoughts, experiences, and journey with beautiful journal entries.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🖼️</div>
+                    <h3>Add Images</h3>
+                    <p>Bring your entries to life with photos and images that tell your story.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3>Connect & Comment</h3>
+                    <p>Engage with others' stories and build a community of support and inspiration.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Entries Preview -->
+    <div class="entries-preview-section">
+        <div class="container">
+            <h2 class="section-title">Recent Stories</h2>
+            {% if entries %}
+            <div class="entries-preview-grid">
+                {% for entry in entries|slice:":3" %}
+                <div class="preview-card">
+                    {% if entry.image %}
+                    <div class="preview-image">
+                        <img src="{{ entry.image.url }}" alt="{{ entry.title }}">
+                    </div>
+                    {% endif %}
+                    <div class="preview-content">
+                        <h3>{{ entry.title }}</h3>
+                        <p>{{ entry.content|truncatewords:20 }}</p>
+                        <a href="{% url 'entry_detail' entry.pk %}" class="preview-link">Read More →</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="cta-section">
+                <p>Want to see more?</p>
+                <a href="{% url 'login' %}" class="btn btn-primary">Login to View All</a>
+            </div>
+            {% else %}
+            <div class="empty-preview">
+                <p>No stories yet. Be the first to share!</p>
+                <a href="{% url 'login' %}" class="btn btn-primary">Get Started</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+

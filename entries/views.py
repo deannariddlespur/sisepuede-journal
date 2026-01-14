@@ -11,9 +11,13 @@ def is_admin(user):
     return user.is_authenticated and user.is_staff
 
 def home(request):
-    # Show all published entries to everyone
-    entries = JournalEntry.objects.filter(is_published=True)
-    return render(request, 'entries/home.html', {'entries': entries})
+    # Landing page for non-authenticated users, entries page for authenticated
+    if request.user.is_authenticated:
+        entries = JournalEntry.objects.filter(is_published=True)
+        return render(request, 'entries/entries_list.html', {'entries': entries})
+    else:
+        entries = JournalEntry.objects.filter(is_published=True)[:3]
+        return render(request, 'entries/landing.html', {'entries': entries})
 
 def entry_detail(request, pk):
     # Anyone can view published entries
