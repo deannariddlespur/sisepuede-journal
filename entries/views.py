@@ -300,6 +300,8 @@ def path_events_calendar(request):
         'next_month': next_month,
         'next_year': next_year,
         'now': now,
+        'search_query': search_query,
+        'search_date': search_date,
     })
 
 def path_event_detail(request, pk):
