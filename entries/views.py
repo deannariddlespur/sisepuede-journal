@@ -8,7 +8,7 @@ from django.conf import settings
 from .models import JournalEntry, Comment, PathEvent, DiaryPage
 from .forms import JournalEntryForm, CommentForm, PathEventForm, DiaryPageForm
 from django.utils import timezone
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone as dt_timezone
 import calendar
 
 DEBUG = settings.DEBUG
@@ -186,7 +186,7 @@ def admin_login_view(request):
 # Define Your Path - Events Calendar Views
 def path_events_calendar(request):
     """Calendar view showing all upcoming path events"""
-    now = timezone.now()
+    now = django_timezone.now()
     upcoming_events = PathEvent.objects.filter(is_published=True, event_date__gte=now).order_by('event_date')
     past_events = PathEvent.objects.filter(is_published=True, event_date__lt=now).order_by('-event_date')[:5]
     
