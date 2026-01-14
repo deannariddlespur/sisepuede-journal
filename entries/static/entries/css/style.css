@@ -982,10 +982,27 @@ main {
     transition: border-color 0.3s;
 }
 
+.space-theme-page .form-control {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.space-theme-page .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
 .form-control:focus {
     outline: none;
     border-color: #b3ffe0;
     box-shadow: 0 0 0 3px rgba(179, 255, 224, 0.2);
+}
+
+.space-theme-page .form-control:focus {
+    border-color: rgba(255, 179, 217, 0.6);
+    box-shadow: 0 0 0 3px rgba(255, 179, 217, 0.2);
+    background: rgba(255, 255, 255, 0.15);
 }
 
 input[type="file"] {
@@ -996,9 +1013,21 @@ input[type="file"] {
     cursor: pointer;
 }
 
+.space-theme-page input[type="file"] {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.9);
+}
+
 input[type="file"]:hover {
     border-color: #b3ffe0;
     background: rgba(255, 255, 255, 0.8);
+}
+
+.space-theme-page input[type="file"]:hover {
+    border-color: rgba(255, 179, 217, 0.6);
+    background: rgba(255, 255, 255, 0.15);
 }
 
 .current-image {
