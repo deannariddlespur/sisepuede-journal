@@ -879,9 +879,19 @@ main {
     border: 1px solid rgba(179, 255, 224, 0.3);
 }
 
+.space-theme-page .empty-state {
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+        0 4px 30px rgba(0, 0, 0, 0.3),
+        0 0 40px rgba(255, 179, 217, 0.1);
+}
+
 .empty-icon {
     font-size: 4rem;
     margin-bottom: 1rem;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
 }
 
 .empty-state h3 {
@@ -889,9 +899,19 @@ main {
     margin-bottom: 0.5rem;
 }
 
+.space-theme-page .empty-state h3 {
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
 .empty-state p {
     color: #666;
     margin-bottom: 2rem;
+}
+
+.space-theme-page .empty-state p {
+    color: rgba(255, 255, 255, 0.8);
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
 }
 
 /* Login */
