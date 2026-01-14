@@ -47,6 +47,33 @@
         <p>&copy; 2026 Me Defino - I Define Myself</p>
     </footer>
 
+    <script>
+        // Dropdown toggle function
+        function toggleDropdown(button) {
+            const dropdown = button.nextElementSibling;
+            const isOpen = dropdown.classList.contains('show');
+            
+            // Close all other dropdowns
+            document.querySelectorAll('.dropdown-menu.show').forEach(menu => {
+                menu.classList.remove('show');
+            });
+            
+            // Toggle current dropdown
+            if (!isOpen) {
+                dropdown.classList.add('show');
+            }
+        }
+        
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.event-actions-dropdown')) {
+                document.querySelectorAll('.dropdown-menu.show').forEach(menu => {
+                    menu.classList.remove('show');
+                });
+            }
+        });
+    </script>
+
     <!-- Background Music Player -->
     <div class="music-player" id="musicPlayer">
         <button class="music-toggle" id="musicToggle" aria-label="Toggle music">

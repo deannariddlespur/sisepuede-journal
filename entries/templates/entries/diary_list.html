@@ -29,9 +29,17 @@
                 <div class="diary-meta">
                     <span class="diary-date">{{ page.created_at|date:"F d, Y" }}</span>
                     {% if user.is_staff %}
-                    <div class="diary-actions">
-                        <a href="{% url 'diary_page_edit' page.pk %}" class="btn-small">Edit</a>
-                        <a href="{% url 'diary_page_delete' page.pk %}" class="btn-small btn-danger">Delete</a>
+                    <div class="event-actions-dropdown">
+                        <button class="pencil-icon-btn" onclick="toggleDropdown(this)">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                            </svg>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a href="{% url 'diary_page_edit' page.pk %}" class="dropdown-item">✏️ Edit</a>
+                            <a href="{% url 'diary_page_delete' page.pk %}" class="dropdown-item delete-item">🗑️ Delete</a>
+                        </div>
                     </div>
                     {% endif %}
                 </div>

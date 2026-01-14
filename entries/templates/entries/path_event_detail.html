@@ -12,9 +12,17 @@
     <div class="event-detail-header">
         <a href="{% url 'path_events_calendar' %}" class="back-link">← Back to Calendar</a>
         {% if user.is_staff %}
-        <div class="event-admin-actions">
-            <a href="{% url 'path_event_edit' event.pk %}" class="btn btn-primary">Edit Event</a>
-            <a href="{% url 'path_event_delete' event.pk %}" class="btn btn-danger">Delete</a>
+        <div class="event-actions-dropdown">
+            <button class="pencil-icon-btn" onclick="toggleDropdown(this)">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                </svg>
+            </button>
+            <div class="dropdown-menu">
+                <a href="{% url 'path_event_edit' event.pk %}" class="dropdown-item">✏️ Edit</a>
+                <a href="{% url 'path_event_delete' event.pk %}" class="dropdown-item delete-item">🗑️ Delete</a>
+            </div>
         </div>
         {% endif %}
     </div>
