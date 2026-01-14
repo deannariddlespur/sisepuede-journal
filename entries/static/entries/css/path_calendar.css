@@ -432,6 +432,14 @@
     transform: translateX(-50%) translateY(-5px);
 }
 
+/* Tooltip arrow pointing down (when tooltip is below dot) */
+.day-event-dot:hover .event-tooltip[style*="top: 100%"]::after {
+    top: auto;
+    bottom: 100%;
+    border-top-color: transparent;
+    border-bottom-color: rgba(10, 14, 39, 0.95);
+}
+
 .event-tooltip strong {
     display: block;
     font-size: 1rem;
