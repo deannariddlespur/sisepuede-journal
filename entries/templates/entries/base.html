@@ -73,55 +73,6 @@
             }
         });
 
-        // Tooltip smart positioning for event dots
-        document.addEventListener('DOMContentLoaded', function() {
-            const eventDots = document.querySelectorAll('.day-event-dot');
-            
-            eventDots.forEach(dot => {
-                dot.addEventListener('mouseenter', function() {
-                    const tooltip = this.querySelector('.event-tooltip');
-                    if (tooltip) {
-                        // Reset positioning
-                        tooltip.style.left = '';
-                        tooltip.style.right = '';
-                        tooltip.style.bottom = '';
-                        tooltip.style.top = '';
-                        tooltip.style.transform = '';
-                        
-                        // Get positions after tooltip is visible
-                        setTimeout(() => {
-                            const rect = this.getBoundingClientRect();
-                            const tooltipRect = tooltip.getBoundingClientRect();
-                            const viewportWidth = window.innerWidth;
-                            
-                            // Adjust horizontal position if tooltip goes off screen
-                            const tooltipLeft = rect.left + (rect.width / 2) - (tooltipRect.width / 2);
-                            
-                            if (tooltipLeft < 10) {
-                                // Too far left - align to left edge
-                                tooltip.style.left = '10px';
-                                tooltip.style.transform = 'translateX(0) translateY(-5px)';
-                            } else if (tooltipLeft + tooltipRect.width > viewportWidth - 10) {
-                                // Too far right - align to right edge
-                                tooltip.style.right = '10px';
-                                tooltip.style.left = 'auto';
-                                tooltip.style.transform = 'translateX(0) translateY(-5px)';
-                            }
-                            
-                            // Adjust vertical position if tooltip goes above viewport
-                            if (rect.top - tooltipRect.height < 10) {
-                                tooltip.style.bottom = 'auto';
-                                tooltip.style.top = '100%';
-                                tooltip.style.marginTop = '8px';
-                                tooltip.style.marginBottom = '0';
-                                // Change arrow direction
-                                tooltip.style.setProperty('--arrow-direction', 'down');
-                            }
-                        }, 10);
-                    }
-                });
-            });
-        });
     </script>
 
     <!-- Background Music Player -->
