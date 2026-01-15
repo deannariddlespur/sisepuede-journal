@@ -1005,6 +1005,37 @@ main {
     background: rgba(255, 255, 255, 0.15);
 }
 
+/* Direct input and textarea styling for Django forms */
+.space-theme-page input[type="text"],
+.space-theme-page input[type="datetime-local"],
+.space-theme-page input[type="date"],
+.space-theme-page textarea,
+.space-theme-page select {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2) !important;
+    color: rgba(255, 255, 255, 0.95) !important;
+    border-radius: 8px;
+    padding: 0.75rem;
+    width: 100%;
+}
+
+.space-theme-page input[type="text"]::placeholder,
+.space-theme-page textarea::placeholder {
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.space-theme-page input[type="text"]:focus,
+.space-theme-page input[type="datetime-local"]:focus,
+.space-theme-page input[type="date"]:focus,
+.space-theme-page textarea:focus,
+.space-theme-page select:focus {
+    outline: none;
+    border-color: rgba(255, 179, 217, 0.6) !important;
+    box-shadow: 0 0 0 3px rgba(255, 179, 217, 0.2);
+    background: rgba(255, 255, 255, 0.15) !important;
+}
+
 input[type="file"] {
     padding: 0.5rem;
     border: 2px dashed rgba(179, 255, 224, 0.5);
