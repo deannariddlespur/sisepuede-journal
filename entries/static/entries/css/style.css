@@ -1043,6 +1043,17 @@ input[type="file"]:hover {
     font-weight: 500;
 }
 
+.space-theme-page .current-image {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.space-theme-page .current-image p {
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
 .entry-image img,
 .entry-image-preview img {
     display: block;
@@ -1120,6 +1131,15 @@ input[type="file"]:hover {
     border: 1px solid rgba(179, 255, 224, 0.3);
 }
 
+.space-theme-page .form-container {
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+        0 4px 30px rgba(0, 0, 0, 0.3),
+        0 0 40px rgba(255, 179, 217, 0.1);
+}
+
 .form-header {
     display: flex;
     justify-content: space-between;
@@ -1156,10 +1176,19 @@ input[type="file"]:hover {
     border-top: 2px solid #eee;
 }
 
+.space-theme-page .form-actions {
+    border-top-color: rgba(255, 255, 255, 0.1);
+}
+
 .error-message {
     color: #dc3545;
     font-size: 0.875rem;
     margin-top: 0.5rem;
+}
+
+.space-theme-page .error-message {
+    color: rgba(255, 179, 217, 0.9);
+    text-shadow: 0 0 10px rgba(255, 179, 217, 0.5);
 }
 
 /* Delete Confirm */
