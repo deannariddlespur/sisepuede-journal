@@ -869,6 +869,12 @@ main {
     border-top: 1px solid #eee;
 }
 
+.space-theme-page .entry-meta {
+    color: rgba(255, 255, 255, 0.7);
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+    border-top-color: rgba(255, 255, 255, 0.1);
+}
+
 /* Empty State */
 .empty-state {
     text-align: center;
@@ -1120,6 +1126,15 @@ input[type="file"]:hover {
     border: 1px solid rgba(179, 255, 224, 0.3);
 }
 
+.space-theme-page .entry-detail {
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+        0 4px 30px rgba(0, 0, 0, 0.3),
+        0 0 40px rgba(255, 179, 217, 0.1);
+}
+
 .entry-header-actions {
     display: flex;
     justify-content: space-between;
@@ -1127,6 +1142,10 @@ input[type="file"]:hover {
     margin-bottom: 2rem;
     padding-bottom: 1rem;
     border-bottom: 2px solid #eee;
+}
+
+.space-theme-page .entry-header-actions {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
 }
 
 .entry-content h1 {
@@ -1218,6 +1237,101 @@ input[type="file"]:hover {
 }
 
 .space-theme-page .error-message {
+    color: rgba(255, 179, 217, 0.9);
+    text-shadow: 0 0 10px rgba(255, 179, 217, 0.5);
+}
+
+/* Comments Section */
+.comments-section {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 2px solid rgba(179, 255, 224, 0.3);
+}
+
+.comments-section h2 {
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+.space-theme-page .comments-section {
+    border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+.space-theme-page .comments-section h2 {
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.comment-form {
+    background: rgba(255, 255, 255, 0.7);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
+
+.space-theme-page .comment-form {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.comment {
+    background: rgba(255, 255, 255, 0.7);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    border-left: 3px solid #b3ffe0;
+}
+
+.space-theme-page .comment {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-left-color: rgba(255, 179, 217, 0.6);
+}
+
+.comment strong {
+    color: #ff69b4;
+}
+
+.space-theme-page .comment strong {
+    color: rgba(255, 179, 217, 0.95);
+    text-shadow: 0 0 10px rgba(255, 179, 217, 0.5);
+}
+
+.comment span {
+    color: #999;
+    font-size: 0.875rem;
+}
+
+.space-theme-page .comment span {
+    color: rgba(255, 255, 255, 0.7);
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+}
+
+.comment p {
+    color: #333;
+    margin: 0;
+}
+
+.space-theme-page .comment p {
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+}
+
+.comments-section p {
+    color: #666;
+}
+
+.space-theme-page .comments-section p {
+    color: rgba(255, 255, 255, 0.8);
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+}
+
+.comments-section a {
+    color: #ff69b4;
+}
+
+.space-theme-page .comments-section a {
     color: rgba(255, 179, 217, 0.9);
     text-shadow: 0 0 10px rgba(255, 179, 217, 0.5);
 }
