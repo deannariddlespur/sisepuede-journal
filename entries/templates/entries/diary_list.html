@@ -14,7 +14,10 @@
     <div class="diary-header">
         <h1>DeAnna's Diary</h1>
         {% if user.is_staff %}
-        <a href="{% url 'diary_page_create' %}" class="btn btn-primary">+ New Page</a>
+        <div class="diary-header-actions">
+            <a href="{% url 'entry_create' %}" class="btn btn-primary">+ New Entry</a>
+            <a href="{% url 'diary_page_create' %}" class="btn btn-primary">+ New Page</a>
+        </div>
         {% endif %}
     </div>
 

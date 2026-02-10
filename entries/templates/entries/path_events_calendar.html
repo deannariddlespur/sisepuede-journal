@@ -18,7 +18,10 @@
             <h1 class="path-title">Define Your Path</h1>
             <p class="path-subtitle">Chart your journey through adventures, runs, hikes, and community events</p>
             {% if user.is_staff %}
-            <a href="{% url 'path_event_create' %}" class="btn btn-hero-primary">Create New Event</a>
+            <div class="path-hero-actions">
+                <a href="{% url 'entry_create' %}" class="btn btn-hero-primary">+ New Entry</a>
+                <a href="{% url 'path_event_create' %}" class="btn btn-hero-primary">Create New Event</a>
+            </div>
             {% endif %}
         </div>
     </div>
