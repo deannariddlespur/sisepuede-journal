@@ -34,6 +34,7 @@ Use these for testing (e.g. login as non-staff to verify comments and that staff
 |------|----------------|
 | **README.md** | Setup, run locally, high-level overview. |
 | **PROJECT_NOTES.md** | This file – “what we built” and changelog. |
+| **PROGRESS.md** | Session-by-session progress log; add a dated entry each time you work. |
 | **GODADDY_RAILWAY_DOMAIN.md** | Pointing medefino.com (GoDaddy) at Railway. |
 | **RAILWAY_MIGRATE.md** | Running migrations from your Mac (venv + public DB URL). |
 | **RAILWAY_DEPLOYMENT.md** | Creating superuser, env vars, deployment on Railway. |
@@ -87,3 +88,4 @@ Open http://127.0.0.1:8000/
 - **2026-02-09** – Path events: added **End date & time** (optional). Form has “Start date & time” and “End date & time (optional)”. Migration: `0006_pathevent_event_end_date`. Detail page shows end date when set.
 - **2026-02-09** – Admin static: WhiteNoise added; start command runs collectstatic before gunicorn so admin CSS/JS load in production.
 - **2026-02-09** – Test account (non-staff) added to PROJECT_NOTES: `test@notstaff` / `Sunshine101!` for testing login and comment flow.
+- **2026-02-09** – Path events: non-staff can join/leave events and comment (discussion section). See **PROGRESS.md** for today’s session notes.
