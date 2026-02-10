@@ -16,6 +16,18 @@
 
 ---
 
+## Test accounts
+
+Use these for testing (e.g. login as non-staff to verify comments and that staff-only areas return 403).
+
+| Purpose | Email/Username | Password |
+|--------|-----------------|----------|
+| **Non-staff (can comment, cannot create/edit)** | `test@notstaff` | `Sunshine101!` |
+
+*(Staff/superuser is created via `python manage.py createsuperuser` or Django admin; not stored here.)*
+
+---
+
 ## Docs in this project
 
 | File | What it’s for |
@@ -74,3 +86,4 @@ Open http://127.0.0.1:8000/
 - **2026-02-09** – Starry-night theme: replaced pink with gold/amber (#d4a84b, #c9a227, #e8c547) and soft blue/lavender where needed. Nav “active” state only on current page; yellow/gold accent for current nav item.
 - **2026-02-09** – Path events: added **End date & time** (optional). Form has “Start date & time” and “End date & time (optional)”. Migration: `0006_pathevent_event_end_date`. Detail page shows end date when set.
 - **2026-02-09** – Admin static: WhiteNoise added; start command runs collectstatic before gunicorn so admin CSS/JS load in production.
+- **2026-02-09** – Test account (non-staff) added to PROJECT_NOTES: `test@notstaff` / `Sunshine101!` for testing login and comment flow.
