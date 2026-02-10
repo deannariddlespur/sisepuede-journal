@@ -206,3 +206,16 @@ class MediaItem(models.Model):
         if any(name.endswith(ext) for ext in ('.mp4', '.webm', '.mov', '.avi', '.mkv')):
             return self.FILE_TYPE_VIDEO
         return self.FILE_TYPE_OTHER
+
+
+class AboutPage(models.Model):
+    """Single-row content for the About page. Staff only can edit."""
+    content = models.TextField(blank=True, help_text='About page content (plain text or HTML).')
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'About page'
+        verbose_name_plural = 'About page'
+
+    def __str__(self):
+        return 'About page'

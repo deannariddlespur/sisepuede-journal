@@ -1,5 +1,5 @@
 from django import forms
-from .models import JournalEntry, Comment, PathEvent, PathEventComment, DiaryPage, DiaryComment, MediaItem
+from .models import JournalEntry, Comment, PathEvent, PathEventComment, DiaryPage, DiaryComment, MediaItem, AboutPage
 
 class JournalEntryForm(forms.ModelForm):
     class Meta:
@@ -133,6 +133,19 @@ class MediaItemForm(forms.ModelForm):
             'title': forms.TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Optional label',
+            }),
+        }
+
+
+class AboutPageForm(forms.ModelForm):
+    class Meta:
+        model = AboutPage
+        fields = ['content']
+        widgets = {
+            'content': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 16,
+                'placeholder': 'About page content (plain text or HTML)...',
             }),
         }
 

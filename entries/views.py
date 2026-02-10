@@ -8,11 +8,11 @@ from django.conf import settings
 from django.db.models import Q
 from .models import (
     JournalEntry, Comment, PathEvent, PathEventRegistration, PathEventComment,
-    DiaryPage, DiaryComment, MediaItem,
+    DiaryPage, DiaryComment, MediaItem, AboutPage,
 )
 from .forms import (
     JournalEntryForm, CommentForm, PathEventForm, PathEventCommentForm,
-    DiaryPageForm, DiaryCommentForm, MediaItemForm,
+    DiaryPageForm, DiaryCommentForm, MediaItemForm, AboutPageForm,
 )
 from django.utils import timezone
 from datetime import datetime, timedelta, timezone as dt_timezone
