@@ -207,6 +207,31 @@ body::after {
     animation: fade-in 1.5s ease-in 0.3s both;
 }
 
+.hero-section {
+    position: relative;
+    padding: 3rem 1rem 4rem;
+    min-height: 200px;
+}
+
+.hero-tagline {
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    margin-top: 1.25rem;
+    opacity: 0.9;
+    animation: fly-in 1s ease-out 0.6s both;
+}
+
+@keyframes fly-in {
+    from {
+        opacity: 0;
+        transform: translateX(-80px);
+    }
+    to {
+        opacity: 0.9;
+        transform: translateX(0);
+    }
+}
+
 .hero-description {
     font-size: 1.2rem;
     margin-top: 1.5rem;
