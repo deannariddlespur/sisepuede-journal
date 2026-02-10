@@ -335,6 +335,85 @@ body::after {
     line-height: 1.6;
 }
 
+/* About / Documentation Section (landing page) */
+.about-section {
+    background: rgba(10, 14, 39, 0.6);
+    padding: 5rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.about-section .section-title {
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.about-intro {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 640px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.7;
+    font-size: 1.1rem;
+}
+
+.about-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.about-card {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 2rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.about-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), 0 0 30px rgba(212, 168, 75, 0.1);
+    border-color: rgba(212, 168, 75, 0.25);
+}
+
+.about-card h3 {
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 1.35rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.about-card p {
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+}
+
+.about-link {
+    color: #e8c547;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s, transform 0.2s;
+    display: inline-block;
+}
+
+.about-link:hover {
+    color: #f4d03f;
+    transform: translateX(4px);
+}
+
+.about-footer {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.95rem;
+    margin: 0;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
 /* Entries Preview Section */
 .entries-preview-section {
     background: linear-gradient(135deg, #d4a84b 0%, #b3ffe0 50%, #e8ecf8 100%);
