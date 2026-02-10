@@ -359,10 +359,12 @@ def path_event_detail(request, pk):
     registrations = event.registrations.all()
     participant_count = registrations.count()
     user_has_joined = request.user.is_authenticated and event.registrations.filter(user=request.user).exists()
+    comment_count = comments.count()
 
     return render(request, 'entries/path_event_detail.html', {
         'event': event,
         'comments': comments,
+        'comment_count': comment_count,
         'comment_form': comment_form,
         'registrations': registrations,
         'participant_count': participant_count,

@@ -91,7 +91,7 @@
 
     <!-- Discussion (comments) -->
     <div class="comments-section event-comments" style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(0,0,0,0.1);">
-        <h2 class="comments-heading">Discussion ({{ comments.count }})</h2>
+        <h2 class="comments-heading">Discussion ({{ comment_count }})</h2>
         {% if user.is_authenticated %}
         <form method="post" class="comment-form" style="margin-bottom: 1.5rem;">
             {% csrf_token %}
