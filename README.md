@@ -1,4 +1,4 @@
-# Me Defino - I Define Myself
+# Me Defino - Define Yourself
 
 A beautiful Django journaling application with image upload support.
 
