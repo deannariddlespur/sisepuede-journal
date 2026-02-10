@@ -33,7 +33,7 @@
             </div>
             {% if entry.image %}
             <div class="entry-image-preview">
-                <img src="{{ entry.image.url }}" alt="{{ entry.title }}" style="max-width: 100%; border-radius: 8px; margin-bottom: 1rem; max-height: 200px; object-fit: cover;">
+                <img src="{{ entry.image.url }}" alt="{{ entry.title }}" style="max-width: 100%; border-radius: 8px; margin-bottom: 1rem; max-height: 200px; object-fit: cover;" onerror="this.style.display='none'">
             </div>
             {% endif %}
             <p class="entry-preview">{{ entry.content|truncatewords:30 }}</p>

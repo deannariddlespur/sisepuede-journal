@@ -36,7 +36,7 @@
             {% if form.instance.image %}
             <div class="current-image">
                 <p>Current image:</p>
-                <img src="{{ form.instance.image.url }}" alt="Current image" style="max-width: 300px; margin-top: 10px; border-radius: 8px;">
+                <img src="{{ form.instance.image.url }}" alt="Current image" style="max-width: 300px; margin-top: 10px; border-radius: 8px;" onerror="this.parentElement.style.display='none'">
             </div>
             {% endif %}
         </div>

@@ -32,7 +32,7 @@
     <div class="event-detail-card event-type-{{ event.event_type }}">
         {% if event.image %}
         <div class="event-detail-image">
-            <img src="{{ event.image.url }}" alt="{{ event.title }}">
+            <img src="{{ event.image.url }}" alt="{{ event.title }}" onerror="this.parentElement.style.display='none'">
         </div>
         {% endif %}
         

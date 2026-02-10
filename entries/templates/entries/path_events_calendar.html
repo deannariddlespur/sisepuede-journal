@@ -96,7 +96,7 @@
             <div class="event-card event-card-clickable" role="button" tabindex="0" data-event-url="{% url 'path_event_detail' event.pk %}" onclick="window.location.href=this.dataset.eventUrl;" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); window.location.href=this.dataset.eventUrl; }">
                 {% if event.image %}
                 <div class="event-image">
-                    <img src="{{ event.image.url }}" alt="{{ event.title }}">
+                    <img src="{{ event.image.url }}" alt="{{ event.title }}" onerror="this.parentElement.style.display='none'">
                 </div>
                 {% endif %}
                 <div class="event-content">
@@ -137,7 +137,7 @@
             <div class="event-card event-card-clickable past" role="button" tabindex="0" data-event-url="{% url 'path_event_detail' event.pk %}" onclick="window.location.href=this.dataset.eventUrl;" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); window.location.href=this.dataset.eventUrl; }">
                 {% if event.image %}
                 <div class="event-image">
-                    <img src="{{ event.image.url }}" alt="{{ event.title }}">
+                    <img src="{{ event.image.url }}" alt="{{ event.title }}" onerror="this.parentElement.style.display='none'">
                 </div>
                 {% endif %}
                 <div class="event-content">

@@ -56,7 +56,7 @@
                 <div class="preview-card">
                     {% if entry.image %}
                     <div class="preview-image">
-                        <img src="{{ entry.image.url }}" alt="{{ entry.title }}">
+                        <img src="{{ entry.image.url }}" alt="{{ entry.title }}" onerror="this.parentElement.style.display='none'">
                     </div>
                     {% endif %}
                     <div class="preview-content">
