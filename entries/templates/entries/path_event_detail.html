@@ -63,10 +63,16 @@
             <div class="event-join-section" style="margin: 1.5rem 0;">
                 {% if user_has_joined %}
                 <p class="event-joined-msg">You're joined ({{ participant_count }}{% if event.max_participants %} / {{ event.max_participants }}{% endif %} participants)</p>
-                <a href="{% url 'path_event_leave' event.pk %}" class="btn btn-secondary">Leave event</a>
+                <form method="post" action="{% url 'path_event_leave' event.pk %}" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-secondary">Leave event</button>
+                </form>
                 {% else %}
                 <p class="event-join-msg">{{ participant_count }}{% if event.max_participants %} / {{ event.max_participants }}{% endif %} participants</p>
-                <a href="{% url 'path_event_join' event.pk %}" class="btn btn-primary">Join event</a>
+                <form method="post" action="{% url 'path_event_join' event.pk %}" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary">Join event</button>
+                </form>
                 {% endif %}
             </div>
             {% else %}
@@ -80,6 +86,33 @@
             <div class="event-detail-footer">
                 <p class="event-created">Created by {{ event.created_by.username }} on {{ event.created_at|date:"F d, Y" }}</p>
             </div>
+        </div>
+    </div>
+
+    <!-- Discussion (comments) -->
+    <div class="comments-section event-comments" style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(0,0,0,0.1);">
+        <h2 class="comments-heading">Discussion ({{ comments.count }})</h2>
+        {% if user.is_authenticated %}
+        <form method="post" class="comment-form" style="margin-bottom: 1.5rem;">
+            {% csrf_token %}
+            {{ comment_form.content }}
+            <button type="submit" name="comment" value="1" class="btn btn-primary" style="margin-top: 0.5rem;">Post comment</button>
+        </form>
+        {% else %}
+        <p><a href="{% url 'login' %}">Log in</a> to join the discussion.</p>
+        {% endif %}
+        <div class="comments-list">
+            {% for comment in comments %}
+            <div class="comment event-detail-card" style="padding: 1rem; margin-bottom: 0.75rem;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <strong>{{ comment.author.username }}</strong>
+                    <span style="font-size: 0.875rem; opacity: 0.8;">{{ comment.created_at|date:"F d, Y g:i A" }}</span>
+                </div>
+                <p style="margin: 0;">{{ comment.content|linebreaks }}</p>
+            </div>
+            {% empty %}
+            <p class="comments-empty">No comments yet. Be the first to start the discussion!</p>
+            {% endfor %}
         </div>
     </div>
     </div>
