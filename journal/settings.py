@@ -61,10 +61,12 @@ if os.environ.get('ALLOWED_HOSTS'):
             if domain_url not in csrf_origins:
                 csrf_origins.append(domain_url)
 
-# Add common Railway domains explicitly
+# Add common Railway and production domains explicitly
 railway_domains = [
     'https://sisepuede-journal-production.up.railway.app',
     'https://1txbr6dw.up.railway.app',
+    'https://www.medefino.com',
+    'https://medefino.com',
 ]
 for domain in railway_domains:
     if domain not in csrf_origins:
@@ -97,7 +99,8 @@ else:
     CSRF_COOKIE_SECURE = False
     SESSION_COOKIE_SECURE = False
 
-CSRF_COOKIE_HTTPONLY = True
+# Don't set HttpOnly on CSRF cookie so same-origin requests work reliably after login
+CSRF_COOKIE_HTTPONLY = False
 CSRF_COOKIE_SAMESITE = 'Lax'
 
 
