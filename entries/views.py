@@ -140,12 +140,8 @@ def login_view(request):
             if DEBUG:
                 print(f"Login attempt failed for: {username_or_email}")
     
-    from django.contrib.auth.forms import AuthenticationForm
     form = AuthenticationForm()
-    if error_message:
-        form.add_error(None, error_message)
-    
-    return render(request, 'entries/login.html', {'form': form})
+    return render(request, 'entries/login.html', {'form': form, 'error_message': error_message})
 
 def admin_login_view(request):
     # Admin-only login - redirects to Django admin
@@ -180,12 +176,8 @@ def admin_login_view(request):
         else:
             error_message = 'Invalid credentials or you do not have admin access.'
     
-    from django.contrib.auth.forms import AuthenticationForm
     form = AuthenticationForm()
-    if error_message:
-        form.add_error(None, error_message)
-    
-    return render(request, 'entries/admin_login.html', {'form': form})
+    return render(request, 'entries/admin_login.html', {'form': form, 'error_message': error_message})
 
 # Define Your Path - Events Calendar Views
 def path_events_calendar(request):

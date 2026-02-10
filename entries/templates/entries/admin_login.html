@@ -8,7 +8,11 @@
         <h2 style="text-align: center; color: #ff69b4; margin-top: 1rem;">Admin Login</h2>
         <p class="subtitle">Administrator access only</p>
         
-        {% if form.errors %}
+        {% if error_message %}
+        <div class="alert alert-error">
+            <p>{{ error_message }}</p>
+        </div>
+        {% elif form.errors %}
         <div class="alert alert-error">
             {% for field in form %}
                 {% for error in field.errors %}
