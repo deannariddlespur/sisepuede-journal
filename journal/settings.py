@@ -208,5 +208,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Media files (user uploads)
+# On Railway, use a persistent volume so uploads survive redeploys (see RAILWAY_MEDIA.md)
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+_media_volume = os.environ.get('RAILWAY_VOLUME_MOUNT_PATH')
+MEDIA_ROOT = Path(_media_volume) / 'media' if _media_volume else BASE_DIR / 'media'

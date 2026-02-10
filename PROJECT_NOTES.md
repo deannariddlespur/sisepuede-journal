@@ -38,6 +38,7 @@ Use these for testing (e.g. login as non-staff to verify comments and that staff
 | **GODADDY_RAILWAY_DOMAIN.md** | Pointing medefino.com (GoDaddy) at Railway. |
 | **RAILWAY_MIGRATE.md** | Running migrations from your Mac (venv + public DB URL). |
 | **RAILWAY_DEPLOYMENT.md** | Creating superuser, env vars, deployment on Railway. |
+| **RAILWAY_MEDIA.md** | Why images break on deploy (DB has path, file is gone). Use a volume + `RAILWAY_VOLUME_MOUNT_PATH` so uploads persist. |
 | **MUSIC_SETUP.md** | Background music on the site. |
 | **BEHAVIOR_LOG.md** | (If you use it) Behavior / design notes. |
 
