@@ -71,6 +71,8 @@ def entry_create(request):
             entry.save()
             messages.success(request, 'Entry created successfully!')
             return redirect('entry_detail', pk=entry.pk)
+        else:
+            messages.error(request, 'Please fix the errors below and try again.')
     else:
         form = JournalEntryForm()
     return render(request, 'entries/entry_form.html', {'form': form, 'title': 'New Entry'})
