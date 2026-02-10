@@ -721,6 +721,38 @@
     border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #e0e0e0;
+}
+
+/* Event detail card background matches event type */
+.event-detail-card.event-type-run {
+    background: #fdf8ed;
+    border-left-color: #d4a84b;
+}
+
+.event-detail-card.event-type-hike {
+    background: #edfaf5;
+    border-left-color: #b3ffe0;
+}
+
+.event-detail-card.event-type-adventure {
+    background: #f0f2fa;
+    border-left-color: #e8ecf8;
+}
+
+.event-detail-card.event-type-community {
+    background: #faf6e8;
+    border-left-color: #c9a227;
+}
+
+.event-detail-card.event-type-wellness {
+    background: #f5f0ff;
+    border-left-color: #d9b3ff;
+}
+
+.event-detail-card.event-type-other {
+    background: #f8f8f8;
+    border-left-color: #e0e0e0;
 }
 
 .event-detail-image {
@@ -835,6 +867,29 @@
     letter-spacing: 4px;
     color: #333;
     margin: 0;
+}
+
+.space-theme-page .diary-header h1 {
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+/* Diary: force gold for primary button (no pink/mint) */
+.space-theme-page .diary-header .btn-primary,
+.space-theme-page .diary-list-page .btn-primary,
+.space-theme-page .diary-page-detail .btn-primary {
+    background: linear-gradient(135deg, #e8c547 0%, #d4a84b 100%) !important;
+    color: #0a0e27 !important;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 2px 12px rgba(212, 168, 75, 0.4);
+}
+
+.space-theme-page .diary-header .btn-primary:hover,
+.space-theme-page .diary-list-page .btn-primary:hover,
+.space-theme-page .diary-page-detail .btn-primary:hover {
+    background: linear-gradient(135deg, #f4d03f 0%, #c9a227 100%) !important;
+    box-shadow: 0 4px 16px rgba(212, 168, 75, 0.5);
+    color: #0a0e27 !important;
 }
 
 .diary-pages-grid {

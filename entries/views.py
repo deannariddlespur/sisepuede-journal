@@ -18,13 +18,20 @@ def is_admin(user):
     return user.is_authenticated and user.is_staff
 
 def home(request):
-    # Landing page for non-authenticated users, entries page for authenticated
+    # Landing for guests; dedicated home page for logged-in users
     if request.user.is_authenticated:
-        entries = JournalEntry.objects.filter(is_published=True)
-        return render(request, 'entries/entries_list.html', {'entries': entries})
+        return render(request, 'entries/home.html')
+    entries = JournalEntry.objects.filter(is_published=True)[:3]
+    return render(request, 'entries/landing.html', {'entries': entries})
+
+
+def entries_list(request):
+    """Journal / stories list (logged-in users; staff see all, others published only)."""
+    if request.user.is_staff:
+        entries = JournalEntry.objects.all().order_by('-created_at')
     else:
-        entries = JournalEntry.objects.filter(is_published=True)[:3]
-        return render(request, 'entries/landing.html', {'entries': entries})
+        entries = JournalEntry.objects.filter(is_published=True).order_by('-created_at')
+    return render(request, 'entries/entries_list.html', {'entries': entries})
 
 def entry_detail(request, pk):
     # Staff can see all entries, others only published

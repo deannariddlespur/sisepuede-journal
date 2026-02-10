@@ -29,7 +29,7 @@
         {% endif %}
     </div>
 
-    <div class="event-detail-card">
+    <div class="event-detail-card event-type-{{ event.event_type }}">
         {% if event.image %}
         <div class="event-detail-image">
             <img src="{{ event.image.url }}" alt="{{ event.title }}">
