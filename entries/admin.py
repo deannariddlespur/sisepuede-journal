@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import JournalEntry, Comment, PathEvent, DiaryPage, DiaryComment, MediaItem
+from .models import JournalEntry, Comment, PathEvent, PathEventRegistration, PathEventComment, DiaryPage, DiaryComment, MediaItem
 
 @admin.register(JournalEntry)
 class JournalEntryAdmin(admin.ModelAdmin):

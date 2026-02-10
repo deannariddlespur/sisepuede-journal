@@ -102,6 +102,35 @@ class PathEvent(models.Model):
         from django.urls import reverse
         return reverse('path_event_detail', kwargs={'pk': self.pk})
 
+
+class PathEventRegistration(models.Model):
+    """Users who joined a path event (any logged-in user can join published events)."""
+    event = models.ForeignKey(PathEvent, on_delete=models.CASCADE, related_name='registrations')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='event_registrations')
+    joined_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['joined_at']
+        unique_together = [['event', 'user']]
+
+    def __str__(self):
+        return f'{self.user.username} → {self.event.title}'
+
+
+class PathEventComment(models.Model):
+    """Comments on path events – any logged-in user can comment on published events."""
+    event = models.ForeignKey(PathEvent, on_delete=models.CASCADE, related_name='event_comments')
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['created_at']
+
+    def __str__(self):
+        return f'Comment by {self.author.username} on {self.event.title}'
+
+
 class DiaryPage(models.Model):
     """DeAnna's Diary - Private diary pages with draft/public status"""
     STATUS_CHOICES = [

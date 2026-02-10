@@ -1,5 +1,5 @@
 from django import forms
-from .models import JournalEntry, Comment, PathEvent, DiaryPage, DiaryComment, MediaItem
+from .models import JournalEntry, Comment, PathEvent, PathEventComment, DiaryPage, DiaryComment, MediaItem
 
 class JournalEntryForm(forms.ModelForm):
     class Meta:
@@ -71,6 +71,20 @@ class PathEventForm(forms.ModelForm):
                 'class': 'form-check-input',
             }),
         }
+
+
+class PathEventCommentForm(forms.ModelForm):
+    class Meta:
+        model = PathEventComment
+        fields = ['content']
+        widgets = {
+            'content': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 4,
+                'placeholder': 'Join the discussion...',
+            }),
+        }
+
 
 class DiaryPageForm(forms.ModelForm):
     class Meta:
