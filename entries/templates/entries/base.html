@@ -23,8 +23,8 @@
                 <a href="{% url 'path_events_calendar' %}" class="nav-link {% if '/define-your-path' in request.path %}active{% endif %}">Define Your Path</a>
                 <a href="{% url 'diary_list' %}" class="nav-link {% if '/deannas-diary' in request.path %}active{% endif %}">DeAnna's Diary</a>
                 {% if user.is_authenticated %}
-                    {% if user.is_staff %}
                     <a href="{% url 'entry_create' %}" class="nav-link {% if request.path == '/entry/new/' %}active{% endif %}">New Entry</a>
+                    {% if user.is_staff %}
                     <a href="{% url 'path_event_create' %}" class="nav-link {% if request.path == '/define-your-path/new/' %}active{% endif %}">New Event</a>
                     <a href="{% url 'diary_page_create' %}" class="nav-link {% if request.path == '/deannas-diary/new/' %}active{% endif %}">New Diary Page</a>
                     <a href="{% url 'media_library' %}" class="nav-link {% if '/media/' in request.path %}active{% endif %}">Media Library</a>

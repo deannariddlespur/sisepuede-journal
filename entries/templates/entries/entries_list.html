@@ -5,7 +5,7 @@
     <div class="space-content-container">
         <div class="header-section space-card">
             <h2 class="space-heading">Me Defino</h2>
-            {% if user.is_staff %}
+            {% if user.is_authenticated %}
             <a href="{% url 'entry_create' %}" class="btn btn-primary">+ New Entry</a>
             {% endif %}
         </div>
@@ -16,7 +16,7 @@
         <div class="entry-card">
             <div class="entry-header">
                 <h3><a href="{% url 'entry_detail' entry.pk %}">{{ entry.title }}</a></h3>
-                {% if user.is_staff %}
+                {% if user.is_staff or entry.author == user %}
                 <div class="event-actions-dropdown">
                     <button class="pencil-icon-btn" onclick="toggleDropdown(this)">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -48,8 +48,10 @@
             <p class="empty-icon">📝</p>
             <h3 class="space-heading">No entries yet</h3>
             <p class="space-text-muted">Start your journaling journey by creating your first entry!</p>
-            {% if user.is_staff %}
+            {% if user.is_authenticated %}
             <a href="{% url 'entry_create' %}" class="btn btn-primary">Create Your First Entry</a>
+            {% else %}
+            <a href="{% url 'login' %}" class="btn btn-primary">Log in to define yourself</a>
             {% endif %}
         </div>
         {% endif %}
