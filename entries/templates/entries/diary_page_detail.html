@@ -54,6 +54,33 @@
             </div>
         </div>
     </div>
+
+    <!-- Comments -->
+    <div class="comments-section diary-comments" style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.15);">
+        <h2 class="comments-heading">Comments ({{ comments.count }})</h2>
+        {% if user.is_authenticated %}
+        <form method="post" class="comment-form" style="margin-bottom: 1.5rem;">
+            {% csrf_token %}
+            {{ comment_form.content }}
+            <button type="submit" class="btn btn-primary" style="margin-top: 0.5rem;">Post comment</button>
+        </form>
+        {% else %}
+        <p><a href="{% url 'login' %}">Log in</a> to join the discussion.</p>
+        {% endif %}
+        <div class="comments-list">
+            {% for comment in comments %}
+            <div class="comment" style="padding: 1rem; margin-bottom: 0.75rem; background: rgba(255,255,255,0.08); border-radius: 8px; border-left: 3px solid rgba(212,168,75,0.6);">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <strong>{{ comment.author.username }}</strong>
+                    <span style="font-size: 0.875rem; opacity: 0.85;">{{ comment.created_at|date:"F d, Y g:i A" }}</span>
+                </div>
+                <p style="margin: 0;">{{ comment.content|linebreaks }}</p>
+            </div>
+            {% empty %}
+            <p class="comments-empty">No comments yet. Be the first to share your thoughts!</p>
+            {% endfor %}
+        </div>
+    </div>
     </div>
 </div>
 {% endblock %}
