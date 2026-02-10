@@ -59,6 +59,20 @@
                 {% endif %}
             </div>
 
+            {% if user.is_authenticated %}
+            <div class="event-join-section" style="margin: 1.5rem 0;">
+                {% if user_has_joined %}
+                <p class="event-joined-msg">You're joined ({{ participant_count }}{% if event.max_participants %} / {{ event.max_participants }}{% endif %} participants)</p>
+                <a href="{% url 'path_event_leave' event.pk %}" class="btn btn-secondary">Leave event</a>
+                {% else %}
+                <p class="event-join-msg">{{ participant_count }}{% if event.max_participants %} / {{ event.max_participants }}{% endif %} participants</p>
+                <a href="{% url 'path_event_join' event.pk %}" class="btn btn-primary">Join event</a>
+                {% endif %}
+            </div>
+            {% else %}
+            <p style="margin: 1rem 0;"><a href="{% url 'login' %}">Log in</a> to join this event or join the discussion.</p>
+            {% endif %}
+
             <div class="event-detail-description">
                 {{ event.description|linebreaks }}
             </div>
