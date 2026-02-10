@@ -369,6 +369,36 @@ def path_event_detail(request, pk):
         'user_has_joined': user_has_joined,
     })
 
+@login_required
+def path_event_join(request, pk):
+    """Join a published event. Respects max_participants."""
+    if request.user.is_staff:
+        event = get_object_or_404(PathEvent, pk=pk)
+    else:
+        event = get_object_or_404(PathEvent, pk=pk, is_published=True)
+    if event.registrations.filter(user=request.user).exists():
+        messages.info(request, "You're already joined.")
+        return redirect('path_event_detail', pk=event.pk)
+    if event.max_participants and event.registrations.count() >= event.max_participants:
+        messages.warning(request, "This event is full.")
+        return redirect('path_event_detail', pk=event.pk)
+    PathEventRegistration.objects.create(event=event, user=request.user)
+    messages.success(request, "You're in! See you there.")
+    return redirect('path_event_detail', pk=event.pk)
+
+
+@login_required
+def path_event_leave(request, pk):
+    """Leave an event."""
+    if request.user.is_staff:
+        event = get_object_or_404(PathEvent, pk=pk)
+    else:
+        event = get_object_or_404(PathEvent, pk=pk, is_published=True)
+    event.registrations.filter(user=request.user).delete()
+    messages.success(request, "You've left this event.")
+    return redirect('path_event_detail', pk=event.pk)
+
+
 @user_passes_test(is_admin)
 def path_event_create(request):
     """Create a new path event - admin only"""
