@@ -1,5 +1,5 @@
 from django import forms
-from .models import JournalEntry, Comment, PathEvent, DiaryPage, MediaItem
+from .models import JournalEntry, Comment, PathEvent, DiaryPage, DiaryComment, MediaItem
 
 class JournalEntryForm(forms.ModelForm):
     class Meta:
@@ -90,6 +90,19 @@ class DiaryPageForm(forms.ModelForm):
             }),
             'status': forms.Select(attrs={
                 'class': 'form-control',
+            }),
+        }
+
+
+class DiaryCommentForm(forms.ModelForm):
+    class Meta:
+        model = DiaryComment
+        fields = ['content']
+        widgets = {
+            'content': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 4,
+                'placeholder': 'Write your comment...',
             }),
         }
 

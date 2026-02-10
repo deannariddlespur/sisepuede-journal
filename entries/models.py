@@ -130,6 +130,20 @@ class DiaryPage(models.Model):
         return reverse('diary_page_detail', kwargs={'pk': self.pk})
 
 
+class DiaryComment(models.Model):
+    """Comments on diary pages – any logged-in user can comment on public pages."""
+    page = models.ForeignKey(DiaryPage, on_delete=models.CASCADE, related_name='diary_comments')
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['created_at']
+
+    def __str__(self):
+        return f'Comment by {self.author.username} on {self.page.title}'
+
+
 class MediaItem(models.Model):
     """Staff media library: images and videos for use in stories."""
     FILE_TYPE_IMAGE = 'image'

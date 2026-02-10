@@ -6,8 +6,8 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from django.conf import settings
 from django.db.models import Q
-from .models import JournalEntry, Comment, PathEvent, DiaryPage, MediaItem
-from .forms import JournalEntryForm, CommentForm, PathEventForm, DiaryPageForm, MediaItemForm
+from .models import JournalEntry, Comment, PathEvent, DiaryPage, DiaryComment, MediaItem
+from .forms import JournalEntryForm, CommentForm, PathEventForm, DiaryPageForm, DiaryCommentForm, MediaItemForm
 from django.utils import timezone
 from datetime import datetime, timedelta, timezone as dt_timezone
 import calendar
@@ -412,16 +412,34 @@ def diary_list(request):
     return render(request, 'entries/diary_list.html', {'pages': pages})
 
 def diary_page_detail(request, pk):
-    """View individual diary page"""
+    """View individual diary page. Public pages show comments; any logged-in user can comment."""
     page = get_object_or_404(DiaryPage, pk=pk)
-    
-    # Check permissions
+
     if page.status == 'draft' and not request.user.is_staff:
         return HttpResponseForbidden("This page is private.")
-    
+
+    comments = page.diary_comments.all()
+    comment_form = None
+    if request.user.is_authenticated and (page.status == 'public' or request.user.is_staff):
+        comment_form = DiaryCommentForm()
+
+    if request.method == 'POST' and request.user.is_authenticated and (page.status == 'public' or request.user.is_staff):
+        form = DiaryCommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.page = page
+            comment.author = request.user
+            comment.save()
+            messages.success(request, 'Your comment has been posted!')
+            return redirect('diary_page_detail', pk=page.pk)
+        comment_form = form  # show errors
+
     if page.status == 'public' or request.user.is_staff:
-        return render(request, 'entries/diary_page_detail.html', {'page': page})
-    
+        return render(request, 'entries/diary_page_detail.html', {
+            'page': page,
+            'comments': comments,
+            'comment_form': comment_form,
+        })
     return HttpResponseForbidden("You don't have permission to view this page.")
 
 @user_passes_test(is_deanna)
