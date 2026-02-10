@@ -10,7 +10,7 @@
         <div class="hero-content">
             <h1 class="hero-title">Me Defino</h1>
             <p class="hero-subtitle">I Define Myself</p>
-            <p class="hero-description">A beautiful space to document your thoughts, experiences, and stories.</p>
+            <p class="hero-description">A space to document your thoughts, experiences, and stories—and to define your path.</p>
             <div class="hero-buttons">
                 <a href="{% url 'login' %}" class="btn btn-hero-primary">Login</a>
                 <a href="{% url 'login' %}" class="btn btn-hero-secondary">Join</a>
@@ -19,34 +19,38 @@
         <div class="mountains"></div>
     </div>
 
-    <!-- Features Section -->
-    <div class="features-section">
+    <!-- About / Documentation Section -->
+    <div class="about-section">
         <div class="container">
-            <h2 class="section-title">Why Me Defino?</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">📝</div>
-                    <h3>Write Your Story</h3>
-                    <p>Share your thoughts, experiences, and journey with beautiful journal entries.</p>
+            <h2 class="section-title">What is Me Defino?</h2>
+            <p class="about-intro">Me Defino is a personal journal and community site. It has three main parts:</p>
+
+            <div class="about-cards">
+                <div class="about-card">
+                    <h3>📝 Journal entries</h3>
+                    <p>Stories and reflections published by the site. You can read them, and once you’re logged in you can comment. Staff can create, edit, and publish new entries with optional images.</p>
+                    <a href="{% url 'login' %}" class="about-link">Login to read & comment →</a>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🖼️</div>
-                    <h3>Add Images</h3>
-                    <p>Bring your entries to life with photos and images that tell your story.</p>
+                <div class="about-card">
+                    <h3>🗓️ Define Your Path</h3>
+                    <p>A calendar of events—runs, hikes, adventures, community and wellness events. Each event has a start (and optional end) date, location, and description. Browse the calendar to see what’s coming up.</p>
+                    <a href="{% url 'path_events_calendar' %}" class="about-link">View calendar →</a>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">💬</div>
-                    <h3>Connect & Comment</h3>
-                    <p>Engage with others' stories and build a community of support and inspiration.</p>
+                <div class="about-card">
+                    <h3>📔 DeAnna's Diary</h3>
+                    <p>Diary pages: personal notes and posts that can be kept as drafts or published. A place for ongoing writing and reflection.</p>
+                    <a href="{% url 'diary_list' %}" class="about-link">See diary →</a>
                 </div>
             </div>
+
+            <p class="about-footer">Log in to comment on entries and, if you have access, to create and manage content.</p>
         </div>
     </div>
 
-    <!-- Recent Entries Preview -->
+    <!-- Recent Stories -->
     <div class="entries-preview-section">
         <div class="container">
-            <h2 class="section-title">Recent Stories</h2>
+            <h2 class="section-title">Recent stories</h2>
             {% if entries %}
             <div class="entries-preview-grid">
                 {% for entry in entries|slice:":3" %}
@@ -59,23 +63,22 @@
                     <div class="preview-content">
                         <h3>{{ entry.title }}</h3>
                         <p>{{ entry.content|truncatewords:20 }}</p>
-                        <a href="{% url 'entry_detail' entry.pk %}" class="preview-link">Read More →</a>
+                        <a href="{% url 'entry_detail' entry.pk %}" class="preview-link">Read more →</a>
                     </div>
                 </div>
                 {% endfor %}
             </div>
             <div class="cta-section">
                 <p>Want to see more?</p>
-                <a href="{% url 'login' %}" class="btn btn-primary">Login to View All</a>
+                <a href="{% url 'login' %}" class="btn btn-primary">Login to view all</a>
             </div>
             {% else %}
             <div class="empty-preview">
-                <p>No stories yet. Be the first to share!</p>
-                <a href="{% url 'login' %}" class="btn btn-primary">Get Started</a>
+                <p>No stories yet. Log in to get started.</p>
+                <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
             </div>
             {% endif %}
         </div>
     </div>
 </div>
 {% endblock %}
-
