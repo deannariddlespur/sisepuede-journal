@@ -73,3 +73,4 @@ Open http://127.0.0.1:8000/
 - **2026-02-09** – README: live links table (site, login, admin). PROJECT_NOTES.md added (this file).
 - **2026-02-09** – Starry-night theme: replaced pink with gold/amber (#d4a84b, #c9a227, #e8c547) and soft blue/lavender where needed. Nav “active” state only on current page; yellow/gold accent for current nav item.
 - **2026-02-09** – Path events: added **End date & time** (optional). Form has “Start date & time” and “End date & time (optional)”. Migration: `0006_pathevent_event_end_date`. Detail page shows end date when set.
+- **2026-02-09** – Admin static: WhiteNoise added; start command runs collectstatic before gunicorn so admin CSS/JS load in production.
