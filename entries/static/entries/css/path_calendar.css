@@ -781,8 +781,8 @@
 }
 
 .space-theme-page .event-detail-title {
-    color: rgba(255, 255, 255, 0.95);
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 1);
+    text-shadow: 0 0 24px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .event-detail-meta {
@@ -811,8 +811,8 @@
 }
 
 .space-theme-page .meta-text {
-    color: rgba(255, 255, 255, 0.8);
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
 }
 
 .event-detail-description {
@@ -823,8 +823,8 @@
 }
 
 .space-theme-page .event-detail-description {
-    color: rgba(255, 255, 255, 0.85);
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.92);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.25);
 }
 
 .event-detail-footer {
@@ -842,8 +842,8 @@
 }
 
 .space-theme-page .event-created {
-    color: rgba(255, 255, 255, 0.7);
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
 }
 
 /* Responsive */
@@ -870,8 +870,8 @@
 }
 
 .space-theme-page .diary-header h1 {
-    color: rgba(255, 255, 255, 0.95);
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 1);
+    text-shadow: 0 0 24px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 /* Diary: force gold for primary button (no pink/mint) */
@@ -981,8 +981,8 @@
 }
 
 .space-theme-page .diary-page-content h2 a {
-    color: rgba(255, 255, 255, 0.95);
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    color: #e8c547;
+    text-shadow: 0 0 12px rgba(232, 197, 71, 0.5);
 }
 
 .diary-page-content h2 a:hover {
@@ -1001,8 +1001,8 @@
 }
 
 .space-theme-page .diary-preview {
-    color: rgba(255, 255, 255, 0.8);
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.92);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.25);
 }
 
 .diary-meta {
@@ -1014,9 +1014,18 @@
     border-top: 1px solid #e0e0e0;
 }
 
+.space-theme-page .diary-meta {
+    border-top-color: rgba(255, 255, 255, 0.25);
+}
+
 .diary-date {
     color: #999;
     font-size: 0.9rem;
+}
+
+.space-theme-page .diary-date {
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
 }
 
 .diary-actions {
@@ -1084,8 +1093,8 @@
 }
 
 .space-theme-page .diary-detail-title {
-    color: rgba(255, 255, 255, 0.95);
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 1);
+    text-shadow: 0 0 24px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .diary-detail-text {
@@ -1096,8 +1105,8 @@
 }
 
 .space-theme-page .diary-detail-text {
-    color: rgba(255, 255, 255, 0.85);
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.25);
 }
 
 .diary-detail-footer {
@@ -1111,8 +1120,8 @@
 
 .space-theme-page .diary-created,
 .space-theme-page .diary-updated {
-    color: rgba(255, 255, 255, 0.95);
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 1);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
     font-size: 0.95rem;
 }
 
