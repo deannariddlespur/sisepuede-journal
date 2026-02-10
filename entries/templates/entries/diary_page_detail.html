@@ -1,6 +1,11 @@
 {% extends 'entries/base.html' %}
+{% load static %}
 
 {% block title %}{{ page.title }} - DeAnna's Diary{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'entries/css/path_calendar.css' %}">
+{% endblock %}
 
 {% block content %}
 <div class="space-theme-page">
