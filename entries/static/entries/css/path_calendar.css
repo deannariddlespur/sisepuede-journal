@@ -846,6 +846,47 @@
     text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
 }
 
+/* Event detail card has light background – use dark text so it’s readable */
+.event-detail-card .event-detail-title {
+    color: #1a1a1a !important;
+    text-shadow: none !important;
+}
+
+.event-detail-card .meta-text {
+    color: #444 !important;
+    text-shadow: none !important;
+}
+
+.event-detail-card .event-detail-description {
+    color: #333 !important;
+    text-shadow: none !important;
+}
+
+.event-detail-card .event-created {
+    color: #555 !important;
+    text-shadow: none !important;
+}
+
+/* Softer card backgrounds so the card isn’t blinding white */
+.event-detail-card.event-type-run {
+    background: #f8f2e6;
+}
+.event-detail-card.event-type-hike {
+    background: #e8f5f0;
+}
+.event-detail-card.event-type-adventure {
+    background: #e8eaf2;
+}
+.event-detail-card.event-type-community {
+    background: #f5f0e0;
+}
+.event-detail-card.event-type-wellness {
+    background: #efe8ff;
+}
+.event-detail-card.event-type-other {
+    background: #f0f0f0;
+}
+
 /* Responsive */
 /* DeAnna's Diary Styles */
 .diary-list-page {
