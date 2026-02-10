@@ -6,6 +6,8 @@ Session-by-session notes. Add a new dated section at the top when you work on th
 
 ## 2026-02-09
 
+**Summary:** Path events (join/leave + comments), diary comments, non-staff “define yourself” (journal entries), home hero + “Define Yourself” CTA, clickable event cards, broken-image fallback sitewide, staff “New Entry” on Diary & Path, About page (staff-only edit), Railway media docs. Migrations: 0009, 0010, 0011.
+
 ### Path events: Join, leave & discussion
 
 - **Join / Leave**

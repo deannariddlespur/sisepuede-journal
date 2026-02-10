@@ -23,7 +23,7 @@ Use these for testing (e.g. login as non-staff to verify comments and that staff
 
 | Purpose | Email/Username | Password |
 |--------|-----------------|----------|
-| **Non-staff (can comment, cannot create/edit)** | `test@notstaff` | `Sunshine101!` |
+| **Non-staff (can create own entries, comment on entries/diary/events; no staff-only areas)** | `test@notstaff` | `Sunshine101!` |
 
 *(Staff/superuser is created via `python manage.py createsuperuser` or Django admin; not stored here.)*
 
@@ -93,4 +93,4 @@ Open http://127.0.0.1:8000/
 - **2026-02-09** – Test account (non-staff) added to PROJECT_NOTES: `test@notstaff` / `Sunshine101!` for testing login and comment flow.
 - **2026-02-09** – Path events: non-staff can join/leave events and comment (discussion section). See **PROGRESS.md** for session notes.
 - **2026-02-09** – Non-staff can “define themselves”: create/edit/delete own journal entries; “New Entry” and “Define Yourself” CTA for all logged-in users. Diary: comments section on public pages for non-staff. Home: hero fly-in, single “Define Yourself” button (no white bar). Event cards fully clickable. Broken diary images hidden. Migrations: 0010_diarycomment. AGENT_BEHAVIOR.md (local, gitignored) for push-on-request.
-- **2026-02-09** – Hero: “I define myself” back with fly-in. Broken image fallback on all templates. Staff: “+ New Entry” on Diary and Define Your Path pages. **About page**: `/about/`, staff-only edit (model AboutPage, migration 0011). RAILWAY_MEDIA.md for persistent uploads. Docs updated.
+- **2026-02-09** – Hero: “I define myself” back with fly-in. Broken image fallback on all templates. Staff: “+ New Entry” on Diary and Define Your Path pages. **About page**: `/about/`, staff-only edit (model AboutPage, migration 0011). RAILWAY_MEDIA.md for persistent uploads. Full session details in **PROGRESS.md**.
