@@ -44,3 +44,6 @@ staticfiles/
 .DS_Store
 Thumbs.db
 
+# Local env (never commit - has DB URL)
+.env
+

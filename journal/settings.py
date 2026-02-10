@@ -12,6 +12,14 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 import os
+
+# Load .env so DATABASE_URL is set when running manage.py locally (migrate, createsuperuser)
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
 import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.

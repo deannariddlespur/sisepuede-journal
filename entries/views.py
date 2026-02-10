@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseForbidden
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from django.conf import settings
@@ -102,6 +102,11 @@ def add_comment(request, pk):
             comment.save()
             messages.success(request, 'Your comment has been posted!')
     return redirect('entry_detail', pk=entry.pk)
+
+def logout_view(request):
+    """Log out and redirect to home. Accepts GET so nav link works."""
+    logout(request)
+    return redirect('home')
 
 def login_view(request):
     # Regular viewer login - anyone can login to comment
