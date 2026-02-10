@@ -1,0 +1,40 @@
+{% extends 'entries/base.html' %}
+{% load static %}
+
+{% block title %}About - Me Defino{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'entries/css/path_calendar.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="space-theme-page">
+    <div class="space-content-container">
+        <div class="about-page">
+            <h1 class="about-title">About</h1>
+
+            {% if user.is_staff and form %}
+            <div class="about-edit-form" style="margin-bottom: 2rem; padding: 1.5rem; background: rgba(0,0,0,0.25); border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
+                <h2 style="margin-top: 0; color: rgba(255,255,255,0.95);">Edit About page (staff only)</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.content }}
+                    <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">Save</button>
+                </form>
+            </div>
+            {% endif %}
+
+            <div class="about-content space-card">
+                {% if about.content %}
+                <div class="about-body">
+                    {{ about.content|linebreaks }}
+                </div>
+                <p class="about-updated" style="opacity: 0.8; font-size: 0.9rem; margin-top: 1.5rem;">Last updated {{ about.updated_at|date:"F d, Y" }}</p>
+                {% else %}
+                <p class="about-empty">No content yet. Staff can add it above or in the admin.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

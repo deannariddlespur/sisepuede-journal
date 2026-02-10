@@ -564,6 +564,23 @@ def diary_page_delete(request, pk):
     return render(request, 'entries/diary_page_confirm_delete.html', {'page': page})
 
 
+# ---- About page (public view; staff only edit) ----
+
+def about_page(request):
+    """About page. Everyone can view; only staff can edit content."""
+    about, _ = AboutPage.objects.get_or_create(pk=1, defaults={'content': ''})
+    form = None
+    if request.user.is_staff:
+        form = AboutPageForm(instance=about)
+    if request.method == 'POST' and request.user.is_staff:
+        form = AboutPageForm(request.POST, instance=about)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'About page updated.')
+            return redirect('about_page')
+    return render(request, 'entries/about.html', {'about': about, 'form': form})
+
+
 # ---- Media Library (staff only) ----
 
 @user_passes_test(is_admin)

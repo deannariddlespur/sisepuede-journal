@@ -56,6 +56,14 @@ Session-by-session notes. Add a new dated section at the top when you work on th
 
 - **AGENT_BEHAVIOR.md** — local behavior file (do not commit). Instructs: when user asks to push to GitHub, run add/commit/push. File listed in `.gitignore`.
 
+### Later session (same day)
+
+- **Hero:** “I define myself” back under “Me Defino”; match size/style (2.5rem, uppercase, letter-spacing); fly-in with 0.4s delay.
+- **Broken images:** `onerror` hide on all image usages — home, entries list, entry detail, entry form, path calendar, path event detail, landing, diary (already had). No broken [?] icon when file missing.
+- **Staff add entries anywhere:** “+ New Entry” for staff on DeAnna’s Diary header (with “+ New Page”) and on Define Your Path hero (with “Create New Event”). Nav “New Entry” already on every page.
+- **About page:** Public `/about/` page. Model `AboutPage` (single row: content, updated_at). Only staff can edit (form on page when staff, or via admin). Nav “About” for everyone. Migration: `0011_aboutpage.py`.
+- **Media on Railway:** `RAILWAY_MEDIA.md` and `RAILWAY_VOLUME_MOUNT_PATH` in settings so uploads can persist on a volume.
+
 ---
 
 ## How to add to this file

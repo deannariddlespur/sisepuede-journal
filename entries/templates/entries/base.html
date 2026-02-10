@@ -22,6 +22,7 @@
                 <a href="{% url 'home' %}" class="nav-link {% if request.path == '/' %}active{% endif %}">Home</a>
                 <a href="{% url 'path_events_calendar' %}" class="nav-link {% if '/define-your-path' in request.path %}active{% endif %}">Define Your Path</a>
                 <a href="{% url 'diary_list' %}" class="nav-link {% if '/deannas-diary' in request.path %}active{% endif %}">DeAnna's Diary</a>
+                <a href="{% url 'about_page' %}" class="nav-link {% if request.path == '/about/' %}active{% endif %}">About</a>
                 {% if user.is_authenticated %}
                     <a href="{% url 'entry_create' %}" class="nav-link {% if request.path == '/entry/new/' %}active{% endif %}">New Entry</a>
                     {% if user.is_staff %}

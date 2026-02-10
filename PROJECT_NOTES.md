@@ -13,6 +13,7 @@
 | **Admin** | https://www.medefino.com/admin/ |
 | **Define Your Path (events)** | https://www.medefino.com/define-your-path/ |
 | **DeAnna's Diary** | https://www.medefino.com/deannas-diary/ |
+| **About** | https://www.medefino.com/about/ |
 
 ---
 
@@ -49,6 +50,7 @@ Use these for testing (e.g. login as non-staff to verify comments and that staff
 - **Journal entries** – **Any logged-in user** can create, edit, and delete their own entries (define themselves). Staff can publish/unpublish and edit/delete any entry. Others can comment when logged in.
 - **Define Your Path** – Event calendar (runs, hikes, adventures, etc.). Each event has start/optional end date/time, location, image, max participants. **Non-staff can join/leave** events and **comment** in the discussion section. Whole event cards are clickable to open event detail.
 - **DeAnna's Diary** – Diary pages (draft/public). Staff-only create/edit/delete. **Non-staff can comment** on public diary pages.
+- **About** – Public `/about/` page. **Only staff** can edit the content (form on page when logged in as staff, or via admin).
 - **Auth** – Login (email or username), logout, admin at `/admin/`. Custom logout at `/logout/` (no 405).
 - **Theme** – Starry-night look: deep blue background, gold/amber accents (no pink). Nav highlights current page in gold.
 - **Persistence** – PostgreSQL on Railway (via `DATABASE_URL`). Local dev can use `.env` + `python-dotenv` for migrate/createsuperuser.
@@ -91,3 +93,4 @@ Open http://127.0.0.1:8000/
 - **2026-02-09** – Test account (non-staff) added to PROJECT_NOTES: `test@notstaff` / `Sunshine101!` for testing login and comment flow.
 - **2026-02-09** – Path events: non-staff can join/leave events and comment (discussion section). See **PROGRESS.md** for session notes.
 - **2026-02-09** – Non-staff can “define themselves”: create/edit/delete own journal entries; “New Entry” and “Define Yourself” CTA for all logged-in users. Diary: comments section on public pages for non-staff. Home: hero fly-in, single “Define Yourself” button (no white bar). Event cards fully clickable. Broken diary images hidden. Migrations: 0010_diarycomment. AGENT_BEHAVIOR.md (local, gitignored) for push-on-request.
+- **2026-02-09** – Hero: “I define myself” back with fly-in. Broken image fallback on all templates. Staff: “+ New Entry” on Diary and Define Your Path pages. **About page**: `/about/`, staff-only edit (model AboutPage, migration 0011). RAILWAY_MEDIA.md for persistent uploads. Docs updated.
