@@ -610,8 +610,8 @@
 }
 
 .pencil-icon-btn {
-    background: linear-gradient(135deg, #d4a84b 0%, #b3ffe0 100%);
-    border: none;
+    background: linear-gradient(135deg, #e8c547 0%, #d4a84b 100%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 50%;
     width: 40px;
     height: 40px;
@@ -698,7 +698,9 @@
     margin-bottom: 2rem;
 }
 
-.back-link {
+.back-link,
+.back-link:link,
+.back-link:visited {
     color: #e8c547;
     text-decoration: none;
     font-weight: 600;
@@ -706,7 +708,7 @@
 }
 
 .back-link:hover {
-    color: #c9a227;
+    color: #f4d03f;
 }
 
 .event-admin-actions {
@@ -1054,14 +1056,15 @@
 
 .space-theme-page .diary-created,
 .space-theme-page .diary-updated {
-    color: rgba(255, 255, 255, 0.7);
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+    font-size: 0.95rem;
 }
 
 .diary-created,
 .diary-updated {
-    color: #999;
-    font-size: 0.9rem;
+    color: #555;
+    font-size: 0.95rem;
     margin: 0.25rem 0;
 }
 

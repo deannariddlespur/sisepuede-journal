@@ -791,8 +791,8 @@ main {
 }
 
 .pencil-icon-btn {
-    background: linear-gradient(135deg, #d4a84b 0%, #b3ffe0 100%);
-    border: none;
+    background: linear-gradient(135deg, #e8c547 0%, #d4a84b 100%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 50%;
     width: 40px;
     height: 40px;
