@@ -371,7 +371,9 @@ def path_event_detail(request, pk):
 
 @login_required
 def path_event_join(request, pk):
-    """Join a published event. Respects max_participants."""
+    """Join a published event. Respects max_participants. POST only."""
+    if request.method != 'POST':
+        return redirect('path_event_detail', pk=pk)
     if request.user.is_staff:
         event = get_object_or_404(PathEvent, pk=pk)
     else:
@@ -389,7 +391,9 @@ def path_event_join(request, pk):
 
 @login_required
 def path_event_leave(request, pk):
-    """Leave an event."""
+    """Leave an event. POST only."""
+    if request.method != 'POST':
+        return redirect('path_event_detail', pk=pk)
     if request.user.is_staff:
         event = get_object_or_404(PathEvent, pk=pk)
     else:
