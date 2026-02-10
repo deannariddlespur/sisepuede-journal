@@ -8,18 +8,18 @@
     <div class="stars2"></div>
     <div class="stars3"></div>
     <div class="hero-content">
-        <h1 class="hero-title">Me Defino</h1>
+        <h1 class="hero-title hero-fly-in">Me Defino</h1>
+        <p class="hero-tagline hero-fly-in">I define myself</p>
     </div>
 </div>
 
-<div class="header-section header-section-home">
-    <div class="header-section-actions">
-    {% if user.is_staff %}
-    <a href="{% url 'entry_create' %}" class="btn btn-primary">+ New Entry</a>
-    {% elif not user.is_authenticated %}
-    <a href="{% url 'login' %}" class="btn btn-primary">Login to Comment</a>
+<div class="define-yourself-cta">
+    <h2 class="define-yourself-heading">Define yourself</h2>
+    {% if user.is_authenticated %}
+    <a href="{% url 'entry_create' %}" class="btn btn-primary define-btn">Write your entry</a>
+    {% else %}
+    <a href="{% url 'login' %}" class="btn btn-primary define-btn">Log in to define yourself</a>
     {% endif %}
-    </div>
 </div>
 
 {% if entries %}
@@ -28,7 +28,7 @@
         <div class="entry-card">
             <div class="entry-header">
                 <h3><a href="{% url 'entry_detail' entry.pk %}">{{ entry.title }}</a></h3>
-                {% if user.is_staff %}
+                {% if user.is_staff or entry.author == user %}
                 <div class="event-actions-dropdown">
                     <button class="pencil-icon-btn" onclick="toggleDropdown(this)">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -60,7 +60,11 @@
         <p class="empty-icon">📝</p>
         <h3>No entries yet</h3>
         <p>Start your journaling journey by creating your first entry!</p>
+        {% if user.is_authenticated %}
         <a href="{% url 'entry_create' %}" class="btn btn-primary">Create Your First Entry</a>
+        {% else %}
+        <a href="{% url 'login' %}" class="btn btn-primary">Log in to define yourself</a>
+        {% endif %}
     </div>
 {% endif %}
 </div>

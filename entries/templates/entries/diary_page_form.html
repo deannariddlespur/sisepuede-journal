@@ -43,7 +43,7 @@
                 <div class="form-error">{{ form.image.errors }}</div>
                 {% endif %}
                 {% if page and page.image %}
-                <p class="form-help">Current image: <img src="{{ page.image.url }}" alt="Current" style="max-width: 200px; margin-top: 0.5rem;"></p>
+                <p class="form-help">Current image: <img src="{{ page.image.url }}" alt="Current" style="max-width: 200px; margin-top: 0.5rem;" onerror="this.parentElement.style.display='none'"></p>
                 {% endif %}
             </div>
 

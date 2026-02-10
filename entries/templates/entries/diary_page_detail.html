@@ -32,7 +32,7 @@
     <div class="diary-detail-card">
         {% if page.image %}
         <div class="diary-detail-image">
-            <img src="{{ page.image.url }}" alt="{{ page.title }}">
+            <img src="{{ page.image.url }}" alt="{{ page.title }}" onerror="this.parentElement.style.display='none'">
         </div>
         {% endif %}
         

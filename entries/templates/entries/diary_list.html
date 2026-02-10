@@ -24,7 +24,7 @@
         <div class="diary-page-card {% if page.status == 'draft' %}draft{% endif %}">
             {% if page.image %}
             <div class="diary-page-image">
-                <img src="{{ page.image.url }}" alt="{{ page.title }}">
+                <img src="{{ page.image.url }}" alt="{{ page.title }}" onerror="this.parentElement.style.display='none'">
             </div>
             {% endif %}
             <div class="diary-page-content">

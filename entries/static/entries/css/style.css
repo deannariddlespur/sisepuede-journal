@@ -194,7 +194,34 @@ body::after {
     margin: 0;
     text-transform: uppercase;
     text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
-    animation: fade-in 1.5s ease-in;
+}
+
+.hero-title.hero-fly-in {
+    animation: hero-fly-in 1s ease-out both;
+}
+
+.hero-tagline {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+    margin-top: 1.25rem;
+    opacity: 0.95;
+}
+
+.hero-tagline.hero-fly-in {
+    animation: hero-fly-in 1s ease-out 0.4s both;
+}
+
+@keyframes hero-fly-in {
+    from {
+        opacity: 0;
+        transform: translateX(-120px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 .hero-subtitle {
@@ -816,6 +843,25 @@ main {
 .space-theme-page .header-section h2 {
     color: rgba(255, 255, 255, 0.95);
     text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+/* Home: Define yourself CTA (no white box) */
+.define-yourself-cta {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 1rem 0;
+}
+.define-yourself-heading {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 1.75rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    margin: 0 0 1rem 0;
+}
+.define-yourself-cta .define-btn {
+    display: inline-block;
 }
 
 /* Entries Grid */
