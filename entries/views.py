@@ -343,7 +343,7 @@ def path_event_detail(request, pk):
         event = get_object_or_404(PathEvent, pk=pk, is_published=True)
 
     comments = event.event_comments.all()
-    comment_form = DiaryCommentForm() if request.user.is_authenticated else None
+    comment_form = PathEventCommentForm() if request.user.is_authenticated else None
     if request.method == 'POST' and request.user.is_authenticated:
         if 'comment' in request.POST:
             form = PathEventCommentForm(request.POST)

@@ -20,6 +20,20 @@ class PathEventAdmin(admin.ModelAdmin):
     search_fields = ['title', 'description', 'location']
     date_hierarchy = 'event_date'
 
+
+@admin.register(PathEventRegistration)
+class PathEventRegistrationAdmin(admin.ModelAdmin):
+    list_display = ['event', 'user', 'joined_at']
+    list_filter = ['joined_at']
+
+
+@admin.register(PathEventComment)
+class PathEventCommentAdmin(admin.ModelAdmin):
+    list_display = ['event', 'author', 'created_at']
+    list_filter = ['created_at']
+    search_fields = ['content', 'author__username']
+
+
 @admin.register(DiaryPage)
 class DiaryPageAdmin(admin.ModelAdmin):
     list_display = ['title', 'author', 'status', 'created_at']
