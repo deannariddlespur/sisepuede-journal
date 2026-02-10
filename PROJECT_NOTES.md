@@ -79,6 +79,12 @@ Open http://127.0.0.1:8000/
 
 ---
 
+## Next up (reminders)
+
+- **About page colors** – Styling/colors for the About page (planned for next session).
+
+---
+
 ## Changelog (what we accomplished)
 
 *Add a line or two here whenever we add something meaningful. Date format: YYYY-MM-DD.*

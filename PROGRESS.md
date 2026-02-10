@@ -66,6 +66,10 @@ Session-by-session notes. Add a new dated section at the top when you work on th
 - **About page:** Public `/about/` page. Model `AboutPage` (single row: content, updated_at). Only staff can edit (form on page when staff, or via admin). Nav “About” for everyone. Migration: `0011_aboutpage.py`.
 - **Media on Railway:** `RAILWAY_MEDIA.md` and `RAILWAY_VOLUME_MOUNT_PATH` in settings so uploads can persist on a volume.
 
+### Next session (to do)
+
+- **About page colors** – Work on colors/styling for the About page.
+
 ---
 
 ## How to add to this file
