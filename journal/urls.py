@@ -43,6 +43,8 @@ urlpatterns = [
     path('deannas-diary/new/', views.diary_page_create, name='diary_page_create'),
     path('deannas-diary/<int:pk>/edit/', views.diary_page_edit, name='diary_page_edit'),
     path('deannas-diary/<int:pk>/delete/', views.diary_page_delete, name='diary_page_delete'),
+    path('media/', views.media_library, name='media_library'),
+    path('media/<int:pk>/delete/', views.media_delete, name='media_delete'),
 ]
 
 # Serve static and media files

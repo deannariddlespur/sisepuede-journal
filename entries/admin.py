@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import JournalEntry, Comment, PathEvent, DiaryPage
+from .models import JournalEntry, Comment, PathEvent, DiaryPage, MediaItem
 
 @admin.register(JournalEntry)
 class JournalEntryAdmin(admin.ModelAdmin):
@@ -26,3 +26,10 @@ class DiaryPageAdmin(admin.ModelAdmin):
     list_filter = ['status', 'created_at']
     search_fields = ['title', 'content']
     date_hierarchy = 'created_at'
+
+
+@admin.register(MediaItem)
+class MediaItemAdmin(admin.ModelAdmin):
+    list_display = ['title', 'file', 'uploaded_by', 'created_at']
+    list_filter = ['created_at']
+    search_fields = ['title', 'file']

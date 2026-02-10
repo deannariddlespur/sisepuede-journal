@@ -1,0 +1,91 @@
+{% extends 'entries/base.html' %}
+{% load static %}
+
+{% block title %}Media Library{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'entries/css/path_calendar.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="space-theme-page">
+    <div class="space-content-container">
+        <div class="media-library-page">
+            <div class="diary-header">
+                <h1>Media Library</h1>
+            </div>
+
+            <div class="form-container space-card" style="margin-bottom: 2rem;">
+                <h2 class="space-heading">Upload file</h2>
+                <form method="post" enctype="multipart/form-data" class="entry-form">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="{{ form.file.id_for_label }}">File (image or video)</label>
+                        {{ form.file }}
+                        {% if form.file.errors %}
+                        <div class="error-message">{{ form.file.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.title.id_for_label }}">Title (optional)</label>
+                        {{ form.title }}
+                    </div>
+                    <button type="submit" class="btn btn-primary">Upload</button>
+                </form>
+            </div>
+
+            <h2 class="space-heading">Your media</h2>
+            {% if items %}
+            <div class="media-grid">
+                {% for item in items %}
+                <div class="media-card space-card">
+                    {% if item.file_type == 'image' %}
+                    <div class="media-preview">
+                        <img src="{{ item.file.url }}" alt="{{ item.title|default:item.file.name }}">
+                    </div>
+                    {% elif item.file_type == 'video' %}
+                    <div class="media-preview media-preview-video">
+                        <video src="{{ item.file.url }}" controls style="max-width:100%; max-height: 200px;"></video>
+                    </div>
+                    {% else %}
+                    <div class="media-preview media-preview-file">
+                        <span>📎 {{ item.file.name }}</span>
+                    </div>
+                    {% endif %}
+                    <div class="media-info">
+                        <p class="media-title">{{ item.title|default:item.file.name }}</p>
+                        <p class="media-meta">{{ item.created_at|date:"M d, Y" }} · {{ item.file_type }}</p>
+                        <a href="{{ item.file.url }}" target="_blank" rel="noopener" class="btn btn-small btn-secondary">Open</a>
+                        <form method="post" action="{% url 'media_delete' item.pk %}" style="display:inline;" onsubmit="return confirm('Delete this file?');">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-small btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="empty-state space-card">
+                <p class="empty-icon">📁</p>
+                <h3 class="space-heading">No media yet</h3>
+                <p class="space-text-muted">Upload images or videos above to use in stories.</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<style>
+.media-library-page { max-width: 1200px; margin: 0 auto; }
+.media-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; }
+.media-card { padding: 1rem; overflow: hidden; }
+.media-preview { height: 180px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.2); border-radius: 8px; margin-bottom: 0.75rem; overflow: hidden; }
+.media-preview img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.media-preview-video video { max-width: 100%; max-height: 180px; }
+.media-preview-file { font-size: 2rem; }
+.media-title { font-weight: 600; margin: 0 0 0.25rem 0; word-break: break-all; }
+.space-theme-page .media-title { color: rgba(255,255,255,0.95); }
+.media-meta { font-size: 0.85rem; margin: 0 0 0.5rem 0; opacity: 0.8; }
+.media-info .btn { margin-right: 0.5rem; margin-top: 0.25rem; }
+</style>
+{% endblock %}

@@ -1,5 +1,5 @@
 from django import forms
-from .models import JournalEntry, Comment, PathEvent, DiaryPage
+from .models import JournalEntry, Comment, PathEvent, DiaryPage, MediaItem
 
 class JournalEntryForm(forms.ModelForm):
     class Meta:
@@ -90,6 +90,22 @@ class DiaryPageForm(forms.ModelForm):
             }),
             'status': forms.Select(attrs={
                 'class': 'form-control',
+            }),
+        }
+
+
+class MediaItemForm(forms.ModelForm):
+    class Meta:
+        model = MediaItem
+        fields = ['file', 'title']
+        widgets = {
+            'file': forms.FileInput(attrs={
+                'class': 'form-control',
+                'accept': 'image/*,video/*',
+            }),
+            'title': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Optional label',
             }),
         }
 

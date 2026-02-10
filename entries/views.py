@@ -6,8 +6,8 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from django.conf import settings
 from django.db.models import Q
-from .models import JournalEntry, Comment, PathEvent, DiaryPage
-from .forms import JournalEntryForm, CommentForm, PathEventForm, DiaryPageForm
+from .models import JournalEntry, Comment, PathEvent, DiaryPage, MediaItem
+from .forms import JournalEntryForm, CommentForm, PathEventForm, DiaryPageForm, MediaItemForm
 from django.utils import timezone
 from datetime import datetime, timedelta, timezone as dt_timezone
 import calendar
@@ -462,3 +462,33 @@ def diary_page_delete(request, pk):
         messages.success(request, 'Diary page deleted successfully!')
         return redirect('diary_list')
     return render(request, 'entries/diary_page_confirm_delete.html', {'page': page})
+
+
+# ---- Media Library (staff only) ----
+
+@user_passes_test(is_admin)
+def media_library(request):
+    """List all media items and show upload form."""
+    items = MediaItem.objects.all()
+    if request.method == 'POST':
+        form = MediaItemForm(request.POST, request.FILES)
+        if form.is_valid():
+            item = form.save(commit=False)
+            item.uploaded_by = request.user
+            item.save()
+            messages.success(request, 'File uploaded.')
+            return redirect('media_library')
+        return render(request, 'entries/media_library.html', {'items': items, 'form': form})
+    form = MediaItemForm()
+    return render(request, 'entries/media_library.html', {'items': items, 'form': form})
+
+
+@user_passes_test(is_admin)
+def media_delete(request, pk):
+    """Delete a media item."""
+    item = get_object_or_404(MediaItem, pk=pk)
+    if request.method == 'POST':
+        item.delete()
+        messages.success(request, 'Media item deleted.')
+        return redirect('media_library')
+    return redirect('media_library')

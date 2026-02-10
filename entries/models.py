@@ -28,6 +28,12 @@ def get_upload_path(instance, filename):
         # Fallback if no user found
         return os.path.join(folder, 'unknown', filename)
 
+
+def media_library_upload_path(instance, filename):
+    """Upload path for media library (images and videos)."""
+    user_id = instance.uploaded_by.id if instance.uploaded_by_id else 'unknown'
+    return os.path.join('media_library', str(user_id), filename)
+
 class JournalEntry(models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField()
@@ -122,3 +128,38 @@ class DiaryPage(models.Model):
     def get_absolute_url(self):
         from django.urls import reverse
         return reverse('diary_page_detail', kwargs={'pk': self.pk})
+
+
+class MediaItem(models.Model):
+    """Staff media library: images and videos for use in stories."""
+    FILE_TYPE_IMAGE = 'image'
+    FILE_TYPE_VIDEO = 'video'
+    FILE_TYPE_OTHER = 'other'
+    FILE_TYPE_CHOICES = [
+        (FILE_TYPE_IMAGE, 'Image'),
+        (FILE_TYPE_VIDEO, 'Video'),
+        (FILE_TYPE_OTHER, 'Other'),
+    ]
+
+    file = models.FileField(upload_to=media_library_upload_path)
+    title = models.CharField(max_length=255, blank=True, help_text='Optional label')
+    uploaded_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='media_uploads')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = 'Media item'
+        verbose_name_plural = 'Media library'
+
+    def __str__(self):
+        return self.title or self.file.name
+
+    @property
+    def file_type(self):
+        """Infer image/video from file extension."""
+        name = (self.file.name or '').lower()
+        if any(name.endswith(ext) for ext in ('.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg')):
+            return self.FILE_TYPE_IMAGE
+        if any(name.endswith(ext) for ext in ('.mp4', '.webm', '.mov', '.avi', '.mkv')):
+            return self.FILE_TYPE_VIDEO
+        return self.FILE_TYPE_OTHER

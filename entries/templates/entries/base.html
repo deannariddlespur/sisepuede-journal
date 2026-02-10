@@ -27,6 +27,7 @@
                     <a href="{% url 'entry_create' %}" class="nav-link {% if request.path == '/entry/new/' %}active{% endif %}">New Entry</a>
                     <a href="{% url 'path_event_create' %}" class="nav-link {% if request.path == '/define-your-path/new/' %}active{% endif %}">New Event</a>
                     <a href="{% url 'diary_page_create' %}" class="nav-link {% if request.path == '/deannas-diary/new/' %}active{% endif %}">New Diary Page</a>
+                    <a href="{% url 'media_library' %}" class="nav-link {% if '/media/' in request.path %}active{% endif %}">Media Library</a>
                     <a href="/admin/" class="nav-link {% if request.path|slice:':6' == '/admin' %}active{% endif %}">Admin</a>
                     {% endif %}
                     <span class="user-info">Welcome, {{ user.username }}</span>
