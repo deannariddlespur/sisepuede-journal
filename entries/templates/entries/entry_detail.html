@@ -54,7 +54,7 @@
         </div>
         {% else %}
         <p style="color: #666; margin-bottom: 2rem;">
-            <a href="{% url 'login' %}" style="color: #ff69b4;">Login</a> to post a comment.
+            <a href="{% url 'login' %}" style="color: #e8c547;">Login</a> to post a comment.
         </p>
         {% endif %}
 
@@ -62,7 +62,7 @@
             {% for comment in comments %}
             <div class="comment" style="background: rgba(255, 255, 255, 0.7); padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border-left: 3px solid #b3ffe0;">
                 <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                    <strong style="color: #ff69b4;">{{ comment.author.username }}</strong>
+                    <strong style="color: #e8c547;">{{ comment.author.username }}</strong>
                     <span style="color: #999; font-size: 0.875rem;">{{ comment.created_at|date:"F d, Y g:i A" }}</span>
                 </div>
                 <p style="color: #333; margin: 0;">{{ comment.content|linebreaks }}</p>
