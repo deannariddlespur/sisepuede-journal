@@ -14,13 +14,15 @@ A beautiful Django journaling application with image upload support.
 
 Use your superuser username + password to log in. Admin is for managing entries, users, and content in the Django backend.
 
+**Coming back after a while?** See **[PROJECT_NOTES.md](PROJECT_NOTES.md)** for what we’ve built, where docs live, and a short changelog so you don’t forget.
+
 ---
 
 ## Features
 
 - 📝 Create, edit, and delete journal entries
 - 🖼️ Upload images with your entries
-- 🎨 Beautiful pastel pink and mint green design
+- 🎨 Starry-night theme (deep blue, gold accents)
 - 🔐 Secure user authentication
 - 📱 Responsive design
 

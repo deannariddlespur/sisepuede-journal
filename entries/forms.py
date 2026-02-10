@@ -37,7 +37,7 @@ class CommentForm(forms.ModelForm):
 class PathEventForm(forms.ModelForm):
     class Meta:
         model = PathEvent
-        fields = ['title', 'description', 'event_type', 'event_date', 'location', 'image', 'max_participants', 'is_published']
+        fields = ['title', 'description', 'event_type', 'event_date', 'event_end_date', 'location', 'image', 'max_participants', 'is_published']
         widgets = {
             'title': forms.TextInput(attrs={
                 'class': 'form-control',
@@ -50,6 +50,10 @@ class PathEventForm(forms.ModelForm):
                 'class': 'form-control',
             }),
             'event_date': forms.DateTimeInput(attrs={
+                'class': 'form-control',
+                'type': 'datetime-local',
+            }),
+            'event_end_date': forms.DateTimeInput(attrs={
                 'class': 'form-control',
                 'type': 'datetime-local',
             }),

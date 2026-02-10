@@ -40,10 +40,19 @@
             </div>
 
             <div class="form-group">
-                <label for="{{ form.event_date.id_for_label }}">Date & Time</label>
+                <label for="{{ form.event_date.id_for_label }}">Start date & time</label>
                 {{ form.event_date }}
                 {% if form.event_date.errors %}
                 <div class="form-error">{{ form.event_date.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.event_end_date.id_for_label }}">End date & time (optional)</label>
+                {{ form.event_end_date }}
+                <span class="form-help">Leave blank for same-day or no end time.</span>
+                {% if form.event_end_date.errors %}
+                <div class="form-error">{{ form.event_end_date.errors }}</div>
                 {% endif %}
             </div>
         </div>

@@ -43,7 +43,7 @@
             <div class="event-detail-meta">
                 <div class="event-meta-item">
                     <span class="meta-icon">📅</span>
-                    <span class="meta-text">{{ event.event_date|date:"F d, Y g:i A" }}</span>
+                    <span class="meta-text">{{ event.event_date|date:"F d, Y g:i A" }}{% if event.event_end_date %} – {{ event.event_end_date|date:"F d, Y g:i A" }}{% endif %}</span>
                 </div>
                 {% if event.location %}
                 <div class="event-meta-item">

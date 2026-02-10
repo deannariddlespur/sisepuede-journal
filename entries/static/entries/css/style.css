@@ -223,8 +223,9 @@ body::after {
     animation: fade-in 1.5s ease-in 0.9s both;
 }
 
+/* Landing hero: star-theme gold (no pink) */
 .btn-hero-primary {
-    background: linear-gradient(135deg, #d4a84b 0%, #c9a227 100%);
+    background: linear-gradient(135deg, #f4d03f 0%, #e8c547 50%, #d4a84b 100%);
     color: #0a0e27;
     padding: 1rem 2.5rem;
     font-size: 1.1rem;
@@ -232,12 +233,14 @@ body::after {
     border-radius: 50px;
     text-decoration: none;
     transition: all 0.3s;
-    box-shadow: 0 4px 15px rgba(212, 168, 75, 0.4);
+    box-shadow: 0 4px 20px rgba(244, 208, 63, 0.5), 0 0 30px rgba(244, 208, 63, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
 .btn-hero-primary:hover {
     transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(212, 168, 75, 0.6);
+    box-shadow: 0 6px 25px rgba(244, 208, 63, 0.6), 0 0 40px rgba(244, 208, 63, 0.3);
+    background: linear-gradient(135deg, #e8c547 0%, #d4a84b 100%);
 }
 
 .btn-hero-secondary {
