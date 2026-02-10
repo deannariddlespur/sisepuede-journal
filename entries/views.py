@@ -97,6 +97,19 @@ def entry_delete(request, pk):
         return redirect('home')
     return render(request, 'entries/entry_confirm_delete.html', {'entry': entry})
 
+
+@user_passes_test(is_admin)
+def entry_toggle_publish(request, pk):
+    """Toggle is_published for an entry. Staff only. Redirects back to entry detail."""
+    entry = get_object_or_404(JournalEntry, pk=pk)
+    entry.is_published = not entry.is_published
+    entry.save()
+    if entry.is_published:
+        messages.success(request, 'Entry is now published.')
+    else:
+        messages.success(request, 'Entry is now a draft (hidden from visitors).')
+    return redirect('entry_detail', pk=entry.pk)
+
 @login_required
 def add_comment(request, pk):
     entry = get_object_or_404(JournalEntry, pk=pk, is_published=True)

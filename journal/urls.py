@@ -30,6 +30,7 @@ urlpatterns = [
     path('entry/<int:pk>/', views.entry_detail, name='entry_detail'),
     path('entry/new/', views.entry_create, name='entry_create'),
     path('entry/<int:pk>/edit/', views.entry_edit, name='entry_edit'),
+    path('entry/<int:pk>/toggle-publish/', views.entry_toggle_publish, name='entry_toggle_publish'),
     path('entry/<int:pk>/delete/', views.entry_delete, name='entry_delete'),
     path('entry/<int:pk>/comment/', views.add_comment, name='add_comment'),
     path('define-your-path/', views.path_events_calendar, name='path_events_calendar'),

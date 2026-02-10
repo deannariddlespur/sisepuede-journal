@@ -16,6 +16,11 @@
             </button>
             <div class="dropdown-menu">
                 <a href="{% url 'entry_edit' entry.pk %}" class="dropdown-item">✏️ Edit</a>
+                {% if entry.is_published %}
+                <a href="{% url 'entry_toggle_publish' entry.pk %}" class="dropdown-item">👁️ Unpublish</a>
+                {% else %}
+                <a href="{% url 'entry_toggle_publish' entry.pk %}" class="dropdown-item">✅ Publish</a>
+                {% endif %}
                 <a href="{% url 'entry_delete' entry.pk %}" class="dropdown-item delete-item">🗑️ Delete</a>
             </div>
         </div>
@@ -23,6 +28,9 @@
     </div>
     
     <article class="entry-content">
+        {% if not entry.is_published and user.is_staff %}
+        <p><strong>Draft</strong> — not visible to visitors.</p>
+        {% endif %}
         <h1>{{ entry.title }}</h1>
         <div class="entry-meta">
             <span>Created: {{ entry.created_at|date:"F d, Y g:i A" }}</span>
