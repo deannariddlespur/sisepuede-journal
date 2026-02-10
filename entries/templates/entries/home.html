@@ -9,16 +9,14 @@
     <div class="stars3"></div>
     <div class="hero-content">
         <h1 class="hero-title hero-fly-in">Me Defino</h1>
-        <p class="hero-tagline hero-fly-in">I define myself</p>
     </div>
 </div>
 
-<div class="define-yourself-cta">
-    <h2 class="define-yourself-heading">Define yourself</h2>
+<div class="define-yourself-cta hero-fly-in">
     {% if user.is_authenticated %}
-    <a href="{% url 'entry_create' %}" class="btn btn-primary define-btn">Write your entry</a>
+    <a href="{% url 'entry_create' %}" class="define-yourself-btn">Define Yourself</a>
     {% else %}
-    <a href="{% url 'login' %}" class="btn btn-primary define-btn">Log in to define yourself</a>
+    <a href="{% url 'login' %}" class="define-yourself-btn">Define Yourself</a>
     {% endif %}
 </div>
 

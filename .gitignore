@@ -47,3 +47,6 @@ Thumbs.db
 # Local env (never commit - has DB URL)
 .env
 
+# Agent behavior / local instructions (do not commit)
+AGENT_BEHAVIOR.md
+

@@ -849,23 +849,36 @@ main {
     text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
 }
 
-/* Home: Define yourself CTA (no white box) */
+/* Home: Define yourself CTA – matches hero size and style */
 .define-yourself-cta {
     text-align: center;
     margin-bottom: 2rem;
     padding: 1rem 0;
 }
-.define-yourself-heading {
+.define-yourself-cta.hero-fly-in {
+    animation: hero-fly-in 1s ease-out 0.4s both;
+}
+.define-yourself-btn {
+    display: inline-block;
     font-family: 'Georgia', 'Times New Roman', serif;
     font-size: 1.75rem;
     font-weight: 300;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     color: rgba(255, 255, 255, 0.95);
     text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-    margin: 0 0 1rem 0;
+    background: linear-gradient(135deg, rgba(212, 168, 75, 0.4) 0%, rgba(201, 162, 39, 0.5) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 12px;
+    padding: 1rem 2.5rem;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
 }
-.define-yourself-cta .define-btn {
-    display: inline-block;
+.define-yourself-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 25px rgba(212, 168, 75, 0.35);
+    background: linear-gradient(135deg, rgba(212, 168, 75, 0.55) 0%, rgba(201, 162, 39, 0.65) 100%);
+    color: white;
 }
 
 /* Entries Grid */
