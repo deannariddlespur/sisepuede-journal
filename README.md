@@ -2,6 +2,20 @@
 
 A beautiful Django journaling application with image upload support.
 
+---
+
+## 🔗 Live site links (medefino.com)
+
+| What        | URL |
+|------------|-----|
+| **Site**   | https://www.medefino.com |
+| **Login**  | https://www.medefino.com/login/ |
+| **Admin**  | https://www.medefino.com/admin/ |
+
+Use your superuser username + password to log in. Admin is for managing entries, users, and content in the Django backend.
+
+---
+
 ## Features
 
 - 📝 Create, edit, and delete journal entries
