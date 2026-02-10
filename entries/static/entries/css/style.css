@@ -637,6 +637,19 @@ main {
     background: linear-gradient(135deg, #ff91c7 0%, #ff69b4 100%);
 }
 
+/* Nav "New Entry" / starry-theme accent - yellow to match stars */
+.nav-link.btn-primary {
+    background: linear-gradient(135deg, #f4d03f 0%, #f1c40f 100%);
+    color: #0a0e27;
+    padding: 0.4rem 0.9rem;
+    border-radius: 8px;
+}
+.nav-link.btn-primary:hover {
+    background: linear-gradient(135deg, #f1c40f 0%, #d4ac0d 100%);
+    box-shadow: 0 4px 12px rgba(244, 208, 63, 0.5);
+    color: #0a0e27;
+}
+
 .btn-secondary {
     background: #6c757d;
     color: white;
