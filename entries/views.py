@@ -26,25 +26,32 @@ def is_admin(user):
 def home(request):
     # Landing for guests; dedicated home page for logged-in users
     if request.user.is_authenticated:
-        return render(request, 'entries/home.html')
+        if request.user.is_staff:
+            entries = JournalEntry.objects.all().order_by('-created_at')
+        else:
+            entries = JournalEntry.objects.filter(
+                Q(is_published=True) | Q(author=request.user)
+            ).order_by('-created_at')
+        return render(request, 'entries/home.html', {'entries': entries})
     entries = JournalEntry.objects.filter(is_published=True)[:3]
     return render(request, 'entries/landing.html', {'entries': entries})
 
 
 def entries_list(request):
-    """Journal / stories list (logged-in users; staff see all, others published only)."""
+    """Journal / stories list (logged-in users; staff see all, others see published + their own)."""
     if request.user.is_staff:
         entries = JournalEntry.objects.all().order_by('-created_at')
     else:
-        entries = JournalEntry.objects.filter(is_published=True).order_by('-created_at')
+        entries = JournalEntry.objects.filter(
+            Q(is_published=True) | Q(author=request.user)
+        ).order_by('-created_at')
     return render(request, 'entries/entries_list.html', {'entries': entries})
 
 def entry_detail(request, pk):
-    # Staff can see all entries, others only published
-    if request.user.is_staff:
-        entry = get_object_or_404(JournalEntry, pk=pk)
-    else:
-        entry = get_object_or_404(JournalEntry, pk=pk, is_published=True)
+    # Staff see all; others see if published or they are the author
+    entry = get_object_or_404(JournalEntry, pk=pk)
+    if not entry.is_published and not request.user.is_staff and entry.author != request.user:
+        return HttpResponseForbidden("This entry is not available.")
     comments = entry.comments.all()
     comment_form = None
     
@@ -67,8 +74,9 @@ def entry_detail(request, pk):
         'comment_form': comment_form,
     })
 
-@user_passes_test(is_admin)
+@login_required
 def entry_create(request):
+    """Any logged-in user can create an entry (define themselves)."""
     if request.method == 'POST':
         form = JournalEntryForm(request.POST, request.FILES)
         if form.is_valid():
@@ -83,9 +91,12 @@ def entry_create(request):
         form = JournalEntryForm()
     return render(request, 'entries/entry_form.html', {'form': form, 'title': 'New Entry'})
 
-@user_passes_test(is_admin)
+@login_required
 def entry_edit(request, pk):
+    """Author or staff can edit."""
     entry = get_object_or_404(JournalEntry, pk=pk)
+    if not request.user.is_staff and entry.author != request.user:
+        return HttpResponseForbidden("You can only edit your own entries.")
     if request.method == 'POST':
         form = JournalEntryForm(request.POST, request.FILES, instance=entry)
         if form.is_valid():
@@ -96,9 +107,12 @@ def entry_edit(request, pk):
         form = JournalEntryForm(instance=entry)
     return render(request, 'entries/entry_form.html', {'form': form, 'title': 'Edit Entry'})
 
-@user_passes_test(is_admin)
+@login_required
 def entry_delete(request, pk):
+    """Author or staff can delete."""
     entry = get_object_or_404(JournalEntry, pk=pk)
+    if not request.user.is_staff and entry.author != request.user:
+        return HttpResponseForbidden("You can only delete your own entries.")
     if request.method == 'POST':
         entry.delete()
         messages.success(request, 'Entry deleted successfully!')
@@ -505,6 +519,7 @@ def diary_page_detail(request, pk):
         return render(request, 'entries/diary_page_detail.html', {
             'page': page,
             'comments': comments,
+            'comment_count': comments.count(),
             'comment_form': comment_form,
         })
     return HttpResponseForbidden("You don't have permission to view this page.")
