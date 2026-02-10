@@ -24,15 +24,37 @@ Session-by-session notes. Add a new dated section at the top when you work on th
 - **Migration**
   - `0009_patheventregistration_patheventcomment.py` — creates `PathEventRegistration` and `PathEventComment` tables. Run: `python manage.py migrate`.
 
-### Diary comments (backend)
+### Diary comments
 
 - **Models & forms**
-  - `DiaryComment` (page FK, author FK, content, created_at) and `DiaryCommentForm` already in place.
-  - `diary_page_detail` view updated to load comments, show comment form for logged-in users, and handle POST to save a comment.
+  - `DiaryComment` (page FK, author FK, content, created_at) and `DiaryCommentForm` in place.
+  - `diary_page_detail` view loads comments, comment form for logged-in users, POST to save comment.
+- **Migration:** `0010_diarycomment.py` for `DiaryComment` table.
+- **Template:** `diary_page_detail.html` — “Comments (N)” section with form for logged-in users, list of comments, “Log in to join the discussion” for guests. Non-staff can comment on public diary pages.
 
-- **Still to do**
-  - Migration for `DiaryComment` (if not already applied).
-  - In `diary_page_detail.html`: add comments list, comment form, and “Login to comment” for anonymous users.
+### Define yourself (non-staff journal entries)
+
+- **Any logged-in user** can create, edit, and delete **their own** journal entries (not just staff).
+- Views: `entry_create` is `@login_required`; `entry_edit` and `entry_delete` allow author or staff. `entry_toggle_publish` stays staff-only.
+- Home and entries list: show published entries plus the current user’s own entries (including drafts). Entry detail viewable if published or user is author or staff.
+- **UI:** “New Entry” in nav and “Create Your First Entry” / “Write your entry” on home and entries list for **all authenticated users**. Edit/delete dropdown on entry cards and detail for entry author or staff. (`base.html`, `home.html`, `entries_list.html`, `entry_detail.html`.)
+
+### Home hero & CTA
+
+- Hero: “Me Defino” with fly-in animation. Removed “I define myself” line.
+- Replaced white header bar with a single **“Define Yourself”** button (serif, matches hero style, fly-in). Links to new entry when logged in, login when not. Correct capitals: “Define Yourself.”
+
+### Path event cards
+
+- **Whole event card** on Define Your Path (Upcoming Paths and Recent Paths) is clickable → event detail. Keyboard: Enter/Space on focused card. Staff edit/delete dropdown still works (stops propagation).
+
+### Images
+
+- Diary page images: if image fails to load (missing file, wrong URL), the image block is hidden via `onerror` so no broken [?] icon. Applied in `diary_page_detail.html`, `diary_list.html`, `diary_page_form.html`.
+
+### Other
+
+- **AGENT_BEHAVIOR.md** — local behavior file (do not commit). Instructs: when user asks to push to GitHub, run add/commit/push. File listed in `.gitignore`.
 
 ---
 
