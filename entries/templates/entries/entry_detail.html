@@ -49,8 +49,8 @@
     </article>
 
     <!-- Comments Section -->
-    <div class="comments-section" style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid rgba(179, 255, 224, 0.3);">
-        <h2 style="color: #333; margin-bottom: 1.5rem;">Comments ({{ comments.count }})</h2>
+    <div class="comments-section">
+        <h2 class="comments-heading">Comments ({{ comments.count }})</h2>
         
         {% if user.is_authenticated %}
         <div class="comment-form" style="background: rgba(255, 255, 255, 0.7); padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;">
@@ -61,8 +61,8 @@
             </form>
         </div>
         {% else %}
-        <p style="color: #666; margin-bottom: 2rem;">
-            <a href="{% url 'login' %}" style="color: #e8c547;">Login</a> to post a comment.
+        <p class="comments-login-prompt">
+            <a href="{% url 'login' %}">Login</a> to post a comment.
         </p>
         {% endif %}
 
@@ -76,7 +76,7 @@
                 <p style="color: #333; margin: 0;">{{ comment.content|linebreaks }}</p>
             </div>
             {% empty %}
-            <p style="color: #666; font-style: italic;">No comments yet. Be the first to comment!</p>
+            <p class="comments-empty">No comments yet. Be the first to comment!</p>
             {% endfor %}
         </div>
         </div>

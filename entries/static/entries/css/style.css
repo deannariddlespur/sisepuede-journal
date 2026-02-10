@@ -1352,9 +1352,11 @@ input[type="file"]:hover {
     border-top-color: rgba(255, 255, 255, 0.1);
 }
 
-.space-theme-page .comments-section h2 {
-    color: rgba(255, 255, 255, 0.95);
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+.space-theme-page .comments-section h2,
+.space-theme-page .comments-heading {
+    color: #ffffff;
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.4);
+    margin-bottom: 1.5rem;
 }
 
 .comment-form {
@@ -1417,9 +1419,19 @@ input[type="file"]:hover {
     color: #666;
 }
 
-.space-theme-page .comments-section p {
-    color: rgba(255, 255, 255, 0.8);
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+.space-theme-page .comments-section p,
+.space-theme-page .comments-empty,
+.space-theme-page .comments-login-prompt {
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.4), 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.space-theme-page .comments-empty {
+    font-style: italic;
+}
+
+.space-theme-page .comments-login-prompt {
+    margin-bottom: 2rem;
 }
 
 .comments-section a {
