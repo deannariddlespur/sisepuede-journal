@@ -225,8 +225,6 @@ class MediaItem(models.Model):
 
 
 class AboutPage(models.Model):
-    """Single-row content for the About page. Staff can only edit."""
-
     content = models.TextField(blank=True)
     image = models.ImageField(upload_to='about/', blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -236,4 +234,4 @@ class AboutPage(models.Model):
         verbose_name_plural = 'About page'
 
     def __str__(self):
-        return 'About page''About page'
+        return 'About page'
