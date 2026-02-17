@@ -6,40 +6,44 @@
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'entries/css/path_calendar.css' %}">
 <style>
-/* Make About title brighter */
+
+/* About Title */
 .about-title {
     color: #ffffff;
     font-weight: 700;
     margin-bottom: 1.5rem;
 }
 
-/* Make Save button pink */
+/* FORCE Save button pink (override global gradient) */
 .about-edit-form .btn-primary {
-    background-color: #ff4fa3;
-    border: none;
-    color: #ffffff;
+    background: linear-gradient(135deg, #ff4fa3 0%, #ff2e91 100%) !important;
+    border: none !important;
+    color: #ffffff !important;
 }
 
 .about-edit-form .btn-primary:hover {
-    background-color: #ff2e91;
+    background: linear-gradient(135deg, #ff2e91 0%, #ff4fa3 100%) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 79, 163, 0.45);
 }
 
-/* Make about content text readable */
+/* About text */
 .about-body {
     color: rgba(255,255,255,0.95);
     font-size: 1.05rem;
     line-height: 1.6;
 }
 
-/* Make footer text readable */
+/* Updated footer text */
 .about-updated {
     color: rgba(255,255,255,0.85);
 }
 
-/* Make empty message readable */
+/* Empty state text */
 .about-empty {
     color: rgba(255,255,255,0.85);
 }
+
 </style>
 {% endblock %}
 
@@ -51,11 +55,15 @@
 
             {% if user.is_staff and form %}
             <div class="about-edit-form" style="margin-bottom: 2rem; padding: 1.5rem; background: rgba(0,0,0,0.35); border-radius: 12px; border: 1px solid rgba(255,255,255,0.15);">
-                <h2 style="margin-top: 0; color: rgba(255,255,255,0.95);">Edit About page (staff only)</h2>
+                <h2 style="margin-top: 0; color: rgba(255,255,255,0.95);">
+                    Edit About page (staff only)
+                </h2>
                 <form method="post">
                     {% csrf_token %}
                     {{ form.content }}
-                    <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">Save</button>
+                    <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">
+                        Save
+                    </button>
                 </form>
             </div>
             {% endif %}
