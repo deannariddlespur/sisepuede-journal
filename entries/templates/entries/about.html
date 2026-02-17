@@ -5,6 +5,42 @@
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'entries/css/path_calendar.css' %}">
+<style>
+/* Make About title brighter */
+.about-title {
+    color: #ffffff;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+/* Make Save button pink */
+.about-edit-form .btn-primary {
+    background-color: #ff4fa3;
+    border: none;
+    color: #ffffff;
+}
+
+.about-edit-form .btn-primary:hover {
+    background-color: #ff2e91;
+}
+
+/* Make about content text readable */
+.about-body {
+    color: rgba(255,255,255,0.95);
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+/* Make footer text readable */
+.about-updated {
+    color: rgba(255,255,255,0.85);
+}
+
+/* Make empty message readable */
+.about-empty {
+    color: rgba(255,255,255,0.85);
+}
+</style>
 {% endblock %}
 
 {% block content %}
@@ -14,7 +50,7 @@
             <h1 class="about-title">About</h1>
 
             {% if user.is_staff and form %}
-            <div class="about-edit-form" style="margin-bottom: 2rem; padding: 1.5rem; background: rgba(0,0,0,0.25); border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
+            <div class="about-edit-form" style="margin-bottom: 2rem; padding: 1.5rem; background: rgba(0,0,0,0.35); border-radius: 12px; border: 1px solid rgba(255,255,255,0.15);">
                 <h2 style="margin-top: 0; color: rgba(255,255,255,0.95);">Edit About page (staff only)</h2>
                 <form method="post">
                     {% csrf_token %}
@@ -24,14 +60,18 @@
             </div>
             {% endif %}
 
-            <div class="about-content space-card">
+            <div class="about-content space-card" style="padding: 1.5rem;">
                 {% if about.content %}
                 <div class="about-body">
                     {{ about.content|linebreaks }}
                 </div>
-                <p class="about-updated" style="opacity: 0.8; font-size: 0.9rem; margin-top: 1.5rem;">Last updated {{ about.updated_at|date:"F d, Y" }}</p>
+                <p class="about-updated" style="margin-top: 1.5rem;">
+                    Last updated {{ about.updated_at|date:"F d, Y" }}
+                </p>
                 {% else %}
-                <p class="about-empty">No content yet. Staff can add it above or in the admin.</p>
+                <p class="about-empty">
+                    No content yet. Staff can add it above or in the admin.
+                </p>
                 {% endif %}
             </div>
         </div>
