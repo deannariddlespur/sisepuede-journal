@@ -16,7 +16,7 @@
             </div>
 
             <div class="form-container space-card" style="margin-bottom: 2rem;">
-                <h2 class="space-heading">Upload file</h2>
+                <h2 class="space-heading">Upload File</h2>
                 <form method="post" enctype="multipart/form-data" class="entry-form">
                     {% csrf_token %}
                     <div class="form-group">
@@ -34,33 +34,46 @@
                 </form>
             </div>
 
-            <h2 class="space-heading">Your media</h2>
+            <h2 class="space-heading">Your Media</h2>
+
             {% if items %}
             <div class="media-grid">
                 {% for item in items %}
                 <div class="media-card space-card">
-                    {% if item.file_type == 'image' %}
-                    <div class="media-preview">
-                        <img src="{{ item.file.url }}" alt="{{ item.title|default:item.file.name }}">
-                    </div>
-                    {% elif item.file_type == 'video' %}
-                    <div class="media-preview media-preview-video">
-                        <video src="{{ item.file.url }}" controls style="max-width:100%; max-height: 200px;"></video>
-                    </div>
+
+                    {% with name=item.file.name|lower %}
+                    {% if name|slice:"-4:" == ".jpg" or name|slice:"-5:" == ".jpeg" or name|slice:"-4:" == ".png" or name|slice:"-4:" == ".gif" or name|slice:"-5:" == ".webp" or name|slice:"-4:" == ".svg" %}
+                        <div class="media-preview">
+                            <img src="{{ item.file.url }}" alt="{{ item.title|default:item.file.name }}">
+                        </div>
+                    {% elif name|slice:"-4:" == ".mp4" or name|slice:"-5:" == ".webm" or name|slice:"-4:" == ".mov" or name|slice:"-4:" == ".avi" or name|slice:"-4:" == ".mkv" %}
+                        <div class="media-preview media-preview-video">
+                            <video src="{{ item.file.url }}" controls style="max-width:100%; max-height: 200px;"></video>
+                        </div>
                     {% else %}
-                    <div class="media-preview media-preview-file">
-                        <span>📎 {{ item.file.name }}</span>
-                    </div>
+                        <div class="media-preview media-preview-file">
+                            <span>📎 {{ item.file.name }}</span>
+                        </div>
                     {% endif %}
+                    {% endwith %}
+
                     <div class="media-info">
                         <p class="media-title">{{ item.title|default:item.file.name }}</p>
-                        <p class="media-meta">{{ item.created_at|date:"M d, Y" }} · {{ item.file_type }}</p>
-                        <a href="{{ item.file.url }}" target="_blank" rel="noopener" class="btn btn-small btn-secondary">Open</a>
-                        <form method="post" action="{% url 'media_delete' item.pk %}" style="display:inline;" onsubmit="return confirm('Delete this file?');">
+                        <p class="media-meta">{{ item.created_at|date:"M d, Y" }}</p>
+
+                        <a href="{{ item.file.url }}" target="_blank" rel="noopener" class="btn btn-small btn-secondary">
+                            Open
+                        </a>
+
+                        <form method="post"
+                              action="{% url 'media_delete' item.pk %}"
+                              style="display:inline;"
+                              onsubmit="return confirm('Delete this file?');">
                             {% csrf_token %}
                             <button type="submit" class="btn btn-small btn-danger">Delete</button>
                         </form>
                     </div>
+
                 </div>
                 {% endfor %}
             </div>
@@ -88,4 +101,5 @@
 .media-meta { font-size: 0.85rem; margin: 0 0 0.5rem 0; opacity: 0.8; }
 .media-info .btn { margin-right: 0.5rem; margin-top: 0.25rem; }
 </style>
+
 {% endblock %}
