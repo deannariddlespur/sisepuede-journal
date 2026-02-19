@@ -58,4 +58,17 @@ class MediaItemAdmin(admin.ModelAdmin):
 
 @admin.register(AboutPage)
 class AboutPageAdmin(admin.ModelAdmin):
-    list_display = ['updated_at']
+    list_display = ['id', 'updated_at', 'has_content', 'has_image']
+    list_display_links = ['id', 'updated_at']
+    fields = ['content', 'image', 'updated_at']
+    readonly_fields = ['updated_at']
+
+    def has_content(self, obj):
+        return bool(obj.content and obj.content.strip())
+    has_content.boolean = True
+    has_content.short_description = 'Has content'
+
+    def has_image(self, obj):
+        return bool(obj.image)
+    has_image.boolean = True
+    has_image.short_description = 'Has image'

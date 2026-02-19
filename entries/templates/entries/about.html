@@ -55,20 +55,28 @@
 
             {% if user.is_staff and form %}
             <div class="about-edit-form" style="margin-bottom: 2rem; padding: 1.5rem; background: rgba(0,0,0,0.35); border-radius: 12px; border: 1px solid rgba(255,255,255,0.15);">
-                <h2 style="margin-top: 0; color: rgba(255,255,255,0.95);">
-                    Edit About page (staff only)
+                <h2 style="margin-top: 0; color: rgba(255,255,255,0.95); margin-bottom: 0.5rem;">
+                    Create and edit your About page
                 </h2>
-                <form method="post">
+                <p style="color: rgba(255,255,255,0.8); font-size: 0.95rem; margin-bottom: 1.25rem;">This is the only About page. Add or change the content and image here; it will show below for everyone.</p>
+                <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
-                    {{ form.content }}
-                    <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">
-                        Save
+                    <p style="margin-bottom: 1rem;"><label style="display:block; margin-bottom: 0.25rem;">Image (optional):</label>{{ form.image }}</p>
+                    {% if about.image %}<p style="margin-bottom: 1rem;">Current image: <img src="{{ about.image.url }}" alt="About" style="max-width: 200px; border-radius: 8px; display: block; margin-top: 0.25rem;" onerror="this.parentElement.style.display='none'"></p>{% endif %}
+                    <p style="margin-bottom: 1rem;"><label style="display:block; margin-bottom: 0.25rem;">Content (your about text):</label>{{ form.content }}</p>
+                    <button type="submit" class="btn btn-primary" style="margin-top: 0.5rem;">
+                        Save About page
                     </button>
                 </form>
             </div>
             {% endif %}
 
             <div class="about-content space-card" style="padding: 1.5rem;">
+                {% if about.image %}
+                <div class="about-image" style="margin-bottom: 1.5rem;">
+                    <img src="{{ about.image.url }}" alt="About" style="max-width: 100%; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.2);" onerror="this.parentElement.style.display='none'">
+                </div>
+                {% endif %}
                 {% if about.content %}
                 <div class="about-body">
                     {{ about.content|linebreaks }}
@@ -78,7 +86,7 @@
                 </p>
                 {% else %}
                 <p class="about-empty">
-                    No content yet. Staff can add it above or in the admin.
+                    {% if user.is_staff %}No content yet. Use the form above to add text and an image.{% else %}No content yet.{% endif %}
                 </p>
                 {% endif %}
             </div>

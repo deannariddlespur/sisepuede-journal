@@ -573,7 +573,7 @@ def about_page(request):
     if request.user.is_staff:
         form = AboutPageForm(instance=about)
     if request.method == 'POST' and request.user.is_staff:
-        form = AboutPageForm(request.POST, instance=about)
+        form = AboutPageForm(request.POST, request.FILES, instance=about)
         if form.is_valid():
             form.save()
             messages.success(request, 'About page updated.')

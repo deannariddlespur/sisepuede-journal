@@ -140,12 +140,16 @@ class MediaItemForm(forms.ModelForm):
 class AboutPageForm(forms.ModelForm):
     class Meta:
         model = AboutPage
-        fields = ['content']
+        fields = ['content', 'image']
         widgets = {
             'content': forms.Textarea(attrs={
                 'class': 'form-control',
                 'rows': 16,
                 'placeholder': 'About page content (plain text or HTML)...',
+            }),
+            'image': forms.FileInput(attrs={
+                'class': 'form-control',
+                'accept': 'image/*',
             }),
         }
 
